@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Restaurant Table Booking</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <style>
+                #intro {
+                    background-image: url("https://www.shutterstock.com/shutterstock/photos/352939400/display_1500/stock-vector-vertical-restaurant-menu-white-background-with-retro-ribbon-and-border-352939400.jpg");
+                    height: auto;
+                }
+            </style>
+        </head>
+        <body>
+        
+        <div class="container mt-5">
+            <h1>Restaurant Table Booking</h1>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                  </div>
+                <div class="form-group">
+                    <label for="table-type">Party-size:</label>
+                    <select class="form-control" id="table-type">
+                        <option value="table-for-2">Table for 2</option>
+                        <option value="table-for-4">Table for 4</option>
+                        <option value="table-for-6">Table for 6</option>
+                        <option value="table-for-6">Table for 8</option>
+                        <option value="table-for-6">Table for 10</option>
+                        <option value="table-for-6">Table for 12</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone number</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+                  </div>
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="date" placeholder="Enter Date">
+                </div>
+                <div class="form-group">
+                    <label for="time">Time:</label>
+                    <input type="time" class="form-control" id="time" placeholder="Enter Time">
+                </div>
+                <div class="form-group">
+                    <label for="template">Table Template:</label>
+                    <div class="table-templates">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" alt="Table Template" class="img-fluid">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="radio" name="table-template" id="table-template1" value="table-template1">
+                                    <label class="form-check-label" for="table-template1">Table Template 1</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" alt="Table Template" class="img-fluid">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="radio" name="table-template" id="table-template2" value="table-template2">
+                                    <label class="form-check-label" for="table-template2">Table Template 2</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" alt="Table Template" class="img-fluid">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="radio" name="table-template" id="table-template3" value="table-template3">
+                                    <label class="form-check-label" for="table-template3">Table Template 3</label>
+                                </div>
+             </form>
+        </div>
+        </body>
+</html>
+                                                    
