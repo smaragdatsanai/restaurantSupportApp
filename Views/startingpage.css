@@ -33,6 +33,7 @@ html, body{
     display: table-cell;
     text-align:center;
     vertical-align: middle;
+
 }
 
 .landing-text h1{
@@ -77,6 +78,10 @@ footer{
     text-decoration:none;
 }
 
+.signup-form{
+    text-align:center;
+    vertical-align: middle;
+}
 @media(max-width:768px){
     .landing-text h1 {
         font-size:300%
