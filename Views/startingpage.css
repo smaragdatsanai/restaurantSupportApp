@@ -4,7 +4,7 @@ html, body{
 }
 
 .navbar{
-    background-color: black;
+    background-color: rgb(43, 43, 43);
     padding: 1% 0;
     font-size:1.2em;
 }
@@ -13,8 +13,8 @@ html, body{
     min-height: 40px;
 }
 
-.navbar-nav li a:hover, .navbar-nav li a:active{
-    color:#FFF;
+.navbar-nav li a .hover, .navbar-nav li a .active{
+    color:#991717;
 }
 
 
@@ -45,7 +45,7 @@ html, body{
     display: table;
     width: 100%;
     background-size: cover;
-    padding: 80px 0px;
+    padding: 40px 0px;
 }
 
 .padding img {
