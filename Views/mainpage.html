@@ -7,10 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>reserveEat</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <!-- My CSS -->
     <link href="startingpage.css" rel="stylesheet" />
-    <link href="login.css" rel="stylesheet" />
+    <link href="card_carousel.css" rel="stylesheet" />
 
 </head>
 
@@ -25,11 +30,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <a class="nav-link" aria-current="page" href="/Views/mainpage.html">Main</a>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/Views/mainpage.html">Main</a>
                     </li>
+                    <a class="nav-link" aria-current="page" href="#">My profile</a>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">My profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#">My inventory</a>
@@ -43,6 +48,113 @@
         </div>
     </nav>
 
+
+    <div id="carouselControls" class="carousel slide carousel-dark cont_style py-md-2" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="cont_header pb-3 "> Our top restaurants</div>
+          <div class="carousel-item active">
+            <div class="card-group">
+                <div class="card">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">1</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card d-none d-md-block">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card d-none d-md-block">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card-group">
+                <div class="card">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">1</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card d-none d-md-block">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card d-none d-md-block">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card-group">
+                <div class="card">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">1</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card d-none d-md-block">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="card d-none d-md-block">
+                    <img src="img\Screenshot_1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+
     <div class="padding">
         <form class="d-flex mx-sm-5 px-sm-5">
             <input class="form-control me-2" type="search" placeholder="Search restaurant by name or place"
@@ -51,192 +163,52 @@
         </form>
     </div>
 
-    <div class="padding">
-        <div class="container mt-5 mb-5 d-flex align-items-center justify-content-center">
-            <!-- <div class="row">
-                <div class="col"> -->
-            <h1>Our top restaurants</h1>
-        </div>
-        <!-- </div>
-            </div>
-            <div class="row">
-                <div class="col"> -->
-
-        <div class="container mt-5 mb-5 d-flex align-items-center justify-content-center">
-            <div class="card-group">
-                <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to
-                            additional
-                            content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural
-                            lead-in to
-                            additional content. This card has even longer content than the first to show that
-                            equal
-                            height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mt-5 mb-5 d-flex align-items-center justify-content-center">
-        <!-- <div class="row">
-            <div class="col"> -->
-        <h1>Find a Restaurant</h1>
-    </div>
-
-
-
-
-    <section class="container p-t-3">
-        <div class="row">
-            <div class="col-lg-12"><img src="...">
-                <h1>Our top restaurants</h1>
-            </div>
-        </div>
-    </section>
-
-
-
-    <section class="carousel slide" data-ride="carousel" id="postsCarousel">
-        <div class="container d-flex">
-
-            <div class="col-xs-12 text-md-right lead">
-                <a class="btn btn-outline-secondary prev" href="" title="go back"><i
-                        class="fa fa-lg fa-chevron-left"></i></a>
-            </div>
-
-            <div class="container p-t-0 m-t-2 carousel-inner">
-                <div class="row row-equal carousel-item active m-t-0">
-                    <div class="container mt-5 mb-5 d-flex align-items-center justify-content-center">
-                        <div class="card-group">
-                            <div class="card">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to
-                                        additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This card has supporting text below as a natural lead-in to
-                                        additional
-                                        content.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to
-                                        additional content. This card has even longer content than the first to show
-                                        that
-                                        equal
-                                        height action.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row-equal carousel-item m-t-0">
-                    <div class="col-md-4">
-                        <div class="container mt-5 mb-5 d-flex align-items-center justify-content-center">
-                            <div class="card-group">
-                                <div class="card">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to
-                                            additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This card has supporting text below as a natural lead-in to
-                                            additional
-                                            content.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to
-                                            additional content. This card has even longer content than the first to show
-                                            that
-                                            equal
-                                            height action.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xs-12 text-md-right lead">
-                <a class="btn btn-outline-secondary next" href="" title="more"><i
-                        class="fa fa-lg fa-chevron-right"></i></a>
-            </div>
-
-        </div>
-    </section>
-
+    
 
 
     <div class="padding">
-        <div class="container d-flex align-items-center justify-content-center">
-            <div class="card mb-3 " style="max-width: 70rem;">
-                <!-- <div class="ratio ratio-21x9 "> -->
-                <img src="..." class="card-img-top" alt="">
-                <!-- </div> -->
-                <div class="card-body">
-                    <h5 class="card-title">Restaurant Name</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional
-                        content. This content is a little bit longer.</p>
+        <div class="container cont_style  justify-content-center p-5  ">
+            <div class="cont_header pb-3 ">All restaurants</div>
+            <div class="card mb-3">
+                <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -256,6 +228,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
 
