@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reserveEat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <!-- My CSS -->
+    <link href="/Public/css/style.css" rel="stylesheet" />
+    <link href="/Public/css/card_carousel.css" rel="stylesheet" />
+    <link href="/Public/css/cont_style.css" rel="stylesheet" />
+
+</head>
+
+
+
+<body id="home">
+    <nav class="user_nav navbar navbar-expand-lg navbar sticky-top navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">researveEat</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/Views/userMain.html">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/Views/userProfile.html">My profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">My inventory</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="ms-auto">
+                <div class="dropdown">
+                    <a class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" href="#"
+                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
+                            alt="user-profile" width="30" height="30" class="rounded-circle me-2">
+                        <span class="text-white ms-2">Username</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end text-small" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">My Inventory</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <li><a class="dropdown-item" href="/Views/userStartingPage.html">Switch Accounts</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+    </nav>
+
+
+    <div id="carouselControls" class="carousel slide carousel-dark cont_style py-md-2" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="cont_header pb-3 "> Our top restaurants</div>
+            <div class="carousel-item active">
+                <div class="card-group">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant description</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                    <div class="card d-none d-md-block">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant descriptiont.</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                    <div class="card d-none d-md-block">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant descriptiont.</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card-group">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant description</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                    <div class="card d-none d-md-block">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant descriptiont.</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                    <div class="card d-none d-md-block">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant descriptiont.</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card-group">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant description</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                    <div class="card d-none d-md-block">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant descriptiont.</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                    <div class="card d-none d-md-block">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant Name</h5>
+                            <p class="card-text">This is a restaurant descriptiont.</p>
+                            <a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+
+
+    <div class="padding ">
+        <div class="container cont_style vstack gap-3 col-md-7 mx-auto py-5  ">
+            <div class="row">
+                <div class="col-md-6 mx-auto text-center pb-3">
+                    <h1>All restaurants</h1>
+                    <p>Find the best place to eat.</p>
+                </div>
+            </div>
+            <form class="d-flex pb-3 mx-sm-5 px-sm-5">
+                <input class="form-control me-2" type="search" placeholder="Search restaurant by name or place"
+                    aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Restaurant Name</h5>
+                                    <p class="card-text">This is a restaurant description.</p>
+                                    <p class="card-text"><a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Restaurant Name</h5>
+                                    <p class="card-text">This is a restaurant description.</p>
+                                    <p class="card-text"><a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Restaurant Name</h5>
+                                    <p class="card-text">This is a restaurant description.</p>
+                                    <p class="card-text"><a href="/Views/booking.html" class="btn btn-outline-dark">Make reservation</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container-fluid text-center bg-dark ">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Contact Us</h3><br>
+                <h4>Our contact info :</h4>
+            </div>
+            <div class="col-sm-6">
+                <h3>Connect</h3><br>
+                <a class="fa fa-facebook-official"></a>
+                <a class="fa fa-linkedin-square"></a>
+                <a class="fa fa-github" href="https://github.com/smaragdatsanai/restaurantSupportApp"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
