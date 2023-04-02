@@ -1,4 +1,5 @@
 .calendar {
+    min-width: 300px;
     border: 1px solid #c2c7e3;
     border-radius: 5px;
     padding: 10px;
@@ -31,3 +32,23 @@
     color: #ccc;
     cursor: not-allowed;
   }
+
+  
+
+  @media (min-width: 768px) {
+    .calendar {
+        border: 1px solid #c2c7e3;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 20px;
+      }
+      .calendar table {
+        width: 100%;
+        table-layout: fixed;
+      }
+      .calendar th,
+      .calendar td {
+        text-align: center;
+        padding: 10px;
+      }
+}
