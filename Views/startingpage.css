@@ -17,6 +17,9 @@ html, body{
     color:#991717;
 }
 
+.dropdown-toggle::after {
+    color: white;
+  }
 
 #home{
     background: url("img/bgpicture.jpg") no-repeat center center fixed;
