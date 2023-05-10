@@ -17,16 +17,35 @@ app.engine('hbs', engine({ extname: 'hbs' }));
 // Ορίζουμε πως η 'hbs' θα είναι η μηχανή template (δηλ. θα ενεργοποιείται με την res.render()) 
 // Set 'hbs' to be the template engine (i.e. activated with res.render())
 app.set('view engine', 'hbs');
-app.get('/', (req, res) => {
-    res.render('./userMain');
-});
-app.get('/userMain', (req, res) => {
-    res.render('./userMain');
-});
 
-app.get('/userProfile', (req, res) => {
+let userMainRender= function(req,res){
+    res.render('./userMain');
+}
+
+
+let userProfileRender= function(req,res){
     res.render('./userProfile');
-});
+}
+
+let menuRender= function(req,res){
+    res.render('./menu');
+}
+
+
+/* Χρησιμοποίησε τις διαδρομές που υπάρχουν στο  router */
+app.use(router); //load the router 'routes' on '/'
+
+
+router.route('/').get(userMainRender);
+router.route('/userMain').get(userMainRender);
+router.route('/userProfile').get(userProfileRender);
+router.route('/menu').get(menuRender);
+
+
+
+/* Επίσης έτσι: */
+// app.route('/api/tasks').get(listAllTasks);
+// app.route('/').get(listAllTasksRender);
 
 
 
