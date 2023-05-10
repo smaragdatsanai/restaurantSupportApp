@@ -31,12 +31,25 @@ let menuRender= function(req,res){
     res.render('./menu');
 }
 
+let userSatrtingPageRender= function(req,res){
+    res.render('./userSatrtingPage');
+}
 
+
+let userSigninRender= function(req,res){
+    res.render('./userSignin');
+}
+
+let userRegister= function(req,res){
+    res.render('./userRegister');
+}
 /* Χρησιμοποίησε τις διαδρομές που υπάρχουν στο  router */
 app.use(router); //load the router 'routes' on '/'
 
 
-router.route('/').get(userMainRender);
+router.route('/').get(userSatrtingPageRender);
+router.route('/userSigninRender').get(userSigninRender);
+router.route('/userRegister').get(userRegister);
 router.route('/userMain').get(userMainRender);
 router.route('/userProfile').get(userProfileRender);
 router.route('/menu').get(menuRender);
