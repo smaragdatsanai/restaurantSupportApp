@@ -1,12 +1,3 @@
-span[data-task-id] {
-	cursor: pointer;
-	text-decoration: none;
-}
-
-.task-status-inactive {
-    text-decoration: line-through;
-}
-
 html, body{
     height: 100%;
     width:100%;
@@ -104,6 +95,8 @@ footer{
     color: black;
 
 }
+
+
 
 
 @media(max-width:768px){
