@@ -19,7 +19,7 @@ html, body{
 
 
 #home{
-    background: url("/Public/img/bgpicture.jpg") no-repeat center center fixed;
+    background: url("/img/bgpicture.jpg") no-repeat center center fixed;
     background-color: #fffcfc; /* fallback background color */
     display: table;
     height: 100%;
@@ -42,7 +42,7 @@ html, body{
 }
 
 .padding{
-    background: url("/Public/img/bgpicture.jpg") no-repeat center center fixed;
+    background: url("/img/bgpicture.jpg") no-repeat center center fixed;
     display: table;
     width: 100%;
     background-size: cover;
@@ -54,7 +54,7 @@ html, body{
     }
 
 #fixed {
-    background: url("/Public/img/bgpicture.jpg")  no-repeat center center fixed;
+    background: url("/img/bgpicture.jpg")  no-repeat center center fixed;
     display:table;
     height:60%;
     position:relative;
