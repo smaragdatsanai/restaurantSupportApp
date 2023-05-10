@@ -20,6 +20,14 @@ app.set('view engine', 'hbs');
 app.get('/', (req, res) => {
     res.render('./userMain');
 });
+app.get('/userMain', (req, res) => {
+    res.render('./userMain');
+});
+
+app.get('/userProfile', (req, res) => {
+    res.render('./userProfile');
+});
+
 
 
 const server = app.listen(port, () => { console.log(`http://127.0.0.1:${port}`) });
