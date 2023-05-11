@@ -2,8 +2,33 @@
 import express from 'express'
 // Handlebars (https://www.npmjs.com/package/express-handlebars)
 import { engine } from 'express-handlebars'
+
+import session from 'express-session'
+import createMemoryStore from 'memorystore'
+import {router} from './routes.mjs'
+import 'dotenv/config'
+
+
+// Δημιουργία ενός memory store constructor 
+const MemoryStore = createMemoryStore(session);
+
+
+const myAppSession= session({
+    secret: process.env.SESSION_SECRET,
+    store: new MemoryStore({ checkPeriod: 86400 * 1000 }),
+    resave: false,
+    saveUninitialized: false,
+    name: "reservEAT", // αλλιώς θα είναι connect.sid
+    cookie: {
+        maxAge: 1000 * 60 * 20 // 20 λεπτά
+    }
+})
+
+
 const app = express()
-const router = express.Router();
+
+app.use(myAppSession)
+
 const port = process.env.PORT || '3000';
 
 // Δηλώνουμε πως ο φάκελος "public" θα περιέχει τα στατικά αρχεία, π.χ. το http://127.0.0.1:3000/style.css θα επιστρέψει, το αρχείο /public/style.css
@@ -18,53 +43,10 @@ app.engine('hbs', engine({ extname: 'hbs' }));
 // Set 'hbs' to be the template engine (i.e. activated with res.render())
 app.set('view engine', 'hbs');
 
-let userMainRender= function(req,res){
-    res.render('./userMain');
-}
+app.use("/",router)
 
-
-let userProfileRender= function(req,res){
-    res.render('./userProfile');
-}
-
-let menuRender= function(req,res){
-    res.render('./menu');
-}
-
-let userStartingPageRender= function(req,res){
-    res.render('./userStartingPage');
-}
-
-
-let userSigninRender= function(req,res){
-    res.render('./userSignin');
-}
-
-let userRegisterRender= function(req,res){
-    res.render('./userRegister');
-}
-
-let userBookingRender= function(req,res){
-    res.render('./userBooking');
-}
-/* Χρησιμοποίησε τις διαδρομές που υπάρχουν στο  router */
-app.use(router); //load the router 'routes' on '/'
-
-
-router.route('/').get(userStartingPageRender);
-router.route('/userSignin').get(userSigninRender);
-router.route('/userRegister').get(userRegisterRender);
-router.route('/userMain').get(userMainRender);
-router.route('/userProfile').get(userProfileRender);
-router.route('/menu').get(menuRender);
-router.route('/userBooking').get(userBookingRender);
-
-
-
-/* Επίσης έτσι: */
-// app.route('/api/tasks').get(listAllTasks);
-// app.route('/').get(listAllTasksRender);
-
-
+app.use((req,res)=> {
+    res.redirect("/")
+})
 
 const server = app.listen(port, () => { console.log(`http://127.0.0.1:${port}`) });
