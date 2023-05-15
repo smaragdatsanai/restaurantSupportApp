@@ -10,27 +10,32 @@
             <div class="container d-flex align-items-center justify-content-center signup-form">
                 <form action="/action_page.php" class="needs-validation">
                     <div class="col-lg form-floating mb-3">
-                        <input type="text" class="form-control" id="userNameInput" placeholder="Username" required>
+                        <input type="text" class="form-control" 
+                        value="{{username}}" name="username" id="userNameInput" placeholder="Username" 
+                        required="required" autofocus>
                         <label for="userNameInput">Username</label>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-sm form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
-                            required>
+                        <input type="email" class="form-control" 
+                        value="{{email}}" name="email" id="floatingInput" placeholder="name@example.com"
+                        required="required">
                         <label for="floatingInput">Email address</label>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-sm form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                            required>
+                        <input type="password" class="form-control" 
+                        value="{{password}}" name="password" id="floatingPassword" placeholder="Password"
+                        required="required">
                         <label for="floatingPassword">Password</label>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-sm mb-sm-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" class="form-check-input" 
+                        value="{{checkbox}}" name="checkbox" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Remember me</label>
                     </div>
                     <button type="submit" class="btn btn-dark btn-lg pb-sm-3 mb-3">Log in</button>
