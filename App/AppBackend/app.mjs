@@ -1,38 +1,27 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import handlebars from 'express-handlebars';
-import path from 'path';
-import './controllers/menuController.mjs';
-import './controllers/reservationController.mjs';
+import 'dotenv/config'
+// const dotenv = require('dotenv'); 
+// dotenv.config(); 
+import express from 'express'
+import { engine } from 'express-handlebars'
+import {router} from './routes.mjs'
 
-const app = express();
+import session from 'express-session'
+import createMemoryStore from 'memorystore'
 
-// view engine setup
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
 
-// body-parser setup
-app.use(bodyParser.urlencoded({extended: true}));
+const app = express()
+const PORT = process.env.PORT || 3000
 
-// static folder setup
-app.use(express.static(path.join(__dirname, '../public')));
 
-// menus routes
-app.get('/menus', menuController.getAllMenus);
-app.get('/menus/:id', menuController.getMenuById);
-app.post('/menus', menuController.addMenu);
-app.put('/menus/:id', menuController.updateMenu);
-app.delete('/menus/:id', menuController.deleteMenu);
+app.use(express.urlencoded({extended:false}))
+app.engine(".hbs", engine({extname:".hbs"}))
+app.set("view engine",".hbs")
 
-// reservations routes
-app.get('/reservations', reservationController.getAllReservations);
-app.get('/reservations/:id', reservationController.getReservationById);
-app.post('/reservations', reservationController.addReservation);
-app.put('/reservations/:id', reservationController.updateReservation);
-app.delete('/reservations/:id', reservationController.deleteReservation);
+//middleware & static files
+app.use(express.static("public"))
 
-const PORT = process.env.PORT || 3000;
+//Diaxeiristes aithmatwn
+app.use("/",router)
 
-app.listen(PORT, () => {
-  console.log(`App is running on port ${PORT}`);
-});
+
+app.listen(PORT, console.log(`Server started on port ${PORT}`))

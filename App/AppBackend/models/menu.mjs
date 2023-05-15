@@ -1,8 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
-const menuFilePath = path.join(__dirname, '..', 'data', 'menu.json');
-
 class Menu {
   static getMenu() {
     const menu = fs.readFileSync(menuFilePath, 'utf-8');
