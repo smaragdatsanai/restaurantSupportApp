@@ -132,5 +132,5 @@ Review.belongsTo(User);
 
 
 await sequelize.sync({alter:true});
-export {Owner,Restaurant,Menu,Menu_Items,Review};
+export {User,Owner,Restaurant,Menu,Menu_Items,Review};
 
