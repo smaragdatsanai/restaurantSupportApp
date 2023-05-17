@@ -5,7 +5,7 @@ const Owner = sequelize.define ('Owner', {
     Owner_Id:{
         type: DataTypes.STRING,
         allowNull: false,
-        autoIncrement: false,
+        autoIncrement: true,
         primaryKey: true,
     },
     First_Name:{
@@ -39,11 +39,17 @@ const Restaurant = sequelize.define('Restaurant',{
     Restaurant_Id:{
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
         allowNull: false
+    },
+    Owner_Id:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        autoIncrement: false
     }
 });
 
@@ -51,7 +57,8 @@ const Menu = sequelize.define('Menu',{
     Menu_Id:{
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -60,14 +67,19 @@ const Menu = sequelize.define('Menu',{
     Type:{
         type:DataTypes.TEXT,
         allowNull: false
-    }
+    },
+    Restaurant_Id:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 });
 
 const Menu_Items = sequelize.define('Menu_Items',{
     Item_Id:{
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -80,6 +92,10 @@ const Menu_Items = sequelize.define('Menu_Items',{
     Price:{
         type: DataTypes.DECIMAL,
         allowNull: false
+    },
+    Menu_Id:{
+        type: DataTypes.STRING,
+        allowNull: false
     }
     
 });
@@ -88,7 +104,8 @@ const User = sequelize.define('User',{
     User_Id:{
         type: DataTypes.STRING,
         allowNull:false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     Username:{
         type: DataTypes.STRING,
@@ -108,7 +125,8 @@ const Review = sequelize.define('Review',{
     Review_Id:{
         type: DataTypes.STRING,
         allowNull:false,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     Rating:{
         type: DataTypes.TEXT,
@@ -117,6 +135,14 @@ const Review = sequelize.define('Review',{
     Comments:{
         type: DataTypes.TEXT,
         allowNull:true
+    },
+    User_Id:{
+        type: DataTypes.STRING,
+        allowNull:false
+    },
+    Item_Id:{
+        type: DataTypes.STRING,
+        allowNull: false
     }
 });
 
