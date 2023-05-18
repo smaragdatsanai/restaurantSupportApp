@@ -87,7 +87,6 @@ const Menu_Items = sequelize.define('Menu_Items',{
 const User = sequelize.define('User',{
     User_Id:{
         type: DataTypes.INTEGER,
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
     },
@@ -97,14 +96,16 @@ const User = sequelize.define('User',{
     },
     Password:{
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: false
     },
     Email:{
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: false
         
-    }
-});
+    },
+    },{tableName: 'User', 
+        timestamps: false 
+    });
 
 const Review = sequelize.define('Review',{
     Review_Id:{

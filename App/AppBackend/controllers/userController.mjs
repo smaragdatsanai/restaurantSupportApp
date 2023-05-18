@@ -10,11 +10,8 @@ const doLogin = async (req, res, next) => {
 const doRegister = async (req, res, next) => {
     // console.log(req.body["username"]);
     try {
-        await User.addUser({
-            "Username": req.body["username"],
-            "Password": req.body["password"],
-            "Email": req.body["email"],
-        })
+        const user = await User.addUser(req.body.username,req.body.password,req.body.email)
+        console.log(user)
         next()
     } catch (error) {
         next(error)
