@@ -1,8 +1,8 @@
 import { Owner,User,Restaurant,Review,Menu,Menu_Items } from "./database.mjs";
 import faker from 'faker' 
 import { sequelize } from "./db-config.mjs";
-
-import { UUIDV4 as uuidv4} from "sequelize";
+import { DataTypes } from "sequelize";
+import { UUID as uuid} from "sequelize";
 
 
 
@@ -15,7 +15,7 @@ async function addRandomData() {
       // Create owners
       for (let i = 0; i < 5; i++) {
         await Owner.create({
-          Owner_Id: uuidv4(),
+          Owner_Id: faker.datatype.uuid(),
           First_Name: faker.name.firstName(),
           Last_Name: faker.name.lastName(),
           Phone: faker.phone.phoneNumber(),
@@ -27,12 +27,14 @@ async function addRandomData() {
   
       // Create restaurants
       const owners = await Owner.findAll();
+      const nnames= ['Yummy Restaurant','La Pasteria','I Fratti','Brunelo','Avli','Salumeria','Abbie','Ovio','Allio','Cozy'];
       for (let i = 0; i < 10; i++) {
         const owner = faker.random.arrayElement(owners);
         await Restaurant.create({
-          Restaurant_Id: uuidv4(),
-          Name: faker.company.companyName(),
-          Owner_Id: owner.Owner_Id,
+          Restaurant_Id: faker.datatype.uuid(),
+          Name: nnames[i],
+          OwnerOwnerId: owner.Owner_Id,
+          Address: faker.address.streetAddress()
         });
       }
   
@@ -41,12 +43,12 @@ async function addRandomData() {
       const nametypes= ['Drinks','Breakfast','Dinner','Lunch','Wines','Soft Drinks'];
       for (let i = 0; i < 20; i++) {
         const restaurant = faker.random.arrayElement(restaurants);
-        
+        const nametype = faker.random.arrayElement(nametypes);
         await Menu.create({
-          Menu_Id: uuidv4(),
-          Name: faker.lorem.words(2),
-          Type: faker.random.arrayElement(nametypes),
-          Restaurant_Id: restaurant.Restaurant_Id,
+          Menu_Id: faker.datatype.uuid(),
+          Name: nametype,
+          Type: nametype,
+          RestaurantRestaurantId: restaurant.Restaurant_Id,
         });
       }
   
@@ -61,11 +63,11 @@ async function addRandomData() {
             const max= 20.00;
             for (let i=0; i<4;i++){ 
                 await Menu_Items.create({
-                    Item_Id: uuidv4(),
+                    Item_Id: faker.datatype.uuid(),
                     Name: drinks[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max, precision : 0.01}),
-                    Menu_Id: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
         }
@@ -76,11 +78,11 @@ async function addRandomData() {
             const max = 13.00;
             for (let i =0; i<5;i++){
                 await Menu_Items.create({
-                    Item_Id: uuidv4(),
+                    Item_Id: faker.datatype.uuid(),
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    Menu_Id: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
 
@@ -92,11 +94,11 @@ async function addRandomData() {
             const max = 24.00;
             for (let i=0;i<4;i++){
                 await Menu_Items.create({
-                    Item_Id: uuidv4(),
+                    Item_Id: faker.datatype.uuid(),
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    Menu_Id: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
         }
@@ -107,11 +109,11 @@ async function addRandomData() {
             const max = 18.99;
             for (let i=0;i<4;i++){
                 await Menu_Items.create({
-                    Item_Id: uuidv4(),
+                    Item_Id: faker.datatype.uuid(),
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    Menu_Id: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
 
                 });
             }
@@ -123,11 +125,11 @@ async function addRandomData() {
             const max= 4.99;
             for (let i=0;i<5;i++){
                 await Menu_Items.create({
-                    Item_Id: uuidv4()(),
+                    Item_Id: faker.datatype.uuid(),
                     Name: drinks[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    Menu_Id: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
         }
@@ -136,7 +138,7 @@ async function addRandomData() {
       // Create users
       for (let i = 0; i < 10; i++) {
         await User.create({
-          User_Id: uuidv4()(),
+          User_Id: faker.datatype.uuid(),
           Username: faker.internet.userName(),
           Password: faker.internet.password(),
           Email: faker.internet.email(),
@@ -146,16 +148,42 @@ async function addRandomData() {
       // Create reviews
       const users = await User.findAll();
       const items = await Menu_Items.findAll();
+      const rev = ['1','2','3','4','5'];
       for (let i = 0; i < 15; i++) {
         const user = faker.random.arrayElement(users);
         const item = faker.random.arrayElement(items);
-        await Review.create({
-          Review_Id :uuidv4(),
-          Rating: faker.random.number({ min: 1, max: 5 }),
-          Comments: faker.lorem.sentence(),
-          User_Id: user.User_Id,
-          Item_Id: item.Item_Id,
-        });
+        const revv = faker.random.arrayElement(rev);
+        if (revv==='1' || revv==='2'){
+            const comments = ['I did not enjoy it at all!','The taste was not for me.','Very bad for how expensive it was.','Was not the worst but it could be a lot better.','Not happy at all with it.','The food was lacking flavor.'];
+            await Review.create({
+                Review_Id :faker.datatype.uuid(),
+                Rating: revv,
+                Comments: faker.random.arrayElement(comments),
+                UserUserId: user.User_Id,
+                MenuItemItemId: item.Item_Id,
+              });
+        }
+        if (revv==='3'){
+            const comments = ['Pretty good but I was not thrilled.','Would try again,however I was not completely satisfied.','Nice taste but something was throwing me off.','Although food was very nice,we waited a lot for it so it was very cold.','Nice pick from the menu just was not that thrilled.'];
+            await Review.create({
+                Review_Id :faker.datatype.uuid(),
+                Rating: revv,
+                Comments: faker.random.arrayElement(comments),
+                UserUserId: user.User_Id,
+                MenuItemItemId: item.Item_Id,
+              });
+        }
+        if (revv==='4' || revv==='5'){
+            const comments = ['Amazing item and the most polite stuff!!','I loved everything, the performance of the plate was a state of the art!','Great personel, incredible flavors. 10/10 recommend!!','The food was good and worth every peny!','Loved this item, I would for sure advise everyone to try it!'];
+            await Review.create({
+                Review_Id :faker.datatype.uuid(),
+                Rating: revv,
+                Comments: faker.random.arrayElement(comments),
+                UserUserId: user.User_Id,
+                MenuItemItemId: item.Item_Id,
+              });
+        }
+        
       }
   
       console.log('Random data added successfully.');
