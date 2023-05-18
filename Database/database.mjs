@@ -46,12 +46,27 @@ const Restaurant = sequelize.define('Restaurant',{
         type: DataTypes.TEXT,
         allowNull: false
     },
-    Owner_Id:{
+    Address:{
         type: DataTypes.STRING,
-        allowNull: false,
-        autoIncrement: false
+        allowNull: false
     }
 });
+
+const WorkingDaysandHours = sequelize.define('WorkingDaysandHours',{
+    Day:{
+        type: DataTypes.STRING,
+        primaryKey: true,
+        allowNull: false
+    },
+    Opening:{
+        type: DataTypes.STRING,
+        allowNull:true
+    },
+    Closing:{
+        type: DataTypes.STRING,
+        allowNull:true
+    }
+})
 
 const Menu = sequelize.define('Menu',{
     Menu_Id:{
@@ -67,11 +82,7 @@ const Menu = sequelize.define('Menu',{
     Type:{
         type:DataTypes.TEXT,
         allowNull: false
-    },
-    Restaurant_Id:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+    }
 });
 
 const Menu_Items = sequelize.define('Menu_Items',{
@@ -92,12 +103,7 @@ const Menu_Items = sequelize.define('Menu_Items',{
     Price:{
         type: DataTypes.DECIMAL,
         allowNull: false
-    },
-    Menu_Id:{
-        type: DataTypes.STRING,
-        allowNull: false
     }
-    
 });
 
 const User = sequelize.define('User',{
@@ -135,14 +141,6 @@ const Review = sequelize.define('Review',{
     Comments:{
         type: DataTypes.TEXT,
         allowNull:true
-    },
-    User_Id:{
-        type: DataTypes.STRING,
-        allowNull:false
-    },
-    Item_Id:{
-        type: DataTypes.STRING,
-        allowNull: false
     }
 });
 
@@ -155,8 +153,15 @@ Menu_Items.belongsTo(Menu);
 Menu_Items.hasMany(Review);
 User.hasMany(Review);
 Review.belongsTo(User);
+Restaurant.hasMany(WorkingDaysandHours);
+WorkingDaysandHours.belongsTo(Restaurant);
 
 
-await sequelize.sync({alter:true});
-export {User,Owner,Restaurant,Menu,Menu_Items,Review};
+try{
+    await sequelize.sync({alter:true});
+    console.log('Database sync successful!');
+}catch (err){
+    console.error('Error sychronizing the database:',err);
+}
+export {User,Owner,Restaurant,Menu,Menu_Items,Review,WorkingDaysandHours};
 
