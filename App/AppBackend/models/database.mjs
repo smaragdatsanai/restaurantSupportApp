@@ -5,7 +5,7 @@ const Owner = sequelize.define ('Owner', {
     Owner_Id:{
         type: DataTypes.STRING,
         allowNull: false,
-        autoIncrement: true,
+        // autoIncrement: true,
         primaryKey: true,
     },
     First_Name:{
@@ -40,7 +40,7 @@ const Restaurant = sequelize.define('Restaurant',{
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        // autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -73,7 +73,7 @@ const Menu = sequelize.define('Menu',{
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        // autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -90,7 +90,7 @@ const Menu_Item = sequelize.define('Menu_Item',{
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
+        // autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -111,7 +111,7 @@ const User = sequelize.define('User',{
         type: DataTypes.STRING,
         allowNull:false,
         primaryKey: true,
-        autoIncrement: true
+        // autoIncrement: true
     },
     Username:{
         type: DataTypes.STRING,
@@ -132,7 +132,7 @@ const Review = sequelize.define('Review',{
         type: DataTypes.STRING,
         allowNull:false,
         primaryKey: true,
-        autoIncrement: true
+        // autoIncrement: true
     },
     Rating:{
         type: DataTypes.TEXT,
@@ -148,13 +148,28 @@ Owner.hasMany(Restaurant);
 Restaurant.belongsTo(Owner);
 Restaurant.hasMany(Menu);
 Menu.belongsTo(Restaurant);
-Menu.hasMany(Menu_Item, { foreignKey: 'MenuId' });
-Menu_Item.belongsTo(Menu, { foreignKey: 'MenuId' });
+Menu.hasMany(Menu_Item);
+Menu_Item.belongsTo(Menu);
 Menu_Item.hasMany(Review);
+Review.belongsTo(Menu_Item);
 User.hasMany(Review);
 Review.belongsTo(User);
 Restaurant.hasMany(WorkingDaysandHours);
 WorkingDaysandHours.belongsTo(Restaurant);
+
+
+// Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
+// Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});
+// Restaurant.hasMany(Menu ,{foreignKey:'RestaurantId'});
+// Menu.belongsTo(Restaurant,{foreignKey:'RestaurantId'});
+// Menu.hasMany(Menu_Item, { foreignKey: 'MenuId' });
+// Menu_Item.belongsTo(Menu, { foreignKey: 'MenuId' });
+// Menu_Item.hasMany(Review,{ foreignKey:'MenuItemId'});
+// Review.belongsTo(Menu_Item,{ foreignKey:'MenuItemId'});
+// User.hasMany(Review,{ foreignKey:'UserId'});
+// Review.belongsTo(User,{ foreignKey:'UserId'});
+// Restaurant.hasMany(WorkingDaysandHours);
+// WorkingDaysandHours.belongsTo(Restaurant);
 
 
 try{

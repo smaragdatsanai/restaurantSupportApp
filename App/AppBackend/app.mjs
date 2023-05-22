@@ -4,7 +4,7 @@ import 'dotenv/config'
 import express from 'express'
 import { engine } from 'express-handlebars'
 import {router} from './routes.mjs'
-// import * as Data from './models/addRandomData.mjs'
+ import * as Data from './models/addRandomData.mjs'
 
 import session from 'express-session'
 import createMemoryStore from 'memorystore'
@@ -13,7 +13,7 @@ import createMemoryStore from 'memorystore'
 const app = express()
 const PORT = process.env.PORT || 3000
 
-// Data.addRandomData();
+
 app.use(express.urlencoded({extended:false}))
 app.engine(".hbs", engine({extname:".hbs"}))
 app.set("view engine",".hbs")
@@ -23,6 +23,7 @@ app.use(express.static("public"))
 
 //Diaxeiristes aithmatwn
 app.use("/",router)
+Data.addRandomData();
 
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`))

@@ -33,7 +33,7 @@ export async function addRandomData() {
         await Restaurant.create({
           Restaurant_Id: faker.datatype.uuid(),
           Name: nnames[i],
-          OwnerOwnerId: owner.Owner_Id,
+          OwnerId: owner.Owner_Id,
           Address: faker.address.streetAddress()
         });
       }
@@ -48,7 +48,7 @@ export async function addRandomData() {
           Menu_Id: faker.datatype.uuid(),
           Name: nametype,
           Type: nametype,
-          RestaurantRestaurantId: restaurant.Restaurant_Id,
+          RestaurantId: restaurant.Restaurant_Id,
         });
       }
   
@@ -159,8 +159,8 @@ export async function addRandomData() {
                 Review_Id :faker.datatype.uuid(),
                 Rating: revv,
                 Comments: faker.random.arrayElement(comments),
-                UserUserId: user.User_Id,
-                MenuItemItemId: item.Item_Id,
+                UserId: user.User_Id,
+                MenuItemId: item.Item_Id,
               });
         }
         if (revv==='3'){
@@ -169,8 +169,8 @@ export async function addRandomData() {
                 Review_Id :faker.datatype.uuid(),
                 Rating: revv,
                 Comments: faker.random.arrayElement(comments),
-                UserUserId: user.User_Id,
-                MenuItemItemId: item.Item_Id,
+                UserId: user.User_Id,
+                MenuItemId: item.Item_Id,
               });
         }
         if (revv==='4' || revv==='5'){
@@ -179,8 +179,8 @@ export async function addRandomData() {
                 Review_Id :faker.datatype.uuid(),
                 Rating: revv,
                 Comments: faker.random.arrayElement(comments),
-                UserUserId: user.User_Id,
-                MenuItemItemId: item.Item_Id,
+                UserId: user.User_Id,
+                MenuItemId: item.Item_Id,
               });
         }
         
