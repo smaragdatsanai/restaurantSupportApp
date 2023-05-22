@@ -1,4 +1,5 @@
 import * as UserController from './controllers/userController.mjs'
+import * as MenuController from './controllers/menuController.mjs'
 import express from 'express'
 // Handlebars (https://www.npmjs.com/package/express-handlebars)
 import { engine } from 'express-handlebars'
@@ -15,8 +16,12 @@ router.get('/logout',(req,res)=> {
 
 
 router.get('/menu',(req,res) =>{
-    res.render('./menu-list');
+    console.log("ok1");
+    MenuController.displayAvailableMenus(req, res);
+    console.log("ok2")
+    
 })
+// ,{username: req.body.username}
 
 router.get('/order-confirmation',(req,res)=>{
     res.render('./order-confirmation');
@@ -54,7 +59,6 @@ router.post("/doRegister",
         res.render("home",{username: req.body.username})
     }
 )
-
 
 
 export {router}

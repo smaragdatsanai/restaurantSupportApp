@@ -1,13 +1,13 @@
-import { Owner,User,Restaurant,Review,Menu,Menu_Items } from "./database.mjs";
-import faker from 'faker' 
-import { sequelize } from "./db-config.mjs";
+import { Owner,User,Restaurant,Review,Menu,Menu_Item } from "./database.mjs";
+import faker from 'faker' ;
+import { sequelize } from './dbConfig.mjs';
 import { DataTypes } from "sequelize";
 import { UUID as uuid} from "sequelize";
 
 
 
 // Add random data to the database
-async function addRandomData() {
+export async function addRandomData() {
     try {
       // Sync models with the database
       await sequelize.sync({ alter: true });
@@ -40,7 +40,7 @@ async function addRandomData() {
   
       // Create menus
       const restaurants = await Restaurant.findAll();
-      const nametypes= ['Drinks','Breakfast','Dinner','Lunch','Wines','Soft Drinks'];
+      const nametypes= ['Drinks','Breakfast','Dinner','Lunch','Wines','All Day'];
       for (let i = 0; i < 20; i++) {
         const restaurant = faker.random.arrayElement(restaurants);
         const nametype = faker.random.arrayElement(nametypes);
@@ -62,12 +62,12 @@ async function addRandomData() {
             const min = 15.00;
             const max= 20.00;
             for (let i=0; i<4;i++){ 
-                await Menu_Items.create({
+                await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
                     Name: drinks[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max, precision : 0.01}),
-                    MenuMenuId: menu.Menu_Id
+                    MenuId: menu.Menu_Id
                 });
             }
         }
@@ -77,12 +77,12 @@ async function addRandomData() {
             const min = 7.50;
             const max = 13.00;
             for (let i =0; i<5;i++){
-                await Menu_Items.create({
+                await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    MenuMenuId: menu.Menu_Id
+                    MenuId: menu.Menu_Id
                 });
             }
 
@@ -93,12 +93,12 @@ async function addRandomData() {
             const min= 14.50;
             const max = 24.00;
             for (let i=0;i<4;i++){
-                await Menu_Items.create({
+                await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    MenuMenuId: menu.Menu_Id
+                    MenuId: menu.Menu_Id
                 });
             }
         }
@@ -108,12 +108,12 @@ async function addRandomData() {
             const min = 12.50;
             const max = 18.99;
             for (let i=0;i<4;i++){
-                await Menu_Items.create({
+                await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    MenuMenuId: menu.Menu_Id
+                    MenuId: menu.Menu_Id
 
                 });
             }
@@ -124,12 +124,12 @@ async function addRandomData() {
             const min = 2.50;
             const max= 4.99;
             for (let i=0;i<5;i++){
-                await Menu_Items.create({
+                await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
                     Name: drinks[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    MenuMenuId: menu.Menu_Id
+                    MenuId: menu.Menu_Id
                 });
             }
         }
@@ -147,7 +147,7 @@ async function addRandomData() {
   
       // Create reviews
       const users = await User.findAll();
-      const items = await Menu_Items.findAll();
+      const items = await Menu_Item.findAll();
       const rev = ['1','2','3','4','5'];
       for (let i = 0; i < 15; i++) {
         const user = faker.random.arrayElement(users);
@@ -195,5 +195,5 @@ async function addRandomData() {
     }
   }
   
-  // Call the function to add random data
-  addRandomData();
+  // // Call the function to add random data
+  // addRandomData();

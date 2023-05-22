@@ -1,4 +1,5 @@
 import {User} from "./database.mjs"
+import { sequelize } from './dbConfig.mjs';
 import bcrypt from "bcrypt";
 
 export async function addUser(Username, Email, password) {

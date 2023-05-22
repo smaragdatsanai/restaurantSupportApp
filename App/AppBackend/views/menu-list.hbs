@@ -1,0 +1,6 @@
+<!-- menuList.hbs -->
+<ul>
+  {{#each menus}}
+    <li>{{this.Name}} {{#each menuItems}}<li>{{this.}}</li>{{/each}}</li>
+  {{/each}}
+</ul>

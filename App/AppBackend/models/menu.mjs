@@ -1,6 +1,6 @@
 import { Menu } from "./database.mjs"
 import { Menu_Item } from "./database.mjs"
-
+import { sequelize } from './dbConfig.mjs';
 
 export async function getMenu() {
   try {
@@ -16,13 +16,31 @@ export async function getMenu() {
 
 export async function getAllMenus() {
   try {
-    const menu = await Menu.findAll();  
-    return menu
+    console.log("getAllMenus");
+    const menu = await Menu.findAll();
+    return menu.map(item => item.toJSON());
   } catch (error) {
     console.error('Error retrieving menu:', error);
     return [];
   }
 }
+
+
+
+export async function getMenuItems(menuId){
+  try {
+    const menuItems = await Menu_Item.findAll({
+      where: {
+        MenuId: this.MenuMenuId
+      }
+    });
+    return menuItems.map(item => item.toJSON());
+  } catch (error) {
+    console.error('Error retrieving Menu_Items:', error);
+    return [];
+  }
+};
+
 
 export async function getMenuById(id){
   try{
