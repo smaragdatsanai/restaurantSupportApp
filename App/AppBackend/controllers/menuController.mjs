@@ -1,59 +1,16 @@
-import fs from 'fs';
+import * as Menu from '../models/menu.mjs' // version 3 with ORM sequelize, postgress
 
-const menuFilePath = './data/menu.json';
 
-// Get all menu items
-export const getAllMenuItems = () => {
-  const menuData = fs.readFileSync(menuFilePath);
-  return JSON.parse(menuData);
-};
+const displayAvailableMenus = async (req, res, next) => {
+    const menu = await Menu.getAllMenus()
+    console.log(menu)
+    next()
+}
 
-// Get menu item by ID
-export const getMenuItemById = (id) => {
-  const menuData = fs.readFileSync(menuFilePath);
-  const menuItems = JSON.parse(menuData);
-  return menuItems.find((item) => item.id === id);
-};
+const displayMenuItems = async (req, res, next) => {
+        const user = await Menu.getMenuItems(id)
+        console.log(user)
+        next()
+}
 
-// Add new menu item
-export const addMenuItem = (menuItem) => {
-  const menuData = fs.readFileSync(menuFilePath);
-  const menuItems = JSON.parse(menuData);
-  const newMenuItem = {
-    id: menuItems.length + 1,
-    ...menuItem,
-  };
-  menuItems.push(newMenuItem);
-  fs.writeFileSync(menuFilePath, JSON.stringify(menuItems));
-  return newMenuItem;
-};
-
-// Update menu item by ID
-export const updateMenuItem = (id, updatedMenuItem) => {
-  const menuData = fs.readFileSync(menuFilePath);
-  const menuItems = JSON.parse(menuData);
-  const index = menuItems.findIndex((item) => item.id === id);
-  if (index !== -1) {
-    const updatedItem = {
-      id,
-      ...updatedMenuItem,
-    };
-    menuItems[index] = updatedItem;
-    fs.writeFileSync(menuFilePath, JSON.stringify(menuItems));
-    return updatedItem;
-  }
-  return null;
-};
-
-// Delete menu item by ID
-export const deleteMenuItem = (id) => {
-  const menuData = fs.readFileSync(menuFilePath);
-  const menuItems = JSON.parse(menuData);
-  const index = menuItems.findIndex((item) => item.id === id);
-  if (index !== -1) {
-    menuItems.splice(index, 1);
-    fs.writeFileSync(menuFilePath, JSON.stringify(menuItems));
-    return true;
-  }
-  return false;
-};
+export { doRegister, doLogin }

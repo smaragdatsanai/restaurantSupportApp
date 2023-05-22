@@ -1,42 +1,64 @@
 
 export async function createRestaurant(email, password, owner_first_name, phone, company_name, city, street, street_number, delivery_time, minimum_order, callback) {
     let user_id;
-    await createUser(email, password, (err, data) => {
-        if(err){
-            return console.error(err.message);
-        }
-        else {
-            user_id = data[0].id;
-        }  
-    });
-    const sql = `INSERT INTO "public.RESTAURANT" VALUES (${user_id}, '${owner_first_name}', NULL, '${company_name}', '${city}', '${street}', ${street_number}, NULL, NULL, ${delivery_time}, ${minimum_order}, '${phone}', 'Δευτέρα: ..-.. <br>Τρίτη: ..-..<br>
-    Τετάρτη: ..-.. <br>Πέμπτη: ..-..<br>
-    Παρασκευή: ..-.. <br>Σάββατο: ..-..<br>
-    Κυριακή: ..-..') RETURNING "user_id";`;
     try {
-        const client = await connect();
-        const res = await client.query(sql);
-        await client.release();
-        callback(null, res.rows) // επιστρέφει array
+        const user = await createUser(email, password);
+        user_id = user[0].id;
+    } catch (err) {
+        console.error('Error creating user:', err.message);
+        return callback(err, null);
     }
-    catch (err) {
+
+    const values = {
+        user_id,
+        owner_first_name,
+        company_name,
+        city,
+        street,
+        street_number,
+        delivery_time,
+        minimum_order,
+        phone,
+        open_on: 'Δευτέρα: ..-.. <br>Τρίτη: ..-..<br> Τετάρτη: ..-.. <br>Πέμπτη: ..-..<br> Παρασκευή: ..-.. <br>Σάββατο: ..-..<br> Κυριακή: ..-..'
+    };
+
+    try {
+        const restaurant = await Restaurant.create(values);
+        console.log('New restaurant created:', restaurant.toJSON());
+        callback(null, [restaurant.toJSON()]);
+    } catch (err) {
+        console.error('Error creating restaurant:', err.message);
         callback(err, null);
     }
 }
 
-export async function getRestaurantById(id, callback) {
-    let sql = `SELECT "user_id" as "rid", "company_name" as "rname", "avg_rating", "city", "street", "street_number", "tel", "open_on"
-    FROM "public.RESTAURANT" NATURAL LEFT OUTER JOIN (SELECT "user_id", ROUND(AVG("rating")::numeric, 2) as "avg_rating"
-                                                      FROM "public.RESTAURANT" JOIN "public.CUSTOMER_RATES_RESTAURANT" ON "user_id"="restaurant_id"
-                                                      GROUP BY "user_id") AS r
-    WHERE "user_id" = ${id};`;
-    try {
-        const client = await connect();
-        const res = await client.query(sql);
-        await client.release();
-        callback(null, res.rows) // επιστρέφει array
-    }
-    catch (err) {
-        callback(err, null);
-    }
-}
+// export async function getRestaurantById(id, callback) {
+//     const sql = `SELECT "Restaurant_Id" AS "rid", "Name" AS "rname", "avg_rating", "city", "street", "street_number", "open_on"
+//                 FROM "Restaurant"
+//                 NATURAL LEFT OUTER JOIN (
+//                   SELECT "Restaurant_Id", ROUND(AVG("rating")::numeric, 2) AS "avg_rating"
+//                   FROM "Restaurant"
+//                   JOIN "CUSTOMER_RATES_RESTAURANT" ON "Restaurant_Id" = "restaurant_id"
+//                   GROUP BY "Restaurant_Id"
+//                 ) AS r
+//                 WHERE "Restaurant_Id" = '${id}';`;
+//     try {
+//         const [results] = await sequelize.query(sql);
+//         console.log('Restaurant details:', results);
+//         callback(null, results);
+//     } catch (err) {
+//         console.error('Error retrieving restaurant details:', err.message);
+//         callback(err, null);
+//     }
+// }
+
+
+// Synchronize the models with the database (create the tables if they don't exist)
+sequelize.sync()
+    .then(() => {
+        console.log('Database and tables synchronized.');
+    })
+    .catch((error) => {
+        console.error('Error synchronizing database:', error);
+    });
+
