@@ -1,6 +1,6 @@
 import { Owner,User,Restaurant,Review,Menu,Menu_Item } from "./database.mjs";
-import faker from 'faker' ;
-import { sequelize } from './dbConfig.mjs';
+import faker from 'faker' 
+import { sequelize } from "./dbConfig.mjs";
 import { DataTypes } from "sequelize";
 import { UUID as uuid} from "sequelize";
 
@@ -33,14 +33,14 @@ export async function addRandomData() {
         await Restaurant.create({
           Restaurant_Id: faker.datatype.uuid(),
           Name: nnames[i],
-          OwnerId: owner.Owner_Id,
+          OwnerOwnerId: owner.Owner_Id,
           Address: faker.address.streetAddress()
         });
       }
   
       // Create menus
       const restaurants = await Restaurant.findAll();
-      const nametypes= ['Drinks','Breakfast','Dinner','Lunch','Wines','All Day'];
+      const nametypes= ['Drinks','Breakfast','Dinner','Lunch','Wines','Soft Drinks'];
       for (let i = 0; i < 20; i++) {
         const restaurant = faker.random.arrayElement(restaurants);
         const nametype = faker.random.arrayElement(nametypes);
@@ -48,7 +48,7 @@ export async function addRandomData() {
           Menu_Id: faker.datatype.uuid(),
           Name: nametype,
           Type: nametype,
-          RestaurantId: restaurant.Restaurant_Id,
+          RestaurantRestaurantId: restaurant.Restaurant_Id,
         });
       }
   
@@ -67,7 +67,7 @@ export async function addRandomData() {
                     Name: drinks[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max, precision : 0.01}),
-                    MenuId: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
         }
@@ -82,7 +82,7 @@ export async function addRandomData() {
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    MenuId: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
 
@@ -98,7 +98,7 @@ export async function addRandomData() {
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    MenuId: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
         }
@@ -113,7 +113,7 @@ export async function addRandomData() {
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    MenuId: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
 
                 });
             }
@@ -129,7 +129,7 @@ export async function addRandomData() {
                     Name: drinks[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
-                    MenuId: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
         }
@@ -159,8 +159,8 @@ export async function addRandomData() {
                 Review_Id :faker.datatype.uuid(),
                 Rating: revv,
                 Comments: faker.random.arrayElement(comments),
-                UserId: user.User_Id,
-                MenuItemId: item.Item_Id,
+                UserUserId: user.User_Id,
+                MenuItemItemId: item.Item_Id,
               });
         }
         if (revv==='3'){
@@ -169,8 +169,8 @@ export async function addRandomData() {
                 Review_Id :faker.datatype.uuid(),
                 Rating: revv,
                 Comments: faker.random.arrayElement(comments),
-                UserId: user.User_Id,
-                MenuItemId: item.Item_Id,
+                UserUserId: user.User_Id,
+                MenuItemItemId: item.Item_Id,
               });
         }
         if (revv==='4' || revv==='5'){
@@ -179,8 +179,8 @@ export async function addRandomData() {
                 Review_Id :faker.datatype.uuid(),
                 Rating: revv,
                 Comments: faker.random.arrayElement(comments),
-                UserId: user.User_Id,
-                MenuItemId: item.Item_Id,
+                UserUserId: user.User_Id,
+                MenuItemItemId: item.Item_Id,
               });
         }
         

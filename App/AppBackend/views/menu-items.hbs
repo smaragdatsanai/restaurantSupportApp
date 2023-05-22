@@ -1,6 +1,5 @@
-
 {{#each Items}}
-  <h2>Menu {{menus.[{{@index}}].Type}}</h2>
+  <h2>Menu Type: {{Type}}</h2>
   <ul>
     {{#each this}}
       {{#if this.Name}}
@@ -11,7 +10,3 @@
     {{/each}}
   </ul>
 {{/each}}
-
-{{!-- {{#each menus}}
-<h2>Menu Type: {{Type}}</h2>
-{{/each}} --}}

@@ -5,7 +5,7 @@ const Owner = sequelize.define ('Owner', {
     Owner_Id:{
         type: DataTypes.STRING,
         allowNull: false,
-        // autoIncrement: true,
+        autoIncrement: true,
         primaryKey: true,
     },
     First_Name:{
@@ -40,7 +40,7 @@ const Restaurant = sequelize.define('Restaurant',{
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
-        // autoIncrement: true
+        autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -73,7 +73,7 @@ const Menu = sequelize.define('Menu',{
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
-        // autoIncrement: true
+        autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -90,7 +90,7 @@ const Menu_Item = sequelize.define('Menu_Item',{
         type: DataTypes.STRING,
         allowNull: false,
         primaryKey: true,
-        // autoIncrement: true
+        autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -111,7 +111,7 @@ const User = sequelize.define('User',{
         type: DataTypes.STRING,
         allowNull:false,
         primaryKey: true,
-        // autoIncrement: true
+        autoIncrement: true
     },
     Username:{
         type: DataTypes.STRING,
@@ -132,7 +132,7 @@ const Review = sequelize.define('Review',{
         type: DataTypes.STRING,
         allowNull:false,
         primaryKey: true,
-        // autoIncrement: true
+        autoIncrement: true
     },
     Rating:{
         type: DataTypes.TEXT,
@@ -151,12 +151,10 @@ Menu.belongsTo(Restaurant);
 Menu.hasMany(Menu_Item);
 Menu_Item.belongsTo(Menu);
 Menu_Item.hasMany(Review);
-Review.belongsTo(Menu_Item);
 User.hasMany(Review);
 Review.belongsTo(User);
 Restaurant.hasMany(WorkingDaysandHours);
 WorkingDaysandHours.belongsTo(Restaurant);
-
 
 // Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
 // Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});

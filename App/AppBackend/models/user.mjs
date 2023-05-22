@@ -1,12 +1,16 @@
 import {User} from "./database.mjs"
-import { sequelize } from './dbConfig.mjs';
 import bcrypt from "bcrypt";
+import faker from 'faker' 
+import { sequelize } from "./dbConfig.mjs";
+import { DataTypes } from "sequelize";
+import { UUID as uuid} from "sequelize";
+
 
 export async function addUser(Username, Email, password) {
   try {
     const Password_hash = await bcrypt.hash(password, 10);
-    
     const user = await User.create({
+      User_Id: faker.datatype.uuid(),
       Username: Username,
       Email: Email,
       Password: Password_hash
@@ -39,25 +43,3 @@ export async function login(username,password){
     }
 }
 
-
-export async function getUser(email, password, callback) {
-    const sql = `SELECT * FROM "User" WHERE "Email"='${email}';`;
-    try {
-        const client = await connect();
-        const res = await client.query(sql);
-        await client.release();
-        bcrypt.compare(password, res.rows[0].password_hash, async (err, match) => {
-            if (match) {
-                const usertype = await getUserType(res.rows[0].id);
-                res.rows[0].usertype = usertype;
-                callback(null, res.rows) // επιστρέφει array
-            }
-            else {
-                callback(null, {});
-            }
-        });
-    }
-    catch (err) {
-        callback(err, null);
-    }
-}

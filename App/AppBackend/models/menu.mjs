@@ -2,6 +2,39 @@ import { Menu } from "./database.mjs"
 import { Menu_Item } from "./database.mjs"
 import { sequelize } from './dbConfig.mjs';
 
+
+export async function getAllMenus() {
+  try {
+    console.log("getAllMenus");
+    const menu = await Menu.findAll({});
+    return menu.map(item => item.toJSON());
+  } catch (error) {
+    console.error('Error retrieving menu:', error);
+  }
+}
+
+
+
+export async function getMenuItems(menuId){
+  try {
+    // console.log(menuId);
+    const menuItems = await Menu_Item.findAll({
+      where: {
+        MenuMenuId: menuId
+      }
+    });
+    return menuItems.map(item => item.toJSON());
+  } catch (error) {
+    console.error('Error retrieving Menu_Items:', error);
+    return [];
+  }
+};
+
+
+
+
+
+
 export async function getMenu() {
   try {
     const menu = await Menu.findAll({
@@ -13,33 +46,6 @@ export async function getMenu() {
     return [];
   }
 }
-
-export async function getAllMenus() {
-  try {
-    console.log("getAllMenus");
-    const menu = await Menu.findAll();
-    return menu.map(item => item.toJSON());
-  } catch (error) {
-    console.error('Error retrieving menu:', error);
-    return [];
-  }
-}
-
-
-
-export async function getMenuItems(menuId){
-  try {
-    const menuItems = await Menu_Item.findAll({
-      where: {
-        MenuId: this.MenuMenuId
-      }
-    });
-    return menuItems.map(item => item.toJSON());
-  } catch (error) {
-    console.error('Error retrieving Menu_Items:', error);
-    return [];
-  }
-};
 
 
 export async function getMenuById(id){

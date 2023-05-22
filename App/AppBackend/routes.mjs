@@ -1,5 +1,6 @@
 import * as UserController from './controllers/userController.mjs'
 import * as MenuController from './controllers/menuController.mjs'
+import * as RestaurantController from './controllers/restaurantController.mjs'
 import express from 'express'
 // Handlebars (https://www.npmjs.com/package/express-handlebars)
 import { engine } from 'express-handlebars'
@@ -13,7 +14,12 @@ router.get('/logout',(req,res)=> {
     res.redirect("/")
 })
 
-
+router.get('/restaurants',(req,res) =>{
+    console.log("ok3");
+    RestaurantController.displayAllRestaurants(req, res);
+    console.log("ok4")
+    
+})
 
 router.get('/menu',(req,res) =>{
     console.log("ok1");
