@@ -1,12 +1,5 @@
 {{#each Items}}
-  <h2>Menu Type: {{Type}}</h2>
   <ul>
-    {{#each this}}
-      {{#if this.Name}}
-      <li>{{this.Name}}</li>
-      {{else}}
-      <p>no items yet</p>
-      {{/if}}
-    {{/each}}
+    {{Name}} {{Description}} {{Price}}
   </ul>
 {{/each}}

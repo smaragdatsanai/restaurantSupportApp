@@ -23,11 +23,28 @@ export async function getAllOpenRestaurants(){
     }
 }
 
+export async function showMenu(resId){
+  try {
+    const menu = await Menu.findAll({
+      where: {
+        RestaurantRestaurantId: resId
+      }
+    });
+    return menu.map(item => item.toJSON());
+  } catch (error) {
+    console.error('Error retrieving Menu_Items:', error);
+    return [];
+  }
+}
+
+
 //when I click on th Restaurant (schedule , ratings, photos etc)
-export async function getRestaurantDetailsByPk(resId){
+export async function getRestaurantById(resId){
     try{
-        const details = await Restaurant.findByPk(resId);
-        return details;
+        const rest = await Restaurant.findByPk(resId);
+        
+        return rest.map(item => item.toJSON());
+
       }catch(err){
         console.error('Error retrieving Restaurant Details:', error);
       }  
