@@ -1,6 +1,7 @@
 import * as UserController from './controllers/userController.mjs'
 import * as MenuController from './controllers/menuController.mjs'
 import * as RestaurantController from './controllers/restaurantController.mjs'
+import * as adminController from './controllers/adminController.mjs'
 import express from 'express'
 // Handlebars (https://www.npmjs.com/package/express-handlebars)
 import { engine } from 'express-handlebars'
@@ -64,6 +65,17 @@ router.post("/doRegister",
     (req, res) => {
         res.render("home",{username: req.body.username})
     }
+)
+
+//admin
+
+router.get("/adminReviews",
+    adminController.findReviews,
+    (req,res) => {
+        res.render("admin-reviews", {reviews: req.reviews})
+        console.log(req.reviews)
+    }
+    
 )
 
 
