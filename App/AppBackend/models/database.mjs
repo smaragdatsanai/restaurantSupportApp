@@ -83,6 +83,7 @@ const Menu = sequelize.define('Menu',{
         type:DataTypes.TEXT,
         allowNull: false
     }
+    
 });
 
 const Menu_Item = sequelize.define('Menu_Item',{

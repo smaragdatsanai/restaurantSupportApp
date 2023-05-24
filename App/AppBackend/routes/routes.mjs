@@ -2,6 +2,9 @@
 import express from 'express'
 const router=express.Router()
 
+import * as Validator from '../validator/validation.mjs'
+
+
 import dotenv from 'dotenv'
 if (process.env.NODE_ENV !== 'production') {
     console.log('loading .env')
@@ -16,21 +19,31 @@ const ReviewController =await import('../controllers/reviewController.mjs')
 const adminController =await import('../controllers/adminController.mjs')
 
 
-
-
-router.get('/',(req,res) =>{
-    res.redirect('./loginForm');
+router.get("/", (req, res) => {
+    if (req.session.username)
+        res.redirect("./restaurants")
+    else
+        res.render("./loginForm")
 })
+
+
+
 
 //RESTAURANT
 
-router.get('/restaurants',(req,res) =>{
-    RestaurantController.displayAllRestaurants(req, res);
-    
-})
+router.get('/restaurants',
+    UserController.checkIfAuthenticated,
+    // Validator.validateLogin,
+    // UserController.doLogin,
+    RestaurantController.displayAllRestaurants)
 
-router.get('/restaurants/menu/:restaurantId',RestaurantController.showRestaurantMenu);
-router.get('/restaurants/menu/menuItems/:menuId',MenuController.showMenuItems);
+router.get('/restaurants/menu/:restaurantId',
+UserController.checkIfAuthenticated,
+RestaurantController.showRestaurantMenu);
+
+router.get('/restaurants/menu/menuItems/:menuId',
+UserController.checkIfAuthenticated,
+MenuController.showMenuItems);
 router.get('/restaurants/menu/menuItems/addRating/:itemName/:itemId',(req,res)=>{
     res.render('./ratingForm',{Item_Id:req.params.itemId,Name:req.params.itemName})
 });
@@ -40,18 +53,15 @@ router.get("/restaurants/menu/menuItems/addRating/:itemId",ReviewController.addR
 router.get('/menu',(req,res) =>{
     MenuController.displayAvailableMenus(req, res);
 })
-// ,{username: req.body.username}
-
-
 
 //USER 
 
-router.get('/loginForm',(req,res) =>{
+router.get('/login',(req,res) =>{
     res.render('./loginForm');
 })
 
 
-router.get('/registrationForm',(req,res) =>{
+router.get('/register',(req,res) =>{
     res.render('./registrationForm');
 })
 
@@ -63,7 +73,7 @@ router.post("/doLogin",
     }
 )
 
-router.post("/doRegister",
+router.post("/doRegister", Validator.validateNewUser,
     UserController.doRegister,
     (req, res) => {
         res.render("home",{username: req.body.username})

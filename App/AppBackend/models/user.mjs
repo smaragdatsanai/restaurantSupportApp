@@ -37,8 +37,6 @@ export async function login(username,password){
         
         if (!user)
         throw new Error(`User ${username} doesn't exist`)
-        // console.log(password)
-        // console.log(user.Password)
         const match = await bcrypt.compare(password, user.Password)
         if(match){
             return user
@@ -51,3 +49,13 @@ export async function login(username,password){
     }
 }
 
+
+export async function findOrAddUser() {
+  if (this.user == undefined)
+      try {
+          const [user, created] = await User.findOrCreate({ where: { Username: this.username } })
+          this.user = user
+      } catch (error) {
+          throw error
+      }
+}

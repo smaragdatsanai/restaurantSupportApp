@@ -17,7 +17,6 @@ export async function getAllMenus() {
 
 export async function getMenuItems(menuId){
   try {
-    // console.log(menuId);
     const menuItems = await Menu_Item.findAll({
       where: {
         MenuMenuId: menuId
@@ -29,6 +28,26 @@ export async function getMenuItems(menuId){
     return [];
   }
 };
+
+export async function findMenuByPk(menuId){
+  try {
+    const menu = await Menu.findAll({
+      where: {
+        Menu_Id: menuId
+      }
+    });
+    return menu.map(item => item.toJSON());
+  } catch (error) {
+    console.error('Error retrieving Menu_Items:', error);
+    return [];
+  }
+};
+
+
+
+
+
+
 
 
 

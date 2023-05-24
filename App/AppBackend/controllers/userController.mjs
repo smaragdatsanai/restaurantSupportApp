@@ -2,15 +2,53 @@ import * as User from '../models/user.mjs' // version 3 with ORM sequelize, post
 
 
 const doLogin = async (req, res, next) => {
-    const user = await User.login(req.body.username, req.body.password)
-    console.log(user)
-    next()
+    const username = req.body.username
+    const password = req.body.password
+    try{
+        const user = await User.login(req.body.username, req.body.password)
+        if (user) {
+            req.session.username = req.body.username // το username μπαίνει σαν μεταβλητή συνεδρίας
+            res.locals.username = req.session.username //τα μέλη του res.locals είναι απευθείας προσβάσιμα στο template
+            next() //το επόμενο middleware είναι το showBooklist
+        }
+        else {
+            throw new Error("άγνωστο σφάλμα")
+        }
+    }catch(error){
+        next(error)
+    }
 }
 
 const doRegister = async (req, res, next) => {
-        const user = await User.addUser(req.body.username,req.body.password,req.body.email)
-        console.log(user)
-        next()
+    const username = req.body.username
+    const password = req.body.password
+    const email = req.body.email
+
+    try {
+        const user = await User.addUser(username,password,email)
+        if (user) {
+            res.render("home", { newusermessage: "Η εγγραφή του χρήστη έγινε με επιτυχία`" })
+        }
+        else {
+            throw new Error("άγνωστο σφάλμα κατά την εγγραφή του χρήστη")
+        }
+    } catch (error) {
+        next(error)
+    }
 }
 
-export { doRegister, doLogin }
+const doLogout = (req, res, next) => {
+    req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
+    next()
+}
+
+function checkIfAuthenticated(req, res, next) {
+    if (req.session.username) { //αν έχει τεθεί η μεταβλητή στο session store θεωρούμε πως ο χρήστης είναι συνδεδεμένος
+        res.locals.username = req.session.username
+        next() //επόμενο middleware
+    }
+    else
+        res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
+}
+
+export { checkIfAuthenticated, doLogin, doRegister, doLogout }

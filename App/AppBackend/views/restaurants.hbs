@@ -1,4 +1,36 @@
-{{#each Restaurant}}
-<h2>Restaurant:<a href="/restaurants/menu/{{Restaurant_Id}}">{{Name}}</a></h2>
-{{/each}}
+<div class="padding ">
+    <div class="container cont_style vstack gap-3 col-md-7 mx-auto py-5  ">
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center pb-3">
+                <h1>All restaurants</h1>
+                <p>Find the best place to eat.</p>
+            </div>
+        </div>
+        <form class="d-flex pb-3 mx-sm-5 px-sm-5">
+            <input class="form-control me-2" type="search" placeholder="Search restaurant by name or place"
+                aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        {{#each Restaurant}}
 
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{Name}}</h5>
+                                <p class="card-text">{{Address}}</p>
+                                <p class="card-text"><a href="/restaurants/menu/{{Restaurant_Id}}" class="btn btn-outline-dark">Show restaurant menus</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
