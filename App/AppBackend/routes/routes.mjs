@@ -12,6 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 const UserController =await import('../controllers/userController.mjs')
 const MenuController =await import('../controllers/menuController.mjs')
 const RestaurantController =await import('../controllers/restaurantController.mjs')
+const ReviewController =await import('../controllers/reviewController.mjs')
 const adminController =await import('../controllers/adminController.mjs')
 
 
@@ -32,7 +33,9 @@ router.get('/restaurants',(req,res) =>{
 
 router.get('/restaurants/menu/:restaurantId',RestaurantController.showRestaurantMenu);
 router.get('/restaurants/menu/menuItems/:menuId',MenuController.showMenuItems);
-
+router.get('/restaurants/menu/menuItems/addRating/:itemId',(req,res)=>{
+    res.render('./ratingForm')
+});
 
 
 //MENU
