@@ -55,7 +55,6 @@ const Restaurant = sequelize.define('Restaurant',{
 const WorkingDaysandHours = sequelize.define('WorkingDaysandHours',{
     Day:{
         type: DataTypes.STRING,
-        primaryKey: true,
         allowNull: false
     },
     Opening:{
@@ -151,6 +150,7 @@ Menu.belongsTo(Restaurant);
 Menu.hasMany(Menu_Items);
 Menu_Items.belongsTo(Menu);
 Menu_Items.hasMany(Review);
+Review.belongsTo(Menu_Items);
 User.hasMany(Review);
 Review.belongsTo(User);
 Restaurant.hasMany(WorkingDaysandHours);

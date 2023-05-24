@@ -55,7 +55,6 @@ const Restaurant = sequelize.define('Restaurant',{
 const WorkingDaysandHours = sequelize.define('WorkingDaysandHours',{
     Day:{
         type: DataTypes.STRING,
-        primaryKey: true,
         allowNull: false
     },
     Opening:{
@@ -151,21 +150,22 @@ Menu.belongsTo(Restaurant);
 Menu.hasMany(Menu_Item);
 Menu_Item.belongsTo(Menu);
 Menu_Item.hasMany(Review);
+Review.belongsTo(Menu_Item);
 User.hasMany(Review);
 Review.belongsTo(User);
 Restaurant.hasMany(WorkingDaysandHours);
 WorkingDaysandHours.belongsTo(Restaurant);
 
-// Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
-// Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});
-// Restaurant.hasMany(Menu ,{foreignKey:'RestaurantId'});
-// Menu.belongsTo(Restaurant,{foreignKey:'RestaurantId'});
-// Menu.hasMany(Menu_Item, { foreignKey: 'MenuId' });
-// Menu_Item.belongsTo(Menu, { foreignKey: 'MenuId' });
-// Menu_Item.hasMany(Review,{ foreignKey:'MenuItemId'});
-// Review.belongsTo(Menu_Item,{ foreignKey:'MenuItemId'});
-// User.hasMany(Review,{ foreignKey:'UserId'});
-// Review.belongsTo(User,{ foreignKey:'UserId'});
+// Owner.hasMany(Restaurant,{foreignKey:'Owner_Id'});
+// Restaurant.belongsTo(Owner,{foreignKey:'Owner_Id'});
+// Restaurant.hasMany(Menu ,{foreignKey:'Restaurant_Id'});
+// Menu.belongsTo(Restaurant,{foreignKey:'Restaurant_Id'});
+// Menu.hasMany(Menu_Item, { foreignKey: 'Menu_Id' });
+// Menu_Item.belongsTo(Menu, { foreignKey: 'Menu_Id' });
+// Menu_Item.hasMany(Review,{ foreignKey:'Item_Id'});
+// Review.belongsTo(Menu_Item,{ foreignKey:'Item_Id'});
+// User.hasMany(Review,{ foreignKey:'User_Id'});
+// Review.belongsTo(User,{ foreignKey:'User_Id'});
 // Restaurant.hasMany(WorkingDaysandHours);
 // WorkingDaysandHours.belongsTo(Restaurant);
 

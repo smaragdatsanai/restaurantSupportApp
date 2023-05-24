@@ -1,4 +1,4 @@
-import { Owner,User,Restaurant,Review,Menu,Menu_Items } from "./database.mjs";
+import { Owner,User,Restaurant,Review,Menu,Menu_Items, WorkingDaysandHours } from "./database.mjs";
 import faker from 'faker' 
 import { sequelize } from "./db-config.mjs";
 import { DataTypes } from "sequelize";
@@ -38,7 +38,7 @@ async function addRandomData() {
         });
       }
   
-      // Create menus
+     // Create menus
       const restaurants = await Restaurant.findAll();
       const nametypes= ['Drinks','Breakfast','Dinner','Lunch','Wines','Soft Drinks'];
       for (let i = 0; i < 20; i++) {
@@ -135,7 +135,7 @@ async function addRandomData() {
         }
       }
   
-      // Create users
+     // Create users
       for (let i = 0; i < 10; i++) {
         await User.create({
           User_Id: faker.datatype.uuid(),
@@ -185,6 +185,30 @@ async function addRandomData() {
         }
         
       }
+
+      
+    //create wornkg days and hours
+
+    //const restaurants = await Restaurant.findAll();
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    for (let i = 0; i < restaurants.length; i++) {
+      const restaurant = restaurants[i];
+
+      for (let j = 0; j < days.length; j++) {
+        const day = days[j];
+
+        const openingHour = faker.random.number({ min: 12, max: 15 });
+        const closingHour = faker.random.number({ min: 21, max: 24 });
+
+        await WorkingDaysandHours.create({
+          Day: day,
+          Opening: `${openingHour}:00`,
+          Closing: `${closingHour}:00`,
+          RestaurantRestaurantId: restaurant.Restaurant_Id
+        });
+      }
+    }
   
       console.log('Random data added successfully.');
     } catch (error) {
@@ -193,7 +217,11 @@ async function addRandomData() {
       // Close the database connection
       await sequelize.close();
     }
+
+
   }
+
+  
   
   // Call the function to add random data
   addRandomData();
