@@ -25,29 +25,22 @@ router.get('/',(req,res) =>{
 //RESTAURANT
 
 router.get('/restaurants',(req,res) =>{
-    console.log("ok3");
     RestaurantController.displayAllRestaurants(req, res);
-    console.log("ok4")
     
 })
 
 router.get('/restaurants/menu/:restaurantId',RestaurantController.showRestaurantMenu);
 router.get('/restaurants/menu/menuItems/:menuId',MenuController.showMenuItems);
-router.get('/restaurants/menu/menuItems/addRating/:itemId',(req,res)=>{
-    res.render('./ratingForm')
+router.get('/restaurants/menu/menuItems/addRating/:itemName/:itemId',(req,res)=>{
+    res.render('./ratingForm',{Item_Id:req.params.itemId,Name:req.params.itemName})
 });
-
+router.get("/restaurants/menu/menuItems/addRating/:itemId",ReviewController.addRating);
 
 //MENU
 router.get('/menu',(req,res) =>{
-    console.log("ok1");
     MenuController.displayAvailableMenus(req, res);
-    console.log("ok2")
-    
 })
 // ,{username: req.body.username}
-
-
 
 
 

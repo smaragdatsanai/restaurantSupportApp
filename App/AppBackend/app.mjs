@@ -16,8 +16,10 @@ app.use(express.urlencoded({extended:false}))
 app.engine(".hbs", engine({extname:".hbs"}))
 app.set("view engine",".hbs")
 
+
 //middleware & static files
 app.use(express.static("public"))
+
 
 //Diaxeiristes aithmatwn
 import routes from './routes/routes.mjs'
