@@ -1,4 +1,4 @@
-import * as Owner from '../models/admin.mjs' // version 3 with ORM sequelize, postgress
+import * as Owner from '../models/admin.mjs' 
 import * as seqObj from '../models/database.mjs'
 
 
