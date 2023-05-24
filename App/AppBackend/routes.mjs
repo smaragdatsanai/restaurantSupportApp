@@ -77,7 +77,29 @@ router.get("/adminReviews",
     }
     
 )
+router.get("/OwnerMenus",
+    adminController.findMenusByOwnerId,
+    (req,res) => {
+        res.render("menu-list",{menus: req.menus})
+        console.log(req.menus)
+    }
+)
 
+router.post("/AddItem",
+    adminController.addMenuItems,
+    (req,res) => {
+        res.render("menu-items",{newitem:req.newitem})
+        console.log(req.newitem)
+    }
+)
+
+router.get("/DeleteItem",
+    adminController.deleteMenuItem,
+    (req,res) => {
+        res.render("menu-items",{item:req.item})
+        console.log(req.item)
+    }
+)
 
 export {router}
 
