@@ -1,11 +1,10 @@
 import {sequelize} from './dbConfig.mjs'
-import { DataTypes} from 'sequelize'
+import { DataTypes, UUIDV4} from 'sequelize'
 
 const Owner = sequelize.define ('Owner', {
     Owner_Id:{
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
     },
     First_Name:{
@@ -37,10 +36,9 @@ const Owner = sequelize.define ('Owner', {
 
 const Restaurant = sequelize.define('Restaurant',{
     Restaurant_Id:{
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
+        primaryKey: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -49,31 +47,33 @@ const Restaurant = sequelize.define('Restaurant',{
     Address:{
         type: DataTypes.STRING,
         allowNull: false
-    }
-});
-
-const WorkingDaysandHours = sequelize.define('WorkingDaysandHours',{
-    Day:{
-        type: DataTypes.STRING,
-        primaryKey: true,
+    },
+    Opens_on:{
+        type: DataTypes.TIME,
+        allowNull:false
+    },
+    Closes_at:{
+        type: DataTypes.TIME,
         allowNull: false
     },
-    Opening:{
-        type: DataTypes.STRING,
-        allowNull:true
+    Image:{
+        type: DataTypes.BLOB,
+        allowNull: false
     },
-    Closing:{
+    Restaurant_Type:{
         type: DataTypes.STRING,
-        allowNull:true
+        allowNull: true
     }
-})
+
+});
+
+
 
 const Menu = sequelize.define('Menu',{
     Menu_Id:{
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
+        primaryKey: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -82,16 +82,26 @@ const Menu = sequelize.define('Menu',{
     Type:{
         type:DataTypes.TEXT,
         allowNull: false
+    },
+    Active_from:{
+        type: DataTypes.TIME,
+        allowNull:false
+    },
+    Active_until:{
+        type: DataTypes.TIME,
+        allowNull:false
+    },
+    Image:{
+        type: DataTypes.BLOB,
+        allowNull: false
     }
-    
 });
 
 const Menu_Item = sequelize.define('Menu_Item',{
     Item_Id:{
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
-        autoIncrement: true
     },
     Name:{
         type: DataTypes.TEXT,
@@ -104,15 +114,18 @@ const Menu_Item = sequelize.define('Menu_Item',{
     Price:{
         type: DataTypes.DECIMAL,
         allowNull: false
+    },
+    Image:{
+        type: DataTypes.BLOB,
+        allowNull: false
     }
 });
 
 const User = sequelize.define('User',{
     User_Id:{
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull:false,
-        primaryKey: true,
-        autoIncrement: true
+        primaryKey: true
     },
     Username:{
         type: DataTypes.STRING,
@@ -125,15 +138,18 @@ const User = sequelize.define('User',{
     Email:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    ProfileImage:{
+        type: DataTypes.BLOB,
+        allowNull: true
     }
 });
 
 const Review = sequelize.define('Review',{
     Review_Id:{
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
         allowNull:false,
-        primaryKey: true,
-        autoIncrement: true
+        primaryKey: true
     },
     Rating:{
         type: DataTypes.TEXT,
@@ -145,30 +161,29 @@ const Review = sequelize.define('Review',{
     }
 });
 
-Owner.hasMany(Restaurant);
-Restaurant.belongsTo(Owner);
-Restaurant.hasMany(Menu);
-Menu.belongsTo(Restaurant);
-Menu.hasMany(Menu_Item);
-Menu_Item.belongsTo(Menu);
-Menu_Item.hasMany(Review);
-User.hasMany(Review);
-Review.belongsTo(User);
-Restaurant.hasMany(WorkingDaysandHours);
-WorkingDaysandHours.belongsTo(Restaurant);
-
-// Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
-// Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});
-// Restaurant.hasMany(Menu ,{foreignKey:'RestaurantId'});
-// Menu.belongsTo(Restaurant,{foreignKey:'RestaurantId'});
-// Menu.hasMany(Menu_Item, { foreignKey: 'MenuId' });
-// Menu_Item.belongsTo(Menu, { foreignKey: 'MenuId' });
-// Menu_Item.hasMany(Review,{ foreignKey:'MenuItemId'});
-// Review.belongsTo(Menu_Item,{ foreignKey:'MenuItemId'});
-// User.hasMany(Review,{ foreignKey:'UserId'});
-// Review.belongsTo(User,{ foreignKey:'UserId'});
+// Owner.hasMany(Restaurant);
+// Restaurant.belongsTo(Owner);
+// Restaurant.hasMany(Menu);
+// Menu.belongsTo(Restaurant);
+// Menu.hasMany(Menu_Item);
+// Menu_Item.belongsTo(Menu);
+// Menu_Item.hasMany(Review);
+// User.hasMany(Review);
+// Review.belongsTo(User);
 // Restaurant.hasMany(WorkingDaysandHours);
 // WorkingDaysandHours.belongsTo(Restaurant);
+
+Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
+Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});
+Restaurant.hasMany(Menu ,{foreignKey:'RestaurantId'});
+Menu.belongsTo(Restaurant,{foreignKey:'RestaurantId'});
+Menu.hasMany(Menu_Item, { foreignKey: 'MenuId' });
+Menu_Item.belongsTo(Menu, { foreignKey: 'MenuId' });
+Menu_Item.hasMany(Review,{ foreignKey:'MenuItemId'});
+Review.belongsTo(Menu_Item,{ foreignKey:'MenuItemId'});
+User.hasMany(Review,{ foreignKey:'UserId'});
+Review.belongsTo(User,{ foreignKey:'UserId'});
+
 
 
 try{
@@ -177,4 +192,4 @@ try{
 }catch (err){
     console.error('Error sychronizing the database:',err);
 }
-export {User,Owner,Restaurant,Menu,Menu_Item,Review,WorkingDaysandHours};
+export {User,Owner,Restaurant,Menu,Menu_Item,Review,};
