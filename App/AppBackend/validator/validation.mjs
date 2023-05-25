@@ -12,7 +12,7 @@ const validateLogin = [
         }
         //se periptwsh pou entopisthkan la8h 
         else {
-            res.render("home", { message: errors.mapped() })
+            res.render("./loginForm", { message: errors.mapped() })
         } 
     }
 ]
@@ -38,7 +38,7 @@ const validateNewUser = [
             next()
         }
         else {
-            res.render("registrationform", {
+            res.render("./registrationform", {
                 message: errors.mapped()
             })
         }

@@ -8,7 +8,7 @@ export async function getAllitemRatings(itemId){
     try{
         const itemReview = await Review.findAll({
             where: {
-                MenuItemItemId: itemId
+                MenuItemId: itemId
             }
           });
         return  itemReview.map(item => item.toJSON());
@@ -24,7 +24,7 @@ export async function getAllUserRatings(userId){
     try{
         const userReview = await Review.findAll({
             where: {
-                UserUserId: userId
+                UserId: userId
             }
           });
         return  userReview.map(item => item.toJSON());
@@ -40,8 +40,8 @@ export async function addItemReview(revv,comment,userId,itemId){
             Review_Id :faker.datatype.uuid(),
             Rating: revv,
             Comments:comment,
-            UserUserId:userId,
-            MenuItemItemId:itemId,
+            UserId:userId,
+            MenuItemId:itemId,
           });
     }
     catch{

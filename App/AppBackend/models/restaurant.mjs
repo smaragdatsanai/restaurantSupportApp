@@ -28,7 +28,7 @@ export async function showMenu(resId){
   try {
     const menu = await Menu.findAll({
       where: {
-        RestaurantRestaurantId: resId
+        RestaurantId: resId
       }
     });
     return menu.map(item => item.toJSON());

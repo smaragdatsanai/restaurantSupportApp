@@ -19,6 +19,7 @@ export async function addUser(username, password, Email) {
       Username: username,
       Email: Email,
       Password: Password_hash
+      
     });
     
     return user; // Return the created user object
@@ -47,15 +48,4 @@ export async function login(username,password){
     } catch (error) {
         throw error
     }
-}
-
-
-export async function findOrAddUser() {
-  if (this.user == undefined)
-      try {
-          const [user, created] = await User.findOrCreate({ where: { Username: this.username } })
-          this.user = user
-      } catch (error) {
-          throw error
-      }
 }

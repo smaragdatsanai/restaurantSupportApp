@@ -6,30 +6,22 @@
                 <h1>Welcome to reserveEat</h1>
                 <h2>Log in to your account</h2>
             </div>
-
             <div class="container d-flex align-items-center justify-content-center signup-form">
                 <form action="/doLogin" method="post" class="needs-validation">
                     <div class="col-lg form-floating mb-3">
-                        <input type="text" class="form-control" 
-                        value="{{username}}" name="username" id="userNameInput" placeholder="Username" 
-                        required="required" autofocus>
-                        <label for="userNameInput">Username</label>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <input type="text" class="form-control {{#if message.username}} is-invalid {{/if}}"
+                            value="{{message.username.value}}" name="username" id="form-username"
+                            placeholder="Όνομα χρήστη" required="required" autofocus>
+                        <label class="form-label" for="form-username">Όνομα χρήστη</label>
+                        <div class="invalid-feedback">{{message.username.msg}}</div>
                     </div>
                     <div class="col-sm form-floating mb-3">
-                        <input type="password" class="form-control" 
-                        value="{{password}}" name="password" id="floatingPassword" placeholder="Password"
-                        required="required">
-                        <label for="floatingPassword">Password</label>
-                        <div class="valid-feedback">Valid.</div>
-                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <input type="password" class="form-control {{#if message.password}} is-invalid {{/if}}"
+                            value="{{message.password.value}}" name="password" id="password" placeholder="Συνθηματικό"
+                            required="required">
+                        <label class="form-label" for="password">Συνθηματικό</label>
+                        <div class="invalid-feedback">{{message.username.msg}}</div>
                     </div>
-                    {{!-- <div class="col-sm mb-sm-3 form-check">
-                        <input type="checkbox" class="form-check-input" 
-                        value="{{checkbox}}" name="checkbox" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                    </div> --}}
                     <button type="submit" class="btn btn-dark btn-lg pb-sm-3 mb-3">Log in</button>
                     <div class="col-sm  mb-sm-2">
                         <a href="/register" style="color: black;  ">Click here if you dont have an

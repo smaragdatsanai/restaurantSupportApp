@@ -19,7 +19,7 @@ export async function getMenuItems(menuId){
   try {
     const menuItems = await Menu_Item.findAll({
       where: {
-        MenuMenuId: menuId
+        MenuId: menuId
       }
     });
     return menuItems.map(item => item.toJSON());

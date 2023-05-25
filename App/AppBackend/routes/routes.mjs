@@ -82,7 +82,7 @@ router.post("/doLogin",
 )
 
 router.post("/doRegister", 
-    Validator.validateNewUser,
+    // Validator.validateNewUser,
     UserController.doRegister,
     UserController.doLogin,
     (req, res) => {

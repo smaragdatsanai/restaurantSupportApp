@@ -10,28 +10,28 @@
             <div class="container d-flex align-items-center justify-content-center signup-form">
                 <form action="/doRegister" method="post" class="needs-validation">
                     <div class="col-sm form-floating mb-3">
-                        <input value="{{username}}" type="text" class="form-control" id="userNameInput"
+                        <input value="{{username}}" name="username" type="text" class="form-control" id="userNameInput"
                             placeholder="Username" required>
                         <label for="userNameInput">Username</label>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-sm form-floating mb-3">
-                        <input value="{{email}}" type="email" class="form-control" id="floatingInput"
+                        <input value="{{email}}" name="email"  type="email" class="form-control" id="floatingInput"
                             placeholder="name@example.com" required>
                         <label for="floatingInput">Email address</label>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-sm form-floating mb-3">
-                        <input value="{{password}}" type="password" class="form-control" id="floatingPassword"
+                        <input value="{{password}}" name="password" type="password" class="form-control" id="floatingPassword"
                             placeholder="Password" required>
                         <label for="floatingPassword">Password</label>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="col-sm form-floating mb-3">
-                        <input value="{{confirmationPassword}}" type="password" class="form-control"
+                        <input value="{{confirmationPassword}}" name="confirmationPassword"  type="password" class="form-control"
                             id="floatingPasswordConfirm" placeholder="Password" required>
                         <label for="floatingPasswordConfirm">Confirm Password</label>
                         <div class="valid-feedback">Valid.</div>

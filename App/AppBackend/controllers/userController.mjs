@@ -10,8 +10,8 @@ const doLogin = async (req, res, next) => {
             req.session.username = req.body.username // το username μπαίνει σαν μεταβλητή συνεδρίας
             req.session.userId=user.User_Id
             res.locals.username = req.session.username
-            // res.session.userType="User"
-            // res.locals.userType= res.locals.userType
+            req.session.userType = "User"; // Corrected line
+            res.locals.userType = req.session.userType; // Corrected line
             next() 
         }
         else {

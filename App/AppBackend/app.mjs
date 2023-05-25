@@ -23,11 +23,12 @@ const myAppSession = session({
     }
 })
 
-const app = express()
+const app = express();
+
+console.log(myAppSession)
 
 app.use(myAppSession)
-//  import * as Data from './models/addRandomData.mjs'
-// Data.addRandomData();
+
 
 app.use(express.urlencoded({extended:false}))
 app.engine(".hbs", engine({extname:".hbs"}))
@@ -37,6 +38,8 @@ app.set("view engine",".hbs")
 //middleware & static files
 app.use(express.static("public"))
 
+// import * as Data from './models/addRandomData.mjs'
+// Data.addRandomData();
 
 //Diaxeiristes aithmatwn
 import routes from './routes/routes.mjs'
