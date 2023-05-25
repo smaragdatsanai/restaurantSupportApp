@@ -21,7 +21,7 @@ const adminController =await import('../controllers/adminController.mjs')
 
 router.get("/", (req, res) => {
     if (req.session.username)
-        res.redirect("./restaurants")
+        res.redirect("./home")
     else
         res.render("./loginForm")
 })
@@ -33,8 +33,6 @@ router.get("/", (req, res) => {
 
 router.get('/restaurants',
     UserController.checkIfAuthenticated,
-    // Validator.validateLogin,
-    // UserController.doLogin,
     RestaurantController.displayAllRestaurants)
 
 router.get('/restaurants/menu/:restaurantId',
@@ -47,7 +45,7 @@ MenuController.showMenuItems);
 router.get('/restaurants/menu/menuItems/addRating/:itemName/:itemId',(req,res)=>{
     res.render('./ratingForm',{Item_Id:req.params.itemId,Name:req.params.itemName})
 });
-router.get("/restaurants/menu/menuItems/addRating/:itemId",ReviewController.addRating);
+router.post("/restaurants/menu/menuItems/addRating/:itemId",ReviewController.addRating);
 
 //MENU
 router.get('/menu',(req,res) =>{
@@ -76,7 +74,7 @@ router.post("/doLogin",
 router.post("/doRegister", Validator.validateNewUser,
     UserController.doRegister,
     (req, res) => {
-        res.render("home",{username: req.body.username})
+        res.render("home")
     }
 )
 

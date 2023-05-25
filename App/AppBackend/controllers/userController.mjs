@@ -8,8 +8,9 @@ const doLogin = async (req, res, next) => {
         const user = await User.login(req.body.username, req.body.password)
         if (user) {
             req.session.username = req.body.username // το username μπαίνει σαν μεταβλητή συνεδρίας
-            res.locals.username = req.session.username //τα μέλη του res.locals είναι απευθείας προσβάσιμα στο template
-            next() //το επόμενο middleware είναι το showBooklist
+            req.session.userId=user.User_Id
+            res.locals.username = req.session.username 
+            next() 
         }
         else {
             throw new Error("άγνωστο σφάλμα")

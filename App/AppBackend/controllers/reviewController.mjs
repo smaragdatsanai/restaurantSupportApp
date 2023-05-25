@@ -2,11 +2,13 @@ import * as Review from '../models/review.mjs' // version 3 with ORM sequelize, 
 
 const  addRating = async (req,res,next) => {
     try{
-        itemId=req.params.itemId;
-        userId=req.params.userId;
-        rating=req.body.Rating;
-        description=req.body.Description;
-        const menus= await Review.addRating()
+        const itemId=req.params.itemId;
+        const userId=req.session.userId;
+        const rating=req.body.rating;
+        const description=req.body.description;
+        console.log(req.body)
+        console.log(rating,description)
+        const menus= await Review.addItemReview(rating,description,userId,itemId)
     }catch(error){
       next(error)  
     }
