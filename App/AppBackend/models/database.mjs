@@ -1,8 +1,10 @@
 import {sequelize} from './dbConfig.mjs'
 import { DataTypes, UUIDV4} from 'sequelize'
+import { DataTypes, UUIDV4} from 'sequelize'
 
 const Owner = sequelize.define ('Owner', {
     Owner_Id:{
+        type: DataTypes.UUID,
         type: DataTypes.UUID,
         allowNull: false,
         primaryKey: true,
@@ -161,6 +163,30 @@ const Review = sequelize.define('Review',{
     }
 });
 
+Owner.hasMany(Restaurant);
+Restaurant.belongsTo(Owner);
+Restaurant.hasMany(Menu);
+Menu.belongsTo(Restaurant);
+Menu.hasMany(Menu_Item);
+Menu_Item.belongsTo(Menu);
+Menu_Item.hasMany(Review);
+User.hasMany(Review);
+Review.belongsTo(User);
+Restaurant.hasMany(WorkingDaysandHours);
+WorkingDaysandHours.belongsTo(Restaurant);
+
+// Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
+// Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});
+// Restaurant.hasMany(Menu ,{foreignKey:'RestaurantId'});
+// Menu.belongsTo(Restaurant,{foreignKey:'RestaurantId'});
+// Menu.hasMany(Menu_Item, { foreignKey: 'MenuId' });
+// Menu_Item.belongsTo(Menu, { foreignKey: 'MenuId' });
+// Menu_Item.hasMany(Review,{ foreignKey:'MenuItemId'});
+// Review.belongsTo(Menu_Item,{ foreignKey:'MenuItemId'});
+// User.hasMany(Review,{ foreignKey:'UserId'});
+// Review.belongsTo(User,{ foreignKey:'UserId'});
+// Restaurant.hasMany(WorkingDaysandHours);
+// WorkingDaysandHours.belongsTo(Restaurant);
 
 Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
 Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});
@@ -181,4 +207,4 @@ try{
 }catch (err){
     console.error('Error sychronizing the database:',err);
 }
-export {User,Owner,Restaurant,Menu,Menu_Item,Review,};
+export {User,Owner,Restaurant,Menu,Menu_Item,Review,WorkingDaysandHours};

@@ -6,6 +6,10 @@ import { UUID as uuid} from "sequelize";
 import { Blob } from 'buffer';
 import fs from 'fs';
 
+
+
+
+
 // Add random data to the database
 export async function addRandomData() {
     try {
@@ -27,8 +31,7 @@ export async function addRandomData() {
   
       // Create restaurants
       const owners = await Owner.findAll();
-      const nnames= ['Mamma Mia','Hermanos','Brunelo','Avli','Smokers','Abbie','Obio','Allio','Sakana','Ocean'];
-      const types = ['Italian','Mexican','Breakfast & Brunch','Greek','Burgers','Steakhouse','Indian','Chinese','Sushi','Fish'];
+      const nnames= ['Yummy Restaurant','La Pasteria','I Fratti','Brunelo','Avli','Salumeria','Abbie','Ovio','Allio','Cozy'];
       for (let i = 0; i < 10; i++) {
         const photodata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/restphoto.jpg`);
         const photoblob = new Blob([photodata], {type: 'image/jpg'});
@@ -193,8 +196,7 @@ export async function addRandomData() {
                     Name: drinks[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max, precision : 0.01}),
-                    Image: photos[i],
-                    MenuId: menu.Menu_Id
+                    MenuMenuId: menu.Menu_Id
                 });
             }
         }
@@ -279,6 +281,8 @@ export async function addRandomData() {
                     Price: faker.random.number({min,max,precision:0.01}),
                     Image: breakfast[i],
                     MenuId: menu.Menu_Id
+                    Image: breakfast[i],
+                    MenuId: menu.Menu_Id
                 });
             }
         }
@@ -306,6 +310,9 @@ export async function addRandomData() {
                     Image: italian[i],
                     MenuId: menu.Menu_Id
 
+                    Image: italian[i],
+                    MenuId: menu.Menu_Id
+
                 });
             }
         }
@@ -330,6 +337,8 @@ export async function addRandomData() {
                     Name: food[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
+                    Image: mexican[i],
+                    MenuId: menu.Menu_Id
                     Image: mexican[i],
                     MenuId: menu.Menu_Id
                 });
