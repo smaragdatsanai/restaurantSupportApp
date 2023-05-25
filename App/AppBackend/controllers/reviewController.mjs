@@ -9,6 +9,7 @@ const  addRating = async (req,res,next) => {
         console.log(req.body)
         console.log(rating,description)
         const menus= await Review.addItemReview(rating,description,userId,itemId)
+        next()
     }catch(error){
       next(error)  
     }

@@ -5,11 +5,13 @@ const doLogin = async (req, res, next) => {
     const username = req.body.username
     const password = req.body.password
     try{
-        const user = await User.login(req.body.username, req.body.password)
+        const user = await User.login(username,password)
         if (user) {
             req.session.username = req.body.username // το username μπαίνει σαν μεταβλητή συνεδρίας
             req.session.userId=user.User_Id
-            res.locals.username = req.session.username 
+            res.locals.username = req.session.username
+            // res.session.userType="User"
+            // res.locals.userType= res.locals.userType
             next() 
         }
         else {

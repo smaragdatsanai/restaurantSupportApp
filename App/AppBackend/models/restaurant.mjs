@@ -1,4 +1,5 @@
 import { Owner,User,Restaurant,Review,Menu,Menu_Item } from "./database.mjs";
+import { Op } from 'sequelize';
 import faker from 'faker' 
 import { sequelize } from "./dbConfig.mjs";
 import { DataTypes } from "sequelize";
@@ -37,6 +38,21 @@ export async function showMenu(resId){
   }
 }
 
+export async function searchRestaurantByName(restaurantName){
+  try {
+    const restaurants = await Restaurant.findAll({
+      where: {
+        Name:{
+          [Op.iLike]: restaurantName // Case-insensitive comparison
+        }
+      }
+    });
+    return restaurants.map(item => item.toJSON());
+  } catch (error) {
+    console.error('Error retrieving restaurants:', error);
+    return [];
+  }
+}
 
 //when I click on th Restaurant (schedule , ratings, photos etc)
 export async function getRestaurantById(resId){

@@ -25,4 +25,17 @@ async function showRestaurantMenu(req, res, next) {
   }
 }
 
-export {displayAllRestaurants,showRestaurantMenu}
+async function searchRestaurant(req,res,next){
+  try {
+    console.log("search");
+    const name=req.query.restaurantName
+    console.log(name)
+    const restaurants = await Restaurant.searchRestaurantByName(name)
+    console.log("exited");
+    res.render("../views/restaurants", { Restaurant: restaurants });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export {displayAllRestaurants,showRestaurantMenu,searchRestaurant}

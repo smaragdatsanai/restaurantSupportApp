@@ -22,7 +22,7 @@ const validateNewUser = [
     body("username")
     .trim().escape().isLength({ min: 4 }) // Θα μπορούσαμε να έχουμε και άλλους ελέγχους
     .withMessage("Δώστε όνομα με τουλάχιστον 4 χαρακτήρες"),
-    body("password-confirm")
+    body("confirmationPassword")
     .trim()
     .isLength({ min: 4, max: 10 })
     .withMessage('Το συνθηματικό πρέπει να έχει από 4 μέχρι 10 χαρακτήρες')

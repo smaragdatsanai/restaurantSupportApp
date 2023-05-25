@@ -6,11 +6,12 @@
                 <p>Find the best place to eat.</p>
             </div>
         </div>
-        <form class="d-flex pb-3 mx-sm-5 px-sm-5">
+        <form action="/restaurants/findRestaurant" method="get" class="d-flex pb-3 mx-sm-5 px-sm-5">
             <input class="form-control me-2" type="search" placeholder="Search restaurant by name or place"
-                aria-label="Search">
+                aria-label="Search" name="restaurantName">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+
         {{#each Restaurant}}
 
         <div class="row justify-content-center">
@@ -24,7 +25,8 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{Name}}</h5>
                                 <p class="card-text">{{Address}}</p>
-                                <p class="card-text"><a href="/restaurants/menu/{{Restaurant_Id}}" class="btn btn-outline-dark">Show restaurant menus</a></p>
+                                <p class="card-text"><a href="/restaurants/menu/{{Restaurant_Id}}"
+                                        class="btn btn-outline-dark">Show restaurant menus</a></p>
                             </div>
                         </div>
                     </div>

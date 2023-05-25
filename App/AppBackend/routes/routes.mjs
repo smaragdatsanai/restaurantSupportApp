@@ -16,14 +16,14 @@ const UserController =await import('../controllers/userController.mjs')
 const MenuController =await import('../controllers/menuController.mjs')
 const RestaurantController =await import('../controllers/restaurantController.mjs')
 const ReviewController =await import('../controllers/reviewController.mjs')
-const adminController =await import('../controllers/adminController.mjs')
+const AdminController =await import('../controllers/adminController.mjs')
 
 
 router.get("/", (req, res) => {
     if (req.session.username)
-        res.redirect("./home")
+        res.redirect("/restaurants")
     else
-        res.render("./loginForm")
+        res.render("./startingPage")
 })
 
 
@@ -45,7 +45,12 @@ MenuController.showMenuItems);
 router.get('/restaurants/menu/menuItems/addRating/:itemName/:itemId',(req,res)=>{
     res.render('./ratingForm',{Item_Id:req.params.itemId,Name:req.params.itemName})
 });
-router.post("/restaurants/menu/menuItems/addRating/:itemId",ReviewController.addRating);
+router.post("/restaurants/menu/menuItems/addRating/:itemId",ReviewController.addRating,
+(req,res) =>{
+    res.render('./home',{message: "Η αξιολόγηση πραγματοποιήθηκε επιτυχώς"});}
+);
+
+router.get('/restaurants/findRestaurant',UserController.checkIfAuthenticated,RestaurantController.searchRestaurant)
 
 //MENU
 router.get('/menu',(req,res) =>{
@@ -53,6 +58,9 @@ router.get('/menu',(req,res) =>{
 })
 
 //USER 
+router.get('/home',(req,res) =>{
+    res.render('./home');
+})
 
 router.get('/login',(req,res) =>{
     res.render('./loginForm');
@@ -64,30 +72,58 @@ router.get('/register',(req,res) =>{
 })
 
 
+
 router.post("/doLogin",
+    Validator.validateLogin,
     UserController.doLogin,
+    // (req, res) => {
+    //     res.render("home",{username: req.body.username})
+    // }
+)
+
+router.post("/doRegister", 
+    Validator.validateNewUser,
+    UserController.doRegister
+)
+
+
+
+//ADMIN
+
+router.get('/adminLogin',
+    (req,res) =>{
+        res.render('./adminLoginForm');
+    }
+)
+
+
+router.get('/adminRegister',(req,res) =>{
+    res.render('./adminRegistrationForm');
+})
+
+router.post("/doAdminLogin",
+    Validator.validateLogin,
+    AdminController.doLogin,
     (req, res) => {
         res.render("home",{username: req.body.username})
     }
 )
 
-router.post("/doRegister", Validator.validateNewUser,
-    UserController.doRegister,
+router.post("/doAdminRegister", 
+    // console.log("entered"),
+    // Validator.validateNewUser,
+    // console.log("exited"),
+    AdminController.doRegister,
+    AdminController.doLogin,
     (req, res) => {
-        res.render("home")
+        res.render("home", { message: "Η εγγραφή του χρήστη έγινε με επιτυχία" })
     }
 )
 
-router.get('/logout',(req,res)=> {
-    req.session.destroy()
-    res.redirect("/")
-})
 
-
-//admin
 
 router.get("/adminReviews",
-    adminController.findReviews,
+    AdminController.findReviews,
     (req,res) => {
         res.render("admin-reviews", {reviews: req.reviews})
         console.log(req.reviews)

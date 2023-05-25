@@ -1,5 +1,12 @@
 <div class="container cont_style p-5">
-
+    {{#if message}}<div class="row ">
+        <div class="col-6 offset-3">
+            <div class="alert alert-primary" role="alert">
+                {{message}}
+            </div>
+        </div>
+    </div>
+    {{/if}}
     {{!-- message (user logged in rating added klp) --}}
     <h1 class="mt-5">Profile Page</h1>
     <div class="row mt-5">
@@ -7,15 +14,24 @@
             <img src="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
                 alt="Profile Picture" class="img-fluid profile-picture">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 ">
             <a href="#" class="btn btn-outline-secondary mb-5">Edit profile</a>
             <h2>{{username}}</h2>
-            <div class="col-md-8 profile-link"><a href="#" class="btn btn-outline-dark pb-3 ">My inventory</a></div>
-            <div class="col-md-8 profile-link"> <a href="#" class="btn btn-outline-dark pb-3">My reviews</a></div>
-            <div class="col-md-8 profile-link"> <a href="#" class="btn btn-outline-dark pb-3">My dinning history</a>
+            <div class="col-md-8 profile-link">
+                <a href="#" class="btn btn-outline-dark btn-block pb-3">My inventory</a>
             </div>
-            <div class="col-md-8 profile-link"> <a href="#" class="btn btn-outline-dark pb-3">My favourites</a></div>
+            <div class="col-md-8 profile-link">
+                <a href="#" class="btn btn-outline-dark btn-block pb-3">My reviews</a>
+            </div>
+            <div class="col-md-8 profile-link">
+                <a href="#" class="btn btn-outline-dark btn-block pb-3">My dining history</a>
+            </div>
+            <div class="col-md-8 profile-link">
+                <a href="#" class="btn btn-outline-dark btn-block pb-3">My favorites</a>
+            </div>
         </div>
+
+
     </div>
     <div class="row mt-5">
         <h3 class="col-md-6 d-flex justify-content-center">Pending reservations</h3>
