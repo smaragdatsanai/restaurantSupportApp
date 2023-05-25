@@ -83,7 +83,11 @@ router.post("/doLogin",
 
 router.post("/doRegister", 
     Validator.validateNewUser,
-    UserController.doRegister
+    UserController.doRegister,
+    UserController.doLogin,
+    (req, res) => {
+        res.render("home", { message: "Η εγγραφή του χρήστη έγινε με επιτυχία" })
+    }
 )
 
 

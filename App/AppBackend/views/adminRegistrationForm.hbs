@@ -10,45 +10,45 @@
             <form action="/doAdminRegister" method="post" class="needs-validation">
                 <div class="row g-3">
                     <div class="col-sm-6 form-floating mb-3  ">
-                        <input value="{{firstName}}"  type="text" class="form-control" id="floatingName" placeholder="First name">
+                        <input value="{{firstName}}" name="firstName"  type="text" class="form-control" id="floatingName" placeholder="First name">
                         <label for="floatingName">First Name</label>
                     </div>
                     <div class="col-sm-6 form-floating mb-3">
-                        <input value="{{lastName}}" type="text" class="form-control" id="lastNameInput" placeholder="Last name">
+                        <input value="{{lastName}}" name="lastName" type="text" class="form-control" id="lastNameInput" placeholder="Last name">
                         <label for="lastNameInput">Last Name</label>
                     </div>
                 </div>
                 
                 <div class="col-sm form-floating mb-3">
-                    <input value="{{username}}" type="text" class="form-control" id="userNameInput"
+                    <input value="{{username}}" name="username" type="text" class="form-control" id="userNameInput"
                         placeholder="Username" required>
                     <label for="userNameInput">Username</label>
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
                 <div class="col-sm form-floating mb-3">
-                    <input value="{{email}}" type="email" class="form-control" id="floatingInput"
+                    <input value="{{email}}" name="email" type="email" class="form-control" id="floatingInput"
                         placeholder="name@example.com" required>
                     <label for="floatingInput">Email address</label>
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
                 <div class="col-sm form-floating mb-3">
-                    <input value="{{password}}" type="password" class="form-control" id="floatingPassword"
+                    <input value="{{password}}" name="password" type="password" class="form-control" id="floatingPassword"
                         placeholder="Password" required>
                     <label for="floatingPassword">Password</label>
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
                 <div class="col-sm form-floating mb-3">
-                    <input value="{{confirmationPassword}}" type="password" class="form-control"
+                    <input value="{{confirmationPassword}}" name="confirmationPassword" type="password" class="form-control"
                         id="floatingPasswordConfirm" placeholder="Password" required>
                     <label for="floatingPasswordConfirm">Confirm Password</label>
                     <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div>
                 </div>
                 <div class="col-sm form-floating mb-3">
-                    <input value="{{phone}}" type="text" class="form-control"
+                    <input value="{{phone}}" name="phone" type="text" class="form-control"
                         id="floatingPasswordConfirm" placeholder="Password" required>
                     <label for="floatingPasswordConfirm">Phone Number</label>
                     <div class="valid-feedback">Valid.</div>
