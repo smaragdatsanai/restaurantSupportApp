@@ -29,6 +29,17 @@ router.get("/", (req, res) => {
     }
 );
 
+router.get('/Profile', 
+    (req, res) => {
+        if (req.session.userType=="User")
+            res.redirect("/userProfile")
+        else
+            res.redirect("/adminProfile")
+        }
+    );
+
+
+
 
 
 
@@ -109,9 +120,9 @@ router.get('/register', (req, res) => {
 router.post("/doLogin",
     Validator.validateLogin,
     UserController.doLogin,
-    // (req, res) => {
-    //     res.render("home",{username: req.body.username})
-    // }
+    (req, res) => {
+        res.render("home",{username: req.body.username})
+    }
 );
 
 router.post("/doRegister",
@@ -128,9 +139,11 @@ router.get('/userProfile',
     UserController.checkIfAuthenticated,
     UserController.userProfileRender,
     (req, res) => {
-        res.render("home", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" })
-    }
-);
+          res.render("home", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" });
+      }
+  ) 
+
+
 
 
 router.get('/logout',
@@ -182,15 +195,12 @@ router.post("/doAdminRegister",
     }
 );
 
-
-
-router.get("/adminReviews",
-    AdminController.findReviews,
-    (req, res) => {
-        res.render("admin-reviews", { reviews: req.reviews })
-        console.log(req.reviews)
-    }
-
+router.get('/adminProfile',
+UserController.checkIfAuthenticated,
+AdminController.adminProfileRender,
+(req, res) => {
+      res.render("home", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" });
+  }
 );
 
 

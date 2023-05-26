@@ -1,4 +1,4 @@
-import { Owner } from "./database.mjs"
+import { Owner,User,Restaurant,Review,Menu,Menu_Item } from "./database.mjs";
 import bcrypt from "bcrypt";
 import faker from 'faker'
 import { sequelize } from "./dbConfig.mjs";
@@ -50,5 +50,29 @@ export async function login(username, password) {
       throw new Error("Wrong credentials")
   } catch (error) {
     throw error
+  }
+}
+
+export async function getAllAdminRestaurants(userId){
+  try{
+    const userRestaurants = await Owner.findAll({
+      where: {
+        Owner_Id: userId
+      },
+      include: [
+        {
+          model: Restaurant,
+          include: [
+            {
+              model: Menu
+            }
+          ]
+        }
+      ]
+    });
+      return  userRestaurants.map(item => item.toJSON());
+  }
+  catch (error) {
+    console.error('Error retrieving Restaurants:', error);
   }
 }

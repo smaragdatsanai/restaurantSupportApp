@@ -11,6 +11,7 @@
                 <a href="#" class="btn btn-outline-secondary mb-5">Edit profile</a>
             </div>
         </div>
+        {{#if (isuser userType )}}   
         <div class="row mt-5">
             <div class=" vstack gap-3 col-md-7 mx-auto">
                 <div class="row">
@@ -18,7 +19,7 @@
                         <p>My reviews</p>
                     </div>
                 </div>
-                {{#if (isuser userType )}}   
+                
                     {{#each reviews}}
                     <div class="row justify-content-center">
                         <div class="col">
@@ -49,7 +50,17 @@
                         </div>
                     </div>
                     {{/each}}
-                {{else}}
+            </div>
+        </div>
+        {{else}}
+        <div class="row mt-5">
+            <div class=" vstack gap-3 col-md-7 mx-auto">
+                <div class="row">
+                    <div class="col-md-5 mx-auto text-center pb-1 ">
+                        <p>My Restaurants</p>
+                    </div>
+                </div>
+                
                     {{#each restaurant}}
                     <div class="row justify-content-center">
                         <div class="col">
@@ -61,18 +72,9 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{this.Menu_Item.Menu.Restaurant.Name}}</h5>
-                                            <p class="card-text">Menu:{{this.Menu_Item.Menu.Name}}<br>Menu
+                                            <h5 class="card-title">{{this.Name}}</h5>
+                                            <p class="card-text">Menu:{{this.Menu.Name}}<br>Menu
                                                 Item:{{this.Menu_Item.Name}}</p>
-                                            <p class="card-text">
-                                                {{#fillstars this.Rating}}
-                                                <i class="fa fa-star"></i>
-                                                {{/fillstars}}
-                                                {{#emptystars this.Rating}}
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                {{/emptystars}}
-                                            </p>
-                                            <p class="card-text">{{this.Comments}}</p>
                                         </div>
                                     </div>
                                 </div>

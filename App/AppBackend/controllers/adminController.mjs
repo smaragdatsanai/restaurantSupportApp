@@ -51,11 +51,17 @@ const doRegister = async (req, res, next) => {
     }
 }
 
-const findReviews = async (req,res,next) => {
-    const reviews = await seqObj.Review.findAll()
-    req.reviews = reviews
-    console.log(reviews)
-    next()
+
+const adminProfileRender= async (req, res, next)=>{
+    try {
+        const userId=req.session.userId
+        const adminRestaurants = await Review.getAllAdminRestaurants(userId)
+        console.log(adminRestaurants)
+        res.render('./profile',{restaurants:adminRestaurants, userType:req.session.userType})
+        }catch (error) {
+        next(error)
+    }
 }
 
-export { doRegister, doLogin , findReviews}
+
+export { doRegister, doLogin,adminProfileRender}
