@@ -53,22 +53,6 @@ export async function login(username, password) {
   }
 }
 
-export async function addOwnerRestaurant(name,address,opens,closes,type,ownerid){
-  try{
-    await Restaurant.create({
-      Restaurant_Id: faker.datatype.uuid(),
-      Name: name,
-      Address: address,
-      Opens_on: opens,
-      Closes_at: closes,
-      Restaurant_Type: type,
-      OwnerId: ownerid
-    });
-  }catch(error){
-    console.error('Error creating restaurant:',error);
-  }
-}
-
 
 export async function getAllAdminRestaurants(userId){
   try{
@@ -87,9 +71,27 @@ export async function getAllAdminRestaurants(userId){
         }
       ]
     });
-      return  userRestaurants.map(item => item.toJSON());
-  }
-  catch (error) {
+    const restaurants = userRestaurants.flatMap(item => item.Restaurants.map(restaurant => restaurant.toJSON()));
+    return  restaurants
+  }catch (error) {
     console.error('Error retrieving Restaurants:', error);
+  }
+}
+
+export async function addOwnerRestaurant(name,address,opens,closes,type,ownerid){
+  try{
+    await Restaurant.create({
+      Restaurant_Id: faker.datatype.uuid(),
+      Name: name,
+      Address: address,
+      Opens_on: opens,
+      Closes_at: closes,
+      Restaurant_Type: type,
+      OwnerId: ownerid,
+
+      Image:'5b6f626a65637420426c6f625d'
+    });
+  }catch(error){
+    console.error('Error creating restaurant:',error);
   }
 }

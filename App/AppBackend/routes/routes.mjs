@@ -165,9 +165,16 @@ router.get('/switchaccounts',
 //ADMIN
 
 
-router.get('/place-restaurant',
+router.post('/place-restaurant',
     UserController.checkIfAuthenticated,
-    AdminController.
+    AdminController.addRestaurant
+)
+
+router.get('/addRestaurant',
+    UserController.checkIfAuthenticated,
+    (req,res)=>{
+        res.render('./add-restaurant');
+    }
 )
 
 
