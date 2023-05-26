@@ -10,8 +10,9 @@ const doLogin = async (req, res, next) => {
             req.session.username = req.body.username // το username μπαίνει σαν μεταβλητή συνεδρίας
             req.session.userId=user.User_Id
             res.locals.username = req.session.username
-            req.session.userType = "User"; // Corrected line
-            res.locals.userType = req.session.userType; // Corrected line
+            req.session.userType = "User"; 
+            res.locals.userType = req.session.userType; 
+            console.log(res.locals.userType)
             next() 
         }
         else {
@@ -49,7 +50,7 @@ const userProfileRender= async (req, res, next)=>{
         const userId=req.session.userId
         const userReviews = await Review.getAllUserReviews(userId)
         console.log(userReviews)
-        res.render('./profile',{reviews:userReviews})
+        res.render('./profile',{reviews:userReviews, userType:req.session.userType})
         }catch (error) {
         next(error)
     }

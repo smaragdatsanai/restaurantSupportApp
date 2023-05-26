@@ -7,23 +7,9 @@
                     alt="Profile Picture" class="img-fluid profile-picture">
             </div>
             <div class="col-md-6 ">
-                <a href="#" class="btn btn-outline-secondary mb-5">Edit profile</a>
                 <h2>{{username}}</h2>
-                {{!-- <div class="col-md-8 profile-link">
-                    <a href="#" class="btn btn-outline-dark btn-block pb-3">My inventory</a>
-                </div>
-                <div class="col-md-8 profile-link">
-                    <a href="#" class="btn btn-outline-dark btn-block pb-3">My reviews</a>
-                </div>
-                <div class="col-md-8 profile-link">
-                    <a href="#" class="btn btn-outline-dark btn-block pb-3">My dining history</a>
-                </div>
-                <div class="col-md-8 profile-link">
-                    <a href="#" class="btn btn-outline-dark btn-block pb-3">My favorites</a>
-                </div>
-            </div> --}}
-
-
+                <a href="#" class="btn btn-outline-secondary mb-5">Edit profile</a>
+            </div>
         </div>
         <div class="row mt-5">
             <div class=" vstack gap-3 col-md-7 mx-auto">
@@ -32,37 +18,69 @@
                         <p>My reviews</p>
                     </div>
                 </div>
-                {{#each reviews}}
-                <div class="row justify-content-center">
-                    <div class="col">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
-                                        class="img-fluid rounded-circle  " alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{this.Menu_Item.Menu.Restaurant.Name}}</h5>
-                                        <p class="card-text">Menu:{{this.Menu_Item.Menu.Name}}<br>Menu
-                                            Item:{{this.Menu_Item.Name}}</p>
-                                        <p class="card-text">
-                                            {{#times this.Rating}}
-                                            <i class="fa fa-star"></i>
-                                            {{/times}}
-                                            {{#remainingtimes this.Rating}}
-                                            <i class="fa fa-star-o" aria-hidden="true"></i>
-                                            {{/remainingtimes}}
-                                        </p>
-                                        <p class="card-text">{{this.Comments}}</p>
+                {{#if (isuser userType )}}   
+                    {{#each reviews}}
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
+                                            class="img-fluid rounded-circle  " alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{this.Menu_Item.Menu.Restaurant.Name}}</h5>
+                                            <p class="card-text">Menu:{{this.Menu_Item.Menu.Name}}<br>Menu
+                                                Item:{{this.Menu_Item.Name}}</p>
+                                            <p class="card-text">
+                                                {{#fillstars this.Rating}}
+                                                <i class="fa fa-star"></i>
+                                                {{/fillstars}}
+                                                {{#emptystars this.Rating}}
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                {{/emptystars}}
+                                            </p>
+                                            <p class="card-text">{{this.Comments}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {{/each}}
-
+                    {{/each}}
+                {{else}}
+                    {{#each restaurant}}
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        {{!-- <img src="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
+                                            class="img-fluid rounded-circle  " alt="..."> --}}
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{this.Menu_Item.Menu.Restaurant.Name}}</h5>
+                                            <p class="card-text">Menu:{{this.Menu_Item.Menu.Name}}<br>Menu
+                                                Item:{{this.Menu_Item.Name}}</p>
+                                            <p class="card-text">
+                                                {{#fillstars this.Rating}}
+                                                <i class="fa fa-star"></i>
+                                                {{/fillstars}}
+                                                {{#emptystars this.Rating}}
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>
+                                                {{/emptystars}}
+                                            </p>
+                                            <p class="card-text">{{this.Comments}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                {{/if}}
             </div>
         </div>
     </div>

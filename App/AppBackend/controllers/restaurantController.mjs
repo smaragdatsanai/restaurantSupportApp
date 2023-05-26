@@ -25,17 +25,6 @@ async function displayOpenRestaurants(req, res, next) {
   }
 }
 
-async function showRestaurantMenu(req, res, next) {
-  try {
-    // const restaurant= await Restaurant.getRestaurantById(req.params.restaurantId)
-    console.log("entered");
-    const menus = await Restaurant.showMenu(req.params.restaurantId)
-    console.log("exited");
-    res.render('menu-list', { menus: menus });
-  } catch (error) {
-    next(error);
-  }
-}
 
 async function searchRestaurant(req,res,next){
   try {
@@ -50,4 +39,4 @@ async function searchRestaurant(req,res,next){
   }
 }
 
-export {displayAllRestaurants,showRestaurantMenu,searchRestaurant,displayOpenRestaurants}
+export {displayAllRestaurants,searchRestaurant,displayOpenRestaurants}

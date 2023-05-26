@@ -15,28 +15,6 @@ export async function getAllRestaurants(){
       }
 }
 
-export async function getAllOpenRestaurants(){
-    try{
-        
-    }
-    catch{
-
-    }
-}
-
-export async function showMenu(resId){
-  try {
-    const menu = await Menu.findAll({
-      where: {
-        RestaurantId: resId
-      }
-    });
-    return menu.map(item => item.toJSON());
-  } catch (error) {
-    console.error('Error retrieving Menu_Items:', error);
-    return [];
-  }
-}
 
 export async function searchRestaurantByName(restaurantName){
   try {
@@ -66,24 +44,29 @@ export async function getRestaurantById(resId){
       }  
 }
 
-export async function getOpenRestaurants(){
-  try{
-  const currentTime = new Date();
+export async function getOpenRestaurants() {
+  try {
+    const currentTime = new Date();
+    const currentTimeString = currentTime.toISOString().substr(11, 8); // Extract time portion (HH:mm:ss)
+
     const rest = await Restaurant.findAll({
       where: {
-        opens_on: sequelize.literal(
-          `TIME(opens_on) <= TIME('${currentTime.toISOString()}')`
-        ),
-        closes_at: sequelize.literal(
-          `TIME(closes_at) >= TIME('${currentTime.toISOString()}')`
-        ),
+        Opens_on: {
+          [Op.lte]: currentTimeString,
+        },
+        Closes_at: {
+          [Op.gte]: currentTimeString,
+        },
       },
     });
+    console.log(rest,currentTimeString)
+
     return rest.map((item) => item.toJSON());
-  }catch(error){
+  } catch (error) {
     console.error('Error retrieving Restaurants:', error);
-  }  
+  }
 }
+
 
 // Synchronize the models with the database (create the tables if they don't exist)
 

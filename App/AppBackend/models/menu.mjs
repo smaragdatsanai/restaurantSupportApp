@@ -1,5 +1,6 @@
 import { Menu } from "./database.mjs"
 import { Menu_Item } from "./database.mjs"
+import { Op } from 'sequelize';
 import { sequelize } from './dbConfig.mjs';
 
 
@@ -13,6 +14,40 @@ export async function getAllMenus() {
   }
 }
 
+export async function showRestaurantMenu(resId){
+  try {
+    const menu = await Menu.findAll({
+      where: {
+        RestaurantId: resId
+      }
+    });
+    return menu.map(item => item.toJSON());
+  } catch (error) {
+    console.error('Error retrieving Menu_Items:', error);
+    return [];
+  }
+}
+
+export async function showActiveMenu(resId) {
+  try {
+    const currentTime = new Date();
+    const currentTimeString = currentTime.toISOString().substr(11, 8);
+
+    const menu = await Menu.findAll({
+      where: {
+        Active_from: {
+          [Op.lte]: currentTimeString,
+        },
+        Active_until: {
+          [Op.gte]: currentTimeString,
+        },
+      },
+    });
+   return menu.map((item) => item.toJSON());
+  } catch (error) {
+    console.error('Error retrieving Restaurants:', error);
+  }
+}
 
 
 export async function getMenuItems(menuId){

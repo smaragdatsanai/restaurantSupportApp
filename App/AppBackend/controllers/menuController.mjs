@@ -5,8 +5,11 @@ import * as Menu from '../models/menu.mjs' // version 3 with ORM sequelize, post
 async function showMenuItems(req, res,next) {
   try {
     const menu = await Menu.findMenuByPk(req.params.menuId)
-    console.log(menu[0].Name)
     const menuItems = await Menu.getMenuItems(req.params.menuId)
+    menuItems.forEach((item) => {
+      const base64Image =item.Image.toString('base64');
+      item.Image = base64Image;
+    });
     res.render('menu-items', { Items: menuItems, MenuType: menu[0].Name });
   } catch (error) {
     next(error);
@@ -27,7 +30,29 @@ async function displayAvailableMenus(req, res, next) {
   }
 }
 
+async function showRestaurantActiveMenu(req, res, next) {
+  try {
+    // const restaurant= await Restaurant.getRestaurantById(req.params.restaurantId)
+    console.log("entered");
+    const menus = await Menu.showActiveMenu(req.params.restaurantId)
+    console.log("exited");
+    res.render('menu-list', { menus: menus ,Restaurant_Id:req.params.restaurantId});
+  } catch (error) {
+    next(error);
+  }
+}
 
+async function showRestaurantMenu(req, res, next) {
+  try {
+    // const restaurant= await Restaurant.getRestaurantById(req.params.restaurantId)
+    console.log("entered");
+    const menus = await Menu.showRestaurantMenu(req.params.restaurantId)
+    console.log("exited");
+    res.render('menu-list', { menus: menus,Restaurant_Id:req.params.restaurantId });
+  } catch (error) {
+    next(error);
+  }
+}
 
 const displayMenuItems = async (req, res) => {
   console.log("displayAvailableMenus");
@@ -47,4 +72,4 @@ const displayMenuItems = async (req, res) => {
   // next()
 }
 
-export { showMenuItems, displayAvailableMenus, displayMenuItems }
+export { showMenuItems, displayAvailableMenus, displayMenuItems,showRestaurantMenu,showRestaurantActiveMenu}
