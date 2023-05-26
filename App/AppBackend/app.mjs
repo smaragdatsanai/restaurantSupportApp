@@ -1,5 +1,5 @@
 import express from 'express'
-
+import handlebars from 'handlebars';
 import dotenv from 'dotenv'
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
@@ -9,6 +9,22 @@ if (process.env.NODE_ENV !== 'production') {
 import { engine } from 'express-handlebars'
 import session from 'express-session'
 import createMemoryStore from 'memorystore'
+
+handlebars.registerHelper('times', function (n, block) {
+    let accum = '';
+    for (let i = 0; i < n; ++i) {
+      accum += block.fn(i);
+    }
+    return accum;
+  });
+handlebars.registerHelper('remainingtimes', function (n, block) {
+    let accum = '';
+    const k=5-n
+    for (let i = 0; i < k; ++i) {
+      accum += block.fn(i);
+    }
+    return accum;
+  });
 
 const MemoryStore = createMemoryStore(session)
 
@@ -25,8 +41,6 @@ const myAppSession = session({
 
 const app = express();
 
-console.log(myAppSession)
-
 app.use(myAppSession)
 
 
@@ -37,6 +51,8 @@ app.set("view engine",".hbs")
 
 //middleware & static files
 app.use(express.static("public"))
+
+
 
 // import * as Data from './models/addRandomData.mjs'
 // Data.addRandomData();

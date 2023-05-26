@@ -280,7 +280,7 @@ export async function addRandomData() {
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
                     Image: breakfast[i],
-                    MenuId: menu.Menu_Id
+                    MenuId: menu.Menu_Id,
                     Image: breakfast[i],
                     MenuId: menu.Menu_Id
                 });
@@ -308,7 +308,7 @@ export async function addRandomData() {
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
                     Image: italian[i],
-                    MenuId: menu.Menu_Id
+                    MenuId: menu.Menu_Id,
 
                     Image: italian[i],
                     MenuId: menu.Menu_Id
@@ -338,7 +338,7 @@ export async function addRandomData() {
                     Description: descr[i],
                     Price: faker.random.number({min,max,precision:0.01}),
                     Image: mexican[i],
-                    MenuId: menu.Menu_Id
+                    MenuId: menu.Menu_Id,
                     Image: mexican[i],
                     MenuId: menu.Menu_Id
                 });

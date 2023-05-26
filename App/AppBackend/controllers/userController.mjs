@@ -1,5 +1,5 @@
 import * as User from '../models/user.mjs' // version 3 with ORM sequelize, postgress
-
+import * as Review from '../models/review.mjs' 
 
 const doLogin = async (req, res, next) => {
     const username = req.body.username
@@ -30,7 +30,7 @@ const doRegister = async (req, res, next) => {
     try {
         const user = await User.addUser(username,password,email)
         if (user) {
-            res.render("home", { newusermessage: "Η εγγραφή του χρήστη έγινε με επιτυχία`" })
+            next()
         }
         else {
             throw new Error("άγνωστο σφάλμα κατά την εγγραφή του χρήστη")
@@ -44,6 +44,16 @@ const doLogout = (req, res, next) => {
     req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
     next()
 }
+const userProfileRender= async (req, res, next)=>{
+    try {
+        const userId=req.session.userId
+        const userReviews = await Review.getAllUserReviews(userId)
+        console.log(userReviews)
+        res.render('./profile',{reviews:userReviews})
+        }catch (error) {
+        next(error)
+    }
+}
 
 function checkIfAuthenticated(req, res, next) {
     if (req.session.username) { //αν έχει τεθεί η μεταβλητή στο session store θεωρούμε πως ο χρήστης είναι συνδεδεμένος
@@ -54,4 +64,4 @@ function checkIfAuthenticated(req, res, next) {
         res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
 }
 
-export { checkIfAuthenticated, doLogin, doRegister, doLogout }
+export { checkIfAuthenticated, doLogin, doRegister, doLogout, userProfileRender }

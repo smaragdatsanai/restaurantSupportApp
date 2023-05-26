@@ -1,7 +1,7 @@
 import { Owner,User,Restaurant,Review,Menu,Menu_Item } from "./database.mjs";
-import { Op } from 'sequelize';
-import faker from 'faker' 
 import { sequelize } from "./dbConfig.mjs";
+import { Op } from 'sequelize';
+import faker from 'faker';
 import { DataTypes } from "sequelize";
 import { UUID as uuid} from "sequelize";
 
@@ -61,10 +61,30 @@ export async function getRestaurantById(resId){
         
         return rest.map(item => item.toJSON());
 
-      }catch(err){
+      }catch(error){
         console.error('Error retrieving Restaurant Details:', error);
       }  
 }
+
+export async function getOpenRestaurants(){
+  try{
+  const currentTime = new Date();
+    const rest = await Restaurant.findAll({
+      where: {
+        opens_on: sequelize.literal(
+          `TIME(opens_on) <= TIME('${currentTime.toISOString()}')`
+        ),
+        closes_at: sequelize.literal(
+          `TIME(closes_at) >= TIME('${currentTime.toISOString()}')`
+        ),
+      },
+    });
+    return rest.map((item) => item.toJSON());
+  }catch(error){
+    console.error('Error retrieving Restaurants:', error);
+  }  
+}
+
 // Synchronize the models with the database (create the tables if they don't exist)
 
 

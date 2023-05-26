@@ -20,18 +20,32 @@ export async function getAllitemRatings(itemId){
 }
 
 
-export async function getAllUserRatings(userId){
+export async function getAllUserReviews(userId){
     try{
-        const userReview = await Review.findAll({
-            where: {
-                UserId: userId
-            }
-          });
-        return  userReview.map(item => item.toJSON());
+      const userReviews = await Review.findAll({
+        where: {
+          UserId: userId
+        },
+        include: [
+          {
+            model: Menu_Item,
+            include: [
+              {
+                model: Menu,
+                include: [
+                  {
+                    model: Restaurant
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      });
+        return  userReviews.map(item => item.toJSON());
     }
-    catch{
-        console.error('Error retrieving Item\'s Review:', error);
-        return [];
+    catch (error) {
+      console.error('Error retrieving Reviews:', error);
     }
 }
 export async function addItemReview(revv,comment,userId,itemId){
@@ -48,18 +62,4 @@ export async function addItemReview(revv,comment,userId,itemId){
 
     }
 }
-
-export async function itemAvgRating(itemId){
-    try{
-        const sql = `SELECT Rating FROM "Menu_Item" join "Review" WHERE "Item_Id"='${itemId}';`;
-    }
-    catch{
-
-    }
-}
-
-
-
-// Synchronize the models with the database (create the tables if they don't exist)
-
 

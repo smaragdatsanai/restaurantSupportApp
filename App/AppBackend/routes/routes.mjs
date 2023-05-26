@@ -19,9 +19,11 @@ const ReviewController =await import('../controllers/reviewController.mjs')
 const AdminController =await import('../controllers/adminController.mjs')
 
 
+
+
 router.get("/", (req, res) => {
     if (req.session.username)
-        res.redirect("/restaurants")
+        res.redirect("/home")
     else
         res.render("./startingPage")
 })
@@ -32,6 +34,11 @@ router.get("/", (req, res) => {
 //RESTAURANT
 
 router.get('/restaurants',
+    UserController.checkIfAuthenticated,
+    RestaurantController.displayOpenRestaurants)
+
+
+router.get('/allRestaurants',
     UserController.checkIfAuthenticated,
     RestaurantController.displayAllRestaurants)
 
@@ -58,6 +65,8 @@ router.get('/menu',(req,res) =>{
 })
 
 //USER 
+
+
 router.get('/home',(req,res) =>{
     res.render('./home');
 })
@@ -82,7 +91,7 @@ router.post("/doLogin",
 )
 
 router.post("/doRegister", 
-    // Validator.validateNewUser,
+    Validator.validateNewUser,
     UserController.doRegister,
     UserController.doLogin,
     (req, res) => {
@@ -91,6 +100,12 @@ router.post("/doRegister",
 )
 
 
+router.get('/userProfile',
+    UserController.checkIfAuthenticated,
+    UserController.userProfileRender,
+    (req,res)=>{
+        res.render("home", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" })
+    })
 
 //ADMIN
 
@@ -115,7 +130,7 @@ router.post("/doAdminLogin",
 
 router.post("/doAdminRegister", 
     // console.log("entered"),
-    // Validator.validateNewUser,
+    Validator.validateNewUser,
     // console.log("exited"),
     AdminController.doRegister,
     AdminController.doLogin,

@@ -99,7 +99,11 @@ footer{
     color:#FFF;
 }
 
-.fa {
+i {
+  color:#000000;
+}
+
+a.fa {
     padding: 15px;
     font-size: 25px;
     color:#ffffff;
