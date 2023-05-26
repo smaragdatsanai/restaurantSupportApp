@@ -57,5 +57,22 @@ const findReviews = async (req,res,next) => {
     console.log(reviews)
     next()
 }
-
-export { doRegister, doLogin , findReviews}
+const addRestaurant = async (req,res,next) => {
+    try{
+        const name = req.body.name;
+        const address = req.body.address;
+        const opens= req.body.opens;
+        const closes = req.body.closes;
+        const type = req.body.type;
+        const ownerid = req.session.userId
+        console.log(req.body)
+        console.log(name,address,opens,closes,type,ownerid)
+        const restaurant = await Owner.addOwnerRestaurant(name,address,opens,closes,type,ownerid)
+        req.restaurant=restaurant;
+        console.log(restaurant);
+        next();
+    }catch(error){
+        next(error)
+    }
+}
+export { doRegister, doLogin , findReviews,addRestaurant}
