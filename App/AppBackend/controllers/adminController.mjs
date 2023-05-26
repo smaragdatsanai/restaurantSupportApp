@@ -1,4 +1,4 @@
-import * as Owner from '../models/admin.mjs' // version 3 with ORM sequelize, postgress
+import * as Owner from '../models/admin.mjs'
 import * as seqObj from '../models/database.mjs'
 
 
@@ -55,7 +55,7 @@ const doRegister = async (req, res, next) => {
 const adminProfileRender= async (req, res, next)=>{
     try {
         const userId=req.session.userId
-        const adminRestaurants = await Review.getAllAdminRestaurants(userId)
+        const adminRestaurants = await Owner.getAllAdminRestaurants(userId)
         console.log(adminRestaurants)
         res.render('./profile',{restaurants:adminRestaurants, userType:req.session.userType})
         }catch (error) {
