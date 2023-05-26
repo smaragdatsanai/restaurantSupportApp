@@ -164,6 +164,13 @@ router.get('/switchaccounts',
 
 //ADMIN
 
+
+router.get('/place-restaurant',
+    UserController.checkIfAuthenticated,
+    AdminController.
+)
+
+
 router.get('/adminLogin',
     (req, res) => {
         res.render('./adminLoginForm');
