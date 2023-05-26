@@ -182,6 +182,16 @@ router.post("/doAdminRegister",
     }
 );
 
+router.get('/add-restaurant',
+    (req,res)=>{
+        res.render('./add-restaurant');
+    }
+)
+router.post('/place-restaurant',AdminController.addRestaurant,
+    (req,res)=>{
+        res.render('./adminhome',{message:"Restaurant added!"});
+    }
+)
 
 
 router.get("/adminReviews",
