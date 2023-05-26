@@ -52,3 +52,19 @@ export async function login(username, password) {
     throw error
   }
 }
+
+export async function addOwnerRestaurant(name,address,opens,closes,type,ownerid){
+  try{
+    await Restaurant.create({
+      Restaurant_Id: faker.datatype.uuid(),
+      Name: name,
+      Address: address,
+      Opens_on: opens,
+      Closes_at: closes,
+      Restaurant_Type: type,
+      OwnerId: ownerid
+    });
+  }catch(error){
+    console.error('Error creating restaurant:',error);
+  }
+}
