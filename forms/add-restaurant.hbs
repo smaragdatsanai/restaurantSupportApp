@@ -1,0 +1,77 @@
+<form action="/place-restaurant" method="post">
+    <div class="row mt-5">
+        <div class="col-8 offset-2">
+            <h2 class="text-center">Give your Restaurant info below...</h2>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+              
+                <input type="text" class="form-control"
+                    value="{{name}}" name="name" id="name" placeholder="Restaurant Name"
+                    required="required" autofocus
+                >
+                <label class="form-label" for="name">New Restaurant Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                
+                <input type="address" class="form-control"
+                    value="{{address}}" name="address" id="address" placeholder="Address"
+                >
+                <label class="form-label" for="address">Restaurant Address</label>               
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                
+                <input type="opens" class="form-control" 
+                    value="{{opens}}" name="opens" id="opens" placeholder="HH:MM"
+                >
+                <label class="form-label" for="opens">Openning Hour</label>
+            </div>
+        </div>
+    
+
+    </div>
+
+    <div class="row mt-7">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                
+                <input type="closes" class="form-control" 
+                    value="{{closes}}" name="closes" id="closes" placeholder="HH:MM"
+                >
+                <label class="form-label" for="closes">Closing Hour</label>
+            </div>
+        </div>
+    
+
+    </div>
+    
+    <div class="row mt-9">
+        <div class="col-6 offset-3">
+            <div class="form-floating">
+                
+                <input type="type" class="form-control" 
+                    value="{{type}}" name="type" id="type"
+                >
+                <label class="form-label" for="type">Restaurant Type</label>
+            </div>
+        </div>
+        
+
+    </div>
+    <div class="row mt-11">
+        <div class="col-6 offset-3">
+            <button type="submit" class="btn btn-dark btn-lg pb-sm-3 mb-3">Submit</button>   
+        </div>
+    </div>
+</form>
