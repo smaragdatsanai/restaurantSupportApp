@@ -1,0 +1,47 @@
+//ADMIN CONTROLLER
+const addMenu = async (req,res,next) => {
+    try{
+        const name = req.body.name;
+        const type = req.body.type;
+        const opens = req.body.opens;
+        const closes = req.body.closes;
+        const restaurantid = req.params.restaurantid; //type params ara theloume to id panw
+        console.log(req.body)
+        console.log(name,type,opens,closes,restaurantid)
+        const menu = await Owner.addOwnerMenu(name,type,opens,closes,restaurantid)
+        req.menu=menu;
+        console.log(menu);
+        next();
+    }catch(error){
+        next(error)
+    }
+}
+
+//ADMIN.MJS
+export async function addOwnerMenu (name,type,opens,closes,restaurantid){
+  try{
+    await Menu.create ({
+      Menu_Id: faker.datatype.uuid(),
+      Name: name,
+      Type: type,
+      Active_from: opens,
+      Active_until: closes,
+      RestaurantId: restaurantid
+
+    });
+  }catch(error){
+    console.error('Error creating menu:',error);
+  }
+}
+
+//ENEIKTIKA ROUTES MALLON LATHOS KAI DEN EXEI HREF STO HBS
+router.get('/add-menu',
+    (req,res)=>{
+        res.render('./add-menu');
+    }
+)
+router.post('/do-add-menu/:restaurantid',AdminController.addMenu,
+    (req,res)=>{
+        res.render('home',{message:"Menu added!"});
+    }
+)
