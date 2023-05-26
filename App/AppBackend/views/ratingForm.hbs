@@ -1,20 +1,35 @@
-  <h2>Rate the Menu Item {{Name}}</h2>
-  <form action="/restaurants/menu/menuItems/addRating/{{Item_Id}}" method="post">
-    <div class="rating">
-      <input  type="radio" id="star5" name="rating" value="5">
-      <label for="star5"></label>
-      <input  type="radio" id="star4" name="rating" value="4">
-      <label for="star4"></label>
-      <input  type="radio" id="star3" name="rating" value="3">
-      <label for="star3"></label>
-      <input  type="radio" id="star2" name="rating" value="2">
-      <label for="star2"></label>
-      <input  type="radio" id="star1" name="rating" value="1">
-      <label for="star1"></label>
+<div id="home">
+  <div class="d-flex justify-content-center">
+    <div class="container-sm m-5 p-5 align-items-center justify-content-center rounded-3"
+      style="background-color: #c7e3c2; max-width:600px; box-shadow: 4px 3px 7px 2px #00000040;">
+      <div class="landing-text pb-sm-3 mb-sm-4">
+        <h1>We value your opinion</h1>
+        <h2>Rate the Menu Item: {{Name}}</h2>
+      </div>
+      <div class="container d-flex align-items-center justify-content-center">
+
+        <form action="/restaurants/menu/menuItems/addRating/{{Item_Id}}" method="post">
+          <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1"></label>
+          </div>
+          <div class="description-container">
+            <label for="description" class="description-label">Description:</label>
+            <textarea value="{{description}}" id="description" name="description" rows="4" cols="50"></textarea>
+          </div>
+          <div class="submit-button-container d-flex justify-content-center">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="description">
-      <label for="description">Description:</label>
-      <textarea value="{{description}}" id="description" name="description" rows="4" cols="50"></textarea>
-    </div>
-    <button type="submit">Submit</button>
-  </form>
+  </div>
+</div>

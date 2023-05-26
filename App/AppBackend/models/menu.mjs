@@ -35,6 +35,7 @@ export async function showActiveMenu(resId) {
 
     const menu = await Menu.findAll({
       where: {
+        RestaurantId: resId,
         Active_from: {
           [Op.lte]: currentTimeString,
         },

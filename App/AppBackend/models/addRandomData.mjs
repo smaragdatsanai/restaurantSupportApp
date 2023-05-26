@@ -196,7 +196,8 @@ export async function addRandomData() {
                     Name: drinks[i],
                     Description: descr[i],
                     Price: faker.random.number({min,max, precision : 0.01}),
-                    MenuMenuId: menu.Menu_Id
+                    Image: photos[i],
+                    MenuId: menu.Menu_Id
                 });
             }
         }
@@ -309,10 +310,6 @@ export async function addRandomData() {
                     Price: faker.random.number({min,max,precision:0.01}),
                     Image: italian[i],
                     MenuId: menu.Menu_Id,
-
-                    Image: italian[i],
-                    MenuId: menu.Menu_Id
-
                 });
             }
         }
@@ -339,8 +336,6 @@ export async function addRandomData() {
                     Price: faker.random.number({min,max,precision:0.01}),
                     Image: mexican[i],
                     MenuId: menu.Menu_Id,
-                    Image: mexican[i],
-                    MenuId: menu.Menu_Id
                 });
             }
         }

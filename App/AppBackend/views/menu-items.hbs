@@ -4,7 +4,7 @@
   <a href="/restaurants/menu/menuItems/addRating/{{Name}}/{{Item_Id}}">add rating</a>
 </ul>
 {{/each}}
- --}}
+--}}
 
 <div class="padding ">
   <div class="container cont_style vstack gap-3 col-md-7 mx-auto py-5  ">
@@ -19,15 +19,15 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-               <img src="data:image/jpg;base64,{{Image}}" class="img-fluid rounded-start" alt="Item Image">
+              <img src="data:image/jpg;base64,W29iamVjdCBCbG9iXQ==" class="img-fluid rounded-start" alt="Item Image">
             </div>
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title">{{Name}}</h5>
-                <p class="card-text"> {{Description}}</p>
-                <p class="card-text"> {{Price}}$</p>
-                 
-                <a href="/restaurants/menu/menuItems/addRating/{{Name}}/{{Item_Id}}" class="btn btn-outline-dark">Add Rating</a>
+                <p class="card-text">{{Description}}</p>
+                <p class="card-text">{{Price}}$</p>
+                <a href="/restaurants/menu/menuItems/addRating/{{Name}}/{{Item_Id}}" class="btn btn-outline-dark">Add
+                  Rating</a>
               </div>
             </div>
           </div>
@@ -35,5 +35,6 @@
       </div>
     </div>
     {{/each}}
+
   </div>
 </div>
