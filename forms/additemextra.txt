@@ -1,0 +1,36 @@
+//ADMIN CONTROLLER
+const  addItem = async (req,res,next) => {
+    try{
+        const menuid =req.params.menuid; //GIA ALLI MIA FORA YPOTHETW OTI EINAI PARAMS
+       // const ownerId=req.session.ownerId;
+        const name=req.body.itemname;
+        const description=req.body.description;
+        const price = req.body.price;
+        console.log(req.body)
+        console.log(name,description,price)
+        const item = await Owner.addMenuItem(name,description,price,menuid)
+        req.item=item;
+        console.log(item);
+        next()
+    }catch(error){
+      next(error)  
+    }
+}
+
+//ADMIN.MJS
+export async function addMenuItem (name,description,price,menuid){
+  try{
+    await Menu_Item.create({
+      Item_Id : faker.datatype.uuid(),
+      Name: name,
+      Description: description,
+      Price: price,
+      MenuId: menuid,
+    });                     
+  }catch(error){
+    console.error('Error adding Item:',error);
+  }
+}
+
+//ROUTES
+SORRY NO
