@@ -95,3 +95,105 @@ export async function addOwnerRestaurant(name,address,opens,closes,type,ownerid)
     console.error('Error creating restaurant:',error);
   }
 }
+
+
+export async function addOwnerMenu (name,type,opens,closes,restaurantid){
+  try{
+    await Menu.create ({
+      Menu_Id: faker.datatype.uuid(),
+      Name: name,
+      Type: type,
+      Active_from: opens,
+      Active_until: closes,
+      RestaurantId: restaurantid,
+      Image:'5b6f626a65637420426c6f625d'
+
+    });
+  }catch(error){
+    console.error('Error creating menu:',error);
+  }
+}
+
+export async function addMenuItem (name,description,price,menuid){
+  try{
+    await Menu_Item.create({
+      Item_Id : faker.datatype.uuid(),
+      Name: name,
+      Description: description,
+      Price: price,
+      MenuId: menuid,
+      Image:'5b6f626a65637420426c6f625d'
+    });                     
+  }catch(error){
+    console.error('Error adding Item:',error);
+  }
+}
+
+
+export async function deleteMenuItem (itemId){
+  try {
+    const menuItem = await Menu_Item.findByPk(itemId);
+    if (!menuItem) {
+      throw new Error('Menu item not found');
+    }
+    await menuItem.destroy();
+    console.log('Menu item deleted successfully');
+  } catch (error) {
+    console.error('Error deleting menu item:', error);
+  }
+}
+
+export async function deleteRestaurantById(restaurantId) {
+  try {
+    const restaurant = await Restaurant.findByPk(restaurantId);
+    if (!restaurant) {
+      throw new Error('Restaurant not found');
+    }
+    
+    const menus = await Menu.findAll({
+      where: {
+        RestaurantId: restaurantId
+      }
+    });
+
+    const menuIds = menus.map(menu => menu.Menu_Id);
+    
+    await Menu_Item.destroy({
+      where: {
+        MenuId: menuIds
+      }
+    });
+    
+    await Menu.destroy({
+      where: {
+        RestaurantId: restaurantId
+      }
+    });
+    
+    await restaurant.destroy();
+    console.log('Restaurant, menus, and menu items deleted successfully');
+  } catch (error) {
+    console.error('Error deleting restaurant:', error);
+  }
+}
+
+
+export async function deleteRestaurantMenu(menuId) {
+  try {
+    const menu = await Menu.findByPk(menuId);
+    if (!menu) {
+      throw new Error('menu not found');
+    }
+    
+    await Menu_Item.destroy({
+      where: {
+        MenuId: menuId
+      }
+    });
+    
+    await menu.destroy();
+    console.log('menus, and menu items deleted successfully');
+  } catch (error) {
+    console.error('Error deleting menu:', error);
+  }
+}

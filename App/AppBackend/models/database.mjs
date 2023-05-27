@@ -163,20 +163,6 @@ const Review = sequelize.define('Review',{
 });
 
 
-
-// Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
-// Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});
-// Restaurant.hasMany(Menu ,{foreignKey:'RestaurantId'});
-// Menu.belongsTo(Restaurant,{foreignKey:'RestaurantId'});
-// Menu.hasMany(Menu_Item, { foreignKey: 'MenuId' });
-// Menu_Item.belongsTo(Menu, { foreignKey: 'MenuId' });
-// Menu_Item.hasMany(Review,{ foreignKey:'MenuItemId'});
-// Review.belongsTo(Menu_Item,{ foreignKey:'MenuItemId'});
-// User.hasMany(Review,{ foreignKey:'UserId'});
-// Review.belongsTo(User,{ foreignKey:'UserId'});
-// Restaurant.hasMany(WorkingDaysandHours);
-// WorkingDaysandHours.belongsTo(Restaurant);
-
 Owner.hasMany(Restaurant,{foreignKey:'OwnerId'});
 Restaurant.belongsTo(Owner,{foreignKey:'OwnerId'});
 Restaurant.hasMany(Menu ,{foreignKey:'RestaurantId'});

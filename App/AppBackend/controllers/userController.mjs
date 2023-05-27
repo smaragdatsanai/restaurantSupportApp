@@ -59,6 +59,7 @@ const userProfileRender= async (req, res, next)=>{
 function checkIfAuthenticated(req, res, next) {
     if (req.session.username) { //αν έχει τεθεί η μεταβλητή στο session store θεωρούμε πως ο χρήστης είναι συνδεδεμένος
         res.locals.username = req.session.username
+        res.locals.userType = req.session.userType
         next() //επόμενο middleware
     }
     else

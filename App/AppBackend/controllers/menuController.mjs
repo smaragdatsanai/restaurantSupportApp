@@ -7,25 +7,9 @@ async function showMenuItems(req, res, next) {
   try {
     const menu = await Menu.findMenuByPk(req.params.menuId);
     const menuItems = await Menu.getMenuItems(req.params.menuId);
-    console.log(menuItems)
-    menuItems.forEach((item) => {
-      const blobData=item.Image
-      item.Image = Buffer.from(blobData).toString('base64');
-    });
-    console.log("AFTER BLOB",menuItems)
-
-    // const base64String = 'W29iamVjdCBCbG9iXQ==';
-    // const buffer = Buffer.from(base64String, 'base64');
-    
-    // fs.writeFile('image.jpg', buffer, { encoding: 'base64' }, (err) => {
-    //   if (err) {
-    //     console.error('Error saving image:', err);
-    //   } else {
-    //     console.log('Image saved successfully.');
-    //   }
-    // });
-
+    console.log(menuItems,menu)
     res.render('menu-items', { Items: menuItems, MenuType: menu[0].Name });
+    
   } catch (error) {
     next(error);
   }

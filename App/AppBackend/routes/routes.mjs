@@ -88,10 +88,9 @@ router.get('/restaurants/findRestaurant',
 );
 
 //MENU
-router.get('/menu', (req, res) => {
+router.get('/menu',
     UserController.checkIfAuthenticated,
-        MenuController.displayAvailableMenus(req, res);
-    }
+    MenuController.displayAvailableMenus
 );
 
 //USER 
@@ -167,15 +166,74 @@ router.get('/switchaccounts',
 
 router.post('/place-restaurant',
     UserController.checkIfAuthenticated,
-    AdminController.addRestaurant
-)
+    AdminController.addRestaurant,
+    (req, res) => {
+        res.render('./home', { message: "Η προσθήκη εστιατορίου πραγματοποιήθηκε επιτυχώς" });
+    }
+);
 
 router.get('/addRestaurant',
     UserController.checkIfAuthenticated,
     (req,res)=>{
         res.render('./add-restaurant');
     }
-)
+);
+
+router.get('/addMenu/:restaurantId',
+    UserController.checkIfAuthenticated,
+    (req,res)=>{
+        res.render('./add-menu',{restaurantId:req.params.restaurantId});
+    }
+);
+
+router.post('/doAddMenu/:restaurantId',
+    UserController.checkIfAuthenticated,
+    AdminController.addMenu,
+    (req, res) => {
+        res.render('./home', { message: "Η προσθήκη Μενού πραγματοποιήθηκε επιτυχώς" });
+    }
+);
+
+router.get('/addItem/:menuId',
+    UserController.checkIfAuthenticated,
+    (req,res)=>{
+        res.render('./add-item',{menuId:req.params.menuId});
+    }
+);
+
+
+router.post('/doAddItem/:menuId',
+    UserController.checkIfAuthenticated,
+    AdminController.addItem,
+    (req, res) => {
+        res.render('./home', { message: "Η Προσθήκη προιόντος πραγματοποιήθηκε επιτυχώς" });
+    }
+);
+
+
+router.get('/restaurants/menu/menuItems/deleteItem/:itemId',
+    UserController.checkIfAuthenticated,
+    AdminController.deleteItem,
+    (req,res)=>{
+        res.render('./home', { message: "Η Διαγραφή προιόντος πραγματοποιήθηκε επιτυχώς" });
+    }
+);
+
+router.get('/restaurants/menu/menuItems/deleteRestaurant/:restaurantId',
+    UserController.checkIfAuthenticated,
+    AdminController.deleteRestaurant,
+    (req,res)=>{
+        res.render('./home', { message: "Η Διαγραφή εστιατορίου πραγματοποιήθηκε επιτυχώς" });
+    }
+);
+
+router.get('/restaurants/menu/menuItems/deleteMenu/:menuId',
+    UserController.checkIfAuthenticated,
+    AdminController.deleteMenu,
+    (req,res)=>{
+        res.render('./home', { message: "Η Διαγραφή του Μενού πραγματοποιήθηκε επιτυχώς" });
+    }
+);
 
 
 router.get('/adminLogin',
@@ -190,6 +248,7 @@ router.get('/adminRegister', (req, res) => {
     }
 );
 
+
 router.post("/doAdminLogin",
     Validator.validateLogin,
     AdminController.doLogin,
@@ -199,9 +258,7 @@ router.post("/doAdminLogin",
 );
 
 router.post("/doAdminRegister",
-    // console.log("entered"),
     Validator.validateNewUser,
-    // console.log("exited"),
     AdminController.doRegister,
     AdminController.doLogin,
     (req, res) => {

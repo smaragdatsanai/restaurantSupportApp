@@ -81,5 +81,73 @@ const addRestaurant = async (req,res,next) => {
         next(error)
     }
 }
+const addMenu = async (req,res,next) => {
+    try{
+        const name = req.body.name;
+        const type = req.body.type;
+        const opens = req.body.opens;
+        const closes = req.body.closes;
+        const restaurantid = req.params.restaurantId; //type params ara theloume to id panw
+        console.log(req.body)
+        console.log(name,type,opens,closes,restaurantid)
+        const menu = await Owner.addOwnerMenu(name,type,opens,closes,restaurantid)
+        console.log(menu);
+        next();
+    }catch(error){
+        next(error)
+    }
+}
 
-export { doRegister, doLogin,adminProfileRender,addRestaurant}
+const  addItem = async (req,res,next) => {
+    try{
+        console.log("add item");
+        const menuid =req.params.menuId;
+        const name=req.body.name;
+        const description=req.body.description;
+        const price = req.body.price;
+        console.log(req.body)
+        console.log(name,description,price)
+        const item = await Owner.addMenuItem(name,description,price,menuid)
+        console.log(item);
+        next()
+    }catch(error){
+      next(error)  
+    }
+}
+
+const deleteItem= async (req,res,next)=>{
+    try{
+    const itemid =req.params.itemId
+    const item = await Owner.deleteMenuItem(itemid)
+    console.log(item);
+    next()
+    }catch{
+        next(error)  
+    }
+}
+const deleteMenu= async (req,res,next)=>{
+    try{
+    console.log("DELETING Menu")
+    const menuid =req.params.menuId
+    const menu = await Owner.deleteRestaurantMenu(menuid)
+    console.log(menu);
+    next()
+    }catch{
+        next(error)  
+    }
+}
+
+const deleteRestaurant= async (req,res,next)=>{
+    try{
+    console.log("DELETING RESTAURANT")
+    const restaurantid =req.params.restaurantId
+    const restaurant = await Owner.deleteRestaurantById(restaurantid)
+    console.log(restaurant);
+    next()
+    }catch{
+        next(error)  
+    }
+}
+
+
+export { doRegister, doLogin,adminProfileRender,addRestaurant,addMenu,addItem,deleteItem,deleteRestaurant,deleteMenu }
