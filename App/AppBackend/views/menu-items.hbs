@@ -5,7 +5,6 @@
         <h1 class="cont_header">{{MenuType}}</h1>
       </div>
     </div>
-    {{!-- {{userType}} --}}
     {{#each Items}}
     <div class="row justify-content-center">
       <div class="col">
@@ -19,7 +18,7 @@
                 <h5 class="card-title">{{Name}}</h5>
                 <p class="card-text">{{Description}}</p>
                 <p class="card-text">{{Price}}$</p>
-                {{#if (isuser userType)}}   
+                {{#if (isuser ../userType)}}   
                 <a href="/restaurants/menu/menuItems/addRating/{{Name}}/{{Item_Id}}" class="btn btn-outline-dark">Add
                   Rating</a>
                 {{else}}
