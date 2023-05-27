@@ -1,0 +1,96 @@
+//vazw kai gia delete review pou leitoyrgei kanonika
+//DES PROFIL
+//USER CONTROLLER
+const update = async (req,res,next)=>{
+    try{
+        console.log("started")
+        const review = await seqObj.Review.findByPk(req.params.Review_Id);
+        res.render('edit-review',{
+            Review_Id: req.params.Review_Id,
+            rating: review.Rating,
+            description: review.Comments,
+            Item_Id: req.params.Item_Id
+        })
+    }catch(error){
+        next(error)
+    }
+}
+
+const updatereview = async (req,res,next)=>{
+    try{
+        console.log("begun")
+        const reviewid = req.params.Review_Id;
+        const id = req.params.Item_Id;
+        const newrating = req.body.rating;
+        const newdescription = req.body.description;
+        console.log(reviewid,id,newrating,newdescription)
+        const newreview = await User.editreview(reviewid,id,newrating,newdescription)
+        console.log(newreview)
+    }catch(error){
+        next(error)
+    }
+}
+const deleteReview= async (req,res,next)=>{
+    try{
+    console.log("DELETING Review")
+    const reviewid =req.params.Review_Id
+    const review = await User.deleteReview(reviewid)
+    console.log(review);
+    next()
+    }catch(error){
+        next(error)  
+    }
+}
+
+
+//USER MJS
+export async function editreview(reviewid,id,newrating,newdescription){
+  try{
+    await Review.update({
+      Rating: newrating,
+      Comments: newdescription,
+    },
+    {
+      where: {Review_id:reviewid,Item_Id: id}
+    }
+    );
+  }catch(error){
+    console.error('Error updating Review:',error);
+  }
+}
+export async function deleteReview(reviewId) {
+  try {
+    const review = await Review.findByPk(reviewId);
+    if (!review) {
+      throw new Error('review not found');
+    }
+  
+    await review.destroy();
+    console.log('review deleted successfully');
+  } catch (error) {
+    console.error('Error deleting review:', error);
+  }
+}
+
+
+//ROUTES
+router.get('/editRating/:Review_Id/:Item_Id',
+    UserController.checkIfAuthenticated,
+    UserController.update,
+)
+
+router.post('/doeditRating/:Review_Id/:Item_Id',
+    UserController.checkIfAuthenticated,
+    UserController.updatereview,
+    (req,res)=>{
+        res.render('./home', { message: "Η Αλλαγή αξιολόγησης πραγματοποιήθηκε επιτυχώς" });
+    }
+)
+
+router.get('/deleteReview/:Review_Id',
+    UserController.checkIfAuthenticated,
+    UserController.deleteReview,
+    (req,res)=>{
+        res.render('./home', { message: "Η Διαγραφή πραγματοποιήθηκε επιτυχώς" });
+    }
+);

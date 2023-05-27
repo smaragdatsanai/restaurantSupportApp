@@ -1,0 +1,8 @@
+//EDW EPEIDH DEN EXW IDEA TI PAIZEI ME TIS EIKONES EXW MONO TH FORMA KAI TO ROUTE GIA NA PAS STH FORMA
+//DES PROFIL
+
+//RPUTE
+router.get('/edit-profile', (req, res) => {
+    res.render('./edit-profile');
+    }
+)

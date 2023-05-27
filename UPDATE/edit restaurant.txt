@@ -1,0 +1,67 @@
+//ADMIN CONTROLLER
+const updater = async (req,res,next)=>{
+    try{
+        console.log("started")
+        const restaurant = await seqObj.Restaurant.findByPk(req.params.Restaurant_Id);
+        res.render('edit-restaurant',{
+            Restaurant_Id: req.params.Restaurant_Id,
+            restaurantname: restaurant.Name,
+            address: restaurant.Address,
+            opens: restaurant.Opens_on,
+            closes: restaurant.Closes_at,
+            type: restaurant.Restaurant_Type,
+        })
+    }catch(error){
+        next(error)
+    }
+}
+const updateRestaurant = async (req,res,next)=>{
+    try{
+        console.log("begun")
+        const id = req.params.Restaurant_Id;
+        const newname = req.body.name;
+        const newaddress = req.body.address;
+        const newopens = req.body.opens;
+        const newcloses = req.body.closes;
+        const newtype = req.body.type;
+        console.log(body)
+        console.log(id,newname,newaddress,newopens,newcloses,newtype)
+        const newrestaurant = await Owner.updaterestaurant(id,newname,newaddress,newopens,newcloses,newtype)
+        console.log(newrestaurant)
+    }catch(error){
+        next(error)
+    }
+}
+
+//ADMIN MJS
+export async function updaterestaurant(id,newname,newaddress,newopens,newcloses,newtype){
+  try{
+    await Restaurant.update({
+      Name: newname,
+      Address: newaddress,
+      Opens_on: newopens,
+      Closes_at: newcloses,
+      Restaurant_Type: newtype
+    },
+    {
+      where: {Restaurant_Id: id}
+    }
+    );
+  }catch(error){
+    console.error('Error updating Restaurant:',error);
+  }
+}
+
+/ROUTES
+router.get('/editrestaurant/:Restaurant_Id',
+    UserController.checkIfAuthenticated,
+    AdminController.updater,
+)
+
+router.post('/doeditrestaurant/:Restaurant_Id',
+    UserController.checkIfAuthenticated,
+    AdminController.updateRestaurant,
+    (req,res)=>{
+        res.render('./home', { message: "Η Αλλαγή εστιατορίου πραγματοποιήθηκε επιτυχώς" });
+    }
+)

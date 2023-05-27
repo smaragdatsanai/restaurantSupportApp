@@ -1,0 +1,64 @@
+//ADMIN CONTROLLER
+const updatem = async (req,res,next)=>{
+    try{
+        console.log("started")
+        const menu = await seqObj.Menu.findByPk(req.params.Menu_Id);
+        res.render('editmenu',{
+            Menu_Id: req.params.Menu_Id,
+            name: menu.Name,
+            type: menu.Type,
+            opens: menu.Active_from,
+            closes: menu.Active_until,
+        })
+    }catch(error){
+        next(error)
+    }
+}
+
+const updateMenu = async (req,res,next)=>{
+    try{
+        console.log("begun")
+        const id = req.params.Menu_Id;
+        const newname = req.body.name;
+        const newtype = req.body.type;
+        const newopens = req.body.opens;
+        const newcloses = req.body.closes;
+        console.log(body)
+        console.log(id,newname,newtype,newopens,newcloses)
+        const newmenu = await Owner.updatemenu(id,newname,newtype,newopens,newcloses)
+        console.log(newmenu)
+    }catch(error){
+        next(error)
+    }
+}
+
+//ADMIN MJS
+export async function updatemenu(id,newname,newtype,newopens,newcloses){
+  try{
+    await Menu.update({
+      Name: newname,
+      Type: newtype,
+      Opens_on: newopens,
+      Closes_at: newcloses
+    },
+    {
+      where: {Menu_Id: id}
+    }
+    );
+  }catch(error){
+    console.error('Error updating Menu:',error);
+  }
+}
+
+//ROUTES
+router.get('/editmenu/:Menu_Id',
+    UserController.checkIfAuthenticated,
+    AdminController.updatem,
+)
+router.post('/doeditmenu/:Menu_Id',
+    UserController.checkIfAuthenticated,
+    AdminController.updateMenu,
+    (req,res)=>{
+        res.render('./home', { message: "Η Αλλαγή menu πραγματοποιήθηκε επιτυχώς" });
+    }
+)

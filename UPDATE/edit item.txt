@@ -1,0 +1,68 @@
+//ADMIN CONTROLLER
+const update = async (req,res,next)=>{
+    try{
+        const item = await seqObj.Menu_Item.findByPk(req.params.itemId);
+        res.render('edit-item',{
+            itemId: req.params.itemId,
+            itemname: item.Name,
+            description : item.Description,
+            price: item.Price
+        })
+    }catch(error){
+        next(error)
+    }
+}
+const updateItem = async (req,res,next) => {
+    try{
+        console.log("UPDATING ITEM")
+        // const item = await seqObj.Menu_Item.findByPk(req.params.itemId);
+        // res.render('edit-item',{
+        //     itemname: item.Name,
+        //     description : item.Description,
+        //     price: item.Price
+        // })
+        const itemid = req.params.itemId;
+        const newname= req.body.name;
+        const newdescription= req.body.description;
+        const newprice= req.body.price;
+        console.log(req.body)
+        console.log(newname,newdescription,newprice)
+        const newitem = await Owner.updateMenuItem(newname,newdescription,newprice,itemid);
+        req.newitem=newitem;
+        console.log(newitem)
+    }catch(error){
+        next(error)
+    }
+}
+
+//ADMIN MJS
+export async function updateMenuItem (newname,newdescription,newprice,itemid){
+  try{
+    await Menu_Item.update({
+      Name: newname,
+      Description: newdescription,
+      Price: newprice
+    },
+    {
+      where: {Item_Id: itemid}
+    }
+    );
+  }catch(error){
+    console.error('Error updating Item:',error);
+  }
+}
+
+
+//ROUTES
+router.get('/restaurants/menu/menuItems/updateItem/:itemId',
+    UserController.checkIfAuthenticated,
+    AdminController.update,
+)
+
+router.post('/restaurants/menu/menuItems/doupdateItem/:itemId',
+    UserController.checkIfAuthenticated,
+    AdminController.updateItem,
+    (req,res)=>{
+        res.render('./home', { message: "Η Αλλαγή προιόντος πραγματοποιήθηκε επιτυχώς" });
+    }
+)
