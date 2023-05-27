@@ -17,6 +17,70 @@ const MenuController = await import('../controllers/menuController.mjs')
 const RestaurantController = await import('../controllers/restaurantController.mjs')
 const ReviewController = await import('../controllers/reviewController.mjs')
 const AdminController = await import('../controllers/adminController.mjs')
+import { Blob } from 'buffer';
+import fs from 'fs';
+import multer from 'multer';
+
+const upload = multer({ dest: 'public/uploads/' });
+
+// router.get('/upload', (req, res) => {
+//   res.render('image');
+// });
+
+// router.post('/upload', upload.single('image'), (req, res) => {
+//   const imageFilePath = req.file.filename;
+//   res.render('display', { imageFilePath });
+// });
+
+
+router.get('/upload', (req, res) => {
+  res.render('image');
+});
+
+// router.post('/upload', upload.single('image'), (req, res) => {
+//     const imageFile = req.file;
+
+//     if (!imageFile) {
+//       res.status(400).send('No image file provided');
+//       return;
+//     }
+  
+//     const imageBuffer = fs.readFileSync(imageFile.path);
+//     const imageBlob =new Blob([imageBuffer],{type:'image/jpg'})
+//     const imageBufferPromise = imageBlob.arrayBuffer();
+
+//     imageBufferPromise.then((buffer) => {
+//     const imageBlobBuffer = Buffer.from(buffer);
+//     const imageBase64 = imageBlobBuffer.toString('base64');
+//     const imageUrl = `data:image/jpg;base64,${imageBase64}`;
+//     console.log(imageUrl)
+  
+//     res.render('display', { imageUrl });
+//     }).catch((error) => {
+//     console.error('Error occurred while retrieving the image buffer:', error);
+//     });
+
+    
+// });
+
+
+router.post('/upload', upload.single('image'), (req, res) => {
+    const imageFile = req.file;
+
+    if (!imageFile) {
+      res.status(400).send('No image file provided');
+      return;
+    }
+  
+    const imageBuffer = fs.readFileSync(imageFile.path);
+    const imageBase64 = imageBuffer.toString('base64');
+    const imageUrl = `data:image/jpg;base64,${imageBase64}`;
+    console.log(imageUrl)
+  
+    res.render('display', { imageUrl });
+    
+});
+
 
 
 
@@ -47,11 +111,13 @@ router.get('/Profile',
 
 router.get('/restaurants',
     UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
     RestaurantController.displayOpenRestaurants)
 
 
 router.get('/allRestaurants',
     UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
     RestaurantController.displayAllRestaurants)
 
 router.get('/restaurants/menu/:restaurantId',
@@ -68,6 +134,7 @@ router.get('/restaurants/menu/menuItems/:menuId',
 );
 router.get('/restaurants/menu/menuItems/addRating/:itemName/:itemId',
     UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
     (req, res) => {
         res.render('./ratingForm', { Item_Id: req.params.itemId, Name: req.params.itemName })
     }
@@ -76,6 +143,7 @@ router.get('/restaurants/menu/menuItems/addRating/:itemName/:itemId',
 
 router.post("/restaurants/menu/menuItems/addRating/:itemId",
     UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
     ReviewController.addRating,
     (req, res) => {
         res.render('./home', { message: "Η αξιολόγηση πραγματοποιήθηκε επιτυχώς" });
@@ -84,14 +152,15 @@ router.post("/restaurants/menu/menuItems/addRating/:itemId",
 
 router.get('/restaurants/findRestaurant',
     UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
     RestaurantController.searchRestaurant
 );
 
-//MENU
-router.get('/menu',
-    UserController.checkIfAuthenticated,
-    MenuController.displayAvailableMenus
-);
+// //MENU
+// router.get('/menu',
+//     UserController.checkIfAuthenticated,
+//     MenuController.displayAvailableMenus
+// );
 
 //USER 
 
@@ -166,6 +235,7 @@ router.get('/switchaccounts',
 
 router.post('/place-restaurant',
     UserController.checkIfAuthenticated,
+    upload.single('image'),
     AdminController.addRestaurant,
     (req, res) => {
         res.render('./home', { message: "Η προσθήκη εστιατορίου πραγματοποιήθηκε επιτυχώς" });
@@ -188,6 +258,7 @@ router.get('/addMenu/:restaurantId',
 
 router.post('/doAddMenu/:restaurantId',
     UserController.checkIfAuthenticated,
+    upload.single('image'),
     AdminController.addMenu,
     (req, res) => {
         res.render('./home', { message: "Η προσθήκη Μενού πραγματοποιήθηκε επιτυχώς" });
@@ -204,6 +275,7 @@ router.get('/addItem/:menuId',
 
 router.post('/doAddItem/:menuId',
     UserController.checkIfAuthenticated,
+    upload.single('image'),
     AdminController.addItem,
     (req, res) => {
         res.render('./home', { message: "Η Προσθήκη προιόντος πραγματοποιήθηκε επιτυχώς" });
@@ -274,6 +346,14 @@ AdminController.adminProfileRender,
   }
 );
 
+
+router.get('/adminHome',
+// UserController.checkIfAuthenticated,
+AdminController.adminHomePageRender,
+(req, res) => {
+      res.render("home", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" });
+  }
+);
 
 export default router;
 

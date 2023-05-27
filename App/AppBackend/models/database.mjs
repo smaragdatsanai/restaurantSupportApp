@@ -58,7 +58,7 @@ const Restaurant = sequelize.define('Restaurant',{
         allowNull: false
     },
     Image:{
-        type: DataTypes.BLOB,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     Restaurant_Type:{
@@ -93,7 +93,7 @@ const Menu = sequelize.define('Menu',{
         allowNull:false
     },
     Image:{
-        type: DataTypes.BLOB,
+        type: DataTypes.TEXT,
         allowNull: false
     }
 });
@@ -117,7 +117,7 @@ const Menu_Item = sequelize.define('Menu_Item',{
         allowNull: false
     },
     Image:{
-        type: DataTypes.BLOB,
+        type: DataTypes.TEXT,
         allowNull: false
     }
 });
@@ -141,7 +141,7 @@ const User = sequelize.define('User',{
         allowNull: false
     },
     ProfileImage:{
-        type: DataTypes.BLOB,
+        type: DataTypes.TEXT,
         allowNull: true
     }
 });
@@ -153,7 +153,7 @@ const Review = sequelize.define('Review',{
         primaryKey: true
     },
     Rating:{
-        type: DataTypes.TEXT,
+        type: DataTypes.INTEGER,
         allowNull:false
     },
     Comments:{

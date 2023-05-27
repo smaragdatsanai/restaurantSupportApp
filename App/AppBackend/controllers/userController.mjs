@@ -27,7 +27,7 @@ const doRegister = async (req, res, next) => {
     const username = req.body.username
     const password = req.body.password
     const email = req.body.email
-
+    console.log(req.body)
     try {
         const user = await User.addUser(username,password,email)
         if (user) {
@@ -66,4 +66,12 @@ function checkIfAuthenticated(req, res, next) {
         res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
 }
 
-export { checkIfAuthenticated, doLogin, doRegister, doLogout, userProfileRender }
+function checkIfUser(req, res, next) {
+    if (req.session.userType=='User') { 
+        next() //επόμενο middleware
+    }
+    else
+        res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
+}
+
+export { checkIfAuthenticated, doLogin, doRegister, doLogout, userProfileRender,checkIfUser }

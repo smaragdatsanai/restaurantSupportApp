@@ -1,7 +1,6 @@
 import * as Menu from '../models/menu.mjs' // version 3 with ORM sequelize, postgress
 import { Blob } from 'buffer';
 import fs from 'fs';
-import streamToBuffer from 'stream-to-buffer';
 
 async function showMenuItems(req, res, next) {
   try {

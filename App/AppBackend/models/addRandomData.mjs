@@ -31,10 +31,11 @@ export async function addRandomData() {
   
       // Create restaurants
       const owners = await Owner.findAll();
+      const types = ['Italian','Mexican','Breakfast & Brunch','Greek','Burgers','Steakhouse','Indian','Chinese','Sushi','Fish'];
       const nnames= ['Yummy Restaurant','La Pasteria','I Fratti','Brunelo','Avli','Salumeria','Abbie','Ovio','Allio','Cozy'];
       for (let i = 0; i < 10; i++) {
         const photodata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/restphoto.jpg`);
-        const photoblob = new Blob([photodata], {type: 'image/jpg'});
+        const photoblob =photodata.toString('base64');
         const owner = owners[i];
         const type = types[i];
         if (type=== 'Breakfast & Brunch'){
@@ -86,11 +87,11 @@ export async function addRandomData() {
       const restaurants = await Restaurant.findAll();
       const nametypes= ['Drinks','Breakfast','Dinner','Wines'];
       const fooddata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/menu.jpg`);
-      const foodblob = new Blob([fooddata], {type: 'image/jpg'});
+      const foodblob =fooddata.toString('base64');
       const drinksdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/drinks.jpg`);
-      const drinksblob = new Blob([drinksdata], {type: 'image/jpg'});
+      const drinksblob =drinksdata.toString('base64');
       const winedata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/wines.jpg`);
-      const wineblob = new Blob([winedata], {type: 'image/jpg'});
+      const wineblob =winedata.toString('base64');
       for (let i = 0; i < 10; i++) {
         const restaurant = restaurants[i];
         if (restaurant.Restaurant_Type === 'Italian' || restaurant.Restaurant_Type==='Mexican' || restaurant.Restaurant_Type==='Greek' || restaurant.Restaurant_Type==='Burgers' || restaurant.Restaurant_Type==='Steakhouse' || restaurant.Restaurant_Type==='Indian' || restaurant.Restaurant_Type==='Chinese' || restaurant.Restaurant_Type==='Sushi' || restaurant.Restaurant_Type==='Fish'){
@@ -177,18 +178,24 @@ export async function addRandomData() {
             const min = 15.00;
             const max= 18.00;
             const palomadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/paloma.jpg`);
-            const paloma = new Blob([palomadata], {type: 'image/jpg'});
+            const palomaBase64 =palomadata.toString('base64');
+            const palomaUrl = `data:image/jpg;base64,${palomaBase64}`;
             const mojitodata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/mojito.jpg`);
-            const mojito= new Blob([mojitodata], {type: 'image/jpg'});
+            const mojitoBase64=mojitodata.toString('base64');
+            const mojitoUrl = `data:image/jpg;base64,${mojitoBase64}`;
             const margarittadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/margarita.jpg`);
-            const margaritta = new Blob([margarittadata], {type: 'image/jpg'});
+            const margarittaBase64 =margarittadata.toString('base64');
+            const margarittaUrl = `data:image/jpg;base64,${margarittaBase64}`;
             const cosmodata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/cosmopolitan.jpg`);
-            const cosmopolitan = new Blob([cosmodata], {type: 'image/jpg'});
+            const cosmopolitanBase64 =cosmodata.toString('base64');
+            const cosmopolitanUrl = `data:image/jpg;base64,${cosmopolitanBase64}`;
             const whitedata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/whitewine.jpg`);
-            const whitewine = new Blob([whitedata], {type: 'image/jpg'});
+            const whitewineBase64 =whitedata.toString('base64');
+            const whitewineUrl = `data:image/jpg;base64,${whitewineBase64}`;
             const reddata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/redwine.jpg`);
-            const redwine = new Blob([reddata], {type: 'image/jpg'});
-            const photos = [paloma,mojito,margaritta,cosmopolitan,whitewine,redwine];
+            const redwineBase64 =reddata.toString('base64');
+            const redwineUrl = `data:image/jpg;base64,${redwineBase64}`;
+            const photos = [palomaUrl,mojitoUrl,margarittaUrl,cosmopolitanUrl,whitewineUrl,redwineUrl];
 
             for (let i=0; i<6;i++){ 
                 await Menu_Item.create({
@@ -207,18 +214,24 @@ export async function addRandomData() {
           const min = 4.00;
           const max= 7.00;
           const carameldata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/caramel.jpg`);
-          const caramel = new Blob([carameldata], {type: 'image/jpg'});
+          const caramelBase64  =carameldata.toString('base64');
+          const caramelUrl = `data:image/jpg;base64,${caramelBase64}`;
           const matchadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/matcha.jpg`);
-          const matcha = new Blob([matchadata], {type: 'image/jpg'});
+          const matchaBase64 =matchadata.toString('base64');
+          const matchaUrl = `data:image/jpg;base64,${matchaBase64}`;
           const orangedata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/orange.jpg`);
-          const orangejuice = new Blob([orangedata], {type: 'image/jpg'});
+          const orangejuiceBase64 =orangedata.toString('base64');
+          const orangejuiceUrl = `data:image/jpg;base64,${orangejuiceBase64}`;
           const berrydata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/berry.jpg`);
-          const berryblast = new Blob([berrydata], {type: 'image/jpg'});
+          const berryblastBase64 =berrydata.toString('base64');
+          const berryblastUrl = `data:image/jpg;base64,${berryblastBase64}`;
           const mochadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/mocha.jpg`);
-          const mocha = new Blob([mochadata], {type: 'image/jpg'});
+          const mochaBase64 =mochadata.toString('base64');
+          const mochaUrl = `data:image/jpg;base64,${mochaBase64}`;
           const herbaldata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/herbal.jpg`);
-          const herbal = new Blob([herbaldata], {type: 'image/jpg'});
-          const photos = [caramel,matcha,orangejuice,berryblast,mocha,herbal];
+          const herbalBase64 =herbaldata.toString('base64');
+          const herbalUrl = `data:image/jpg;base64,${herbalBase64}`;
+          const photos = [caramelUrl,matchaUrl,orangejuiceUrl,berryblastUrl,mochaUrl,herbalUrl];
           for (let i=0; i<6;i++){ 
               await Menu_Item.create({
                   Item_Id: faker.datatype.uuid(),
@@ -236,16 +249,21 @@ export async function addRandomData() {
             const min = 20.50;
             const max = 27.00;
             const paragkawdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/white.jpg`);
-            const paragkaw = new Blob([paragkawdata], {type: 'image/jpg'});
+            const paragkawBase64 =paragkawdata.toString('base64');
+            const paragkawUrl = `data:image/jpg;base64,${paragkawBase64}`;
             const paragkardata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/red.jpg`);
-            const paragkar = new Blob([paragkardata], {type: 'image/jpg'});
+            const paragkarBase64 =paragkardata.toString('base64');
+            const paragkarUrl = `data:image/jpg;base64,${paragkarBase64}`;
             const notosdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/white.jpg`);
-            const notos = new Blob([notosdata], {type: 'image/jpg'});
+            const notosBase64 =notosdata.toString('base64');
+            const notosUrl = `data:image/jpg;base64,${notosBase64}`;
             const chardata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/sparkly.jpg`);
-            const char = new Blob([chardata], {type: 'image/jpg'});
+            const charBase64 =chardata.toString('base64');
+            const charUrl = `data:image/jpg;base64,${charBase64}`;
             const malagouziadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/red.jpg`);
-            const malagouzia = new Blob([malagouziadata], {type: 'image/jpg'});
-            const winess = [paragkaw,paragkar,notos,char,malagouzia];
+            const malagouziaBase64 =malagouziadata.toString('base64');
+            const malagouziaUrl = `data:image/jpg;base64,${ malagouziaBase64}`;
+            const winess = [paragkawUrl,paragkarUrl,notosUrl,charUrl,malagouziaUrl];
             for (let i =0; i<5;i++){
                 await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
@@ -264,16 +282,21 @@ export async function addRandomData() {
             const min= 11.50;
             const max = 15.00;
             const omelettedata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/omelette.jpg`);
-            const omelette = new Blob([omelettedata], {type: 'image/jpg'});
+            const omeletteBase64 =omelettedata.toString('base64');
+            const omeletteUrl = `data:image/jpg;base64,${ omeletteBase64}`;
             const pancakesdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/pancakes.jpg`);
-            const pancakes = new Blob([pancakesdata], {type: 'image/jpg'});
+            const pancakesBase64 =pancakesdata.toString('base64');
+            const pancakesUrl = `data:image/jpg;base64,${ pancakesBase64}`;
             const avotoastdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/avotoast.jpg`);
-            const avotoast = new Blob([avotoastdata], {type: 'image/jpg'});
+            const avotoastBase64 =avotoastdata.toString('base64');
+            const avotoastUrl = `data:image/jpg;base64,${ avotoastBase64}`;
             const burittodata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/buritto.jpg`);
-            const buritto = new Blob([burittodata], {type: 'image/jpg'});
+            const burittoBase64 =burittodata.toString('base64');
+            const burittoUrl = `data:image/jpg;base64,${ burittoBase64}`;
             const granoladata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/granola.jpg`);
-            const granola = new Blob([granoladata], {type: 'image/jpg'});
-            const breakfast = [omelette,pancakes,avotoast,buritto,granola];
+            const granolaBase64 =granoladata.toString('base64');
+            const granolaUrl = `data:image/jpg;base64,${ granolaBase64}`;
+            const breakfast = [omeletteUrl,pancakesUrl,avotoastUrl,burittoUrl,granolaUrl,];
             for (let i=0;i<5;i++){
                 await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
@@ -282,8 +305,6 @@ export async function addRandomData() {
                     Price: faker.random.number({min,max,precision:0.01}),
                     Image: breakfast[i],
                     MenuId: menu.Menu_Id,
-                    Image: breakfast[i],
-                    MenuId: menu.Menu_Id
                 });
             }
         }
@@ -294,14 +315,18 @@ export async function addRandomData() {
             const min = 14.50;
             const max = 18.99;
             const carbonaradata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/carbonara.jpg`);
-            const carbonara = new Blob([carbonaradata], {type: 'image/jpg'});
+            const carbonaraBase64 =carbonaradata.toString('base64');
+            const carbonaraUrl = `data:image/jpg;base64,${ carbonaraBase64}`;
             const pizzadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/pizza.jpg`);
-            const pizza = new Blob([pizzadata], {type: 'image/jpg'});
+            const pizzaBase64 =pizzadata.toString('base64');
+            const pizzaUrl = `data:image/jpg;base64,${ pizzaBase64}`;
             const chickendata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/chicken.jpg`);
-            const chicken = new Blob([chickendata], {type: 'image/jpg'});
+            const chickenBase64 =chickendata.toString('base64');
+            const chickenUrl = `data:image/jpg;base64,${chickenBase64}`;
             const risottodata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/risotto.jpg`);
-            const risotto = new Blob([risottodata], {type: 'image/jpg'});
-            const italian = [carbonara,pizza,chicken,risotto];
+            const risottoBase64 =risottodata.toString('base64');
+            const risottoUrl = `data:image/jpg;base64,${ risottoBase64}`;
+            const italian = [carbonaraUrl,pizzaUrl,chickenUrl,risottoUrl];
             for (let i=0;i<4;i++){
                 await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
@@ -320,14 +345,18 @@ export async function addRandomData() {
             const min = 13.50;
             const max= 17.99;
             const enchiladasdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/enchiladas.jpg`);
-            const enchiladas = new Blob([enchiladasdata], {type: 'image/jpg'});
+            const enchiladasBase64 =enchiladasdata.toString('base64');
+            const enchiladasUrl = `data:image/jpg;base64,${ enchiladasBase64}`;
             const tacosdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/tacos.jpg`);
-            const tacos = new Blob([tacosdata], {type: 'image/jpg'});
+            const tacosBase64 =tacosdata.toString('base64');
+            const tacosUrl = `data:image/jpg;base64,${ tacosBase64}`;
             const chilesdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/chiles.jpg`);
-            const chiles = new Blob([chilesdata], {type: 'image/jpg'});
+            const chilesBase64 =chilesdata.toString('base64');
+            const chilesUrl = `data:image/jpg;base64,${ chilesBase64}`;
             const moledata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/mole.jpg`);
-            const mole = new Blob([moledata], {type: 'image/jpg'});
-            const mexican = [enchiladas,tacos,chiles,mole];
+            const moleBase64 =moledata.toString('base64');
+            const moleUrl = `data:image/jpg;base64,${ moleBase64}`;
+            const mexican = [enchiladasUrl,tacosUrl,chilesUrl,moleUrl];
             for (let i=0;i<4;i++){
                 await Menu_Item.create({
                     Item_Id: faker.datatype.uuid(),
@@ -346,14 +375,18 @@ export async function addRandomData() {
           const min = 14.50;
           const max= 17.99;
           const mousakadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/mousaka.jpg`);
-          const mousaka = new Blob([mousakadata], {type: 'image/jpg'});
+          const mousakaBase64 =mousakadata.toString('base64');
+          const mousakaUrl = `data:image/jpg;base64,${ mousakaBase64}`;
           const souvlakidata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/souvlaki.jpg`);
-          const souvlaki = new Blob([souvlakidata], {type: 'image/jpg'});
+          const souvlakiBase64 =souvlakidata.toString('base64');
+          const souvlakiUrl = `data:image/jpg;base64,${ souvlakiBase64}`;
           const spanakopitadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/spanakopita.jpg`);
-          const spanakopita = new Blob([spanakopitadata], {type: 'image/jpg'});
+          const spanakopitaBase64 =spanakopitadata.toString('base64');
+          const spanakopitaUrl = `data:image/jpg;base64,${ spanakopitaBase64}`;
           const dolmadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/dolma.jpg`);
-          const dolma = new Blob([dolmadata], {type: 'image/jpg'});
-          const greek = [mousaka,souvlaki,spanakopita,dolma];
+          const dolmaBase64 =dolmadata.toString('base64');
+          const dolmaUrl = `data:image/jpg;base64,${ dolmaBase64}`;
+          const greek = [mousakaUrl,souvlakiUrl,spanakopitaUrl,dolmaUrl];
           for (let i=0;i<4;i++){
               await Menu_Item.create({
                   Item_Id: faker.datatype.uuid(),
@@ -372,14 +405,18 @@ export async function addRandomData() {
           const min = 14.50;
           const max= 17.99;
           const cheesedata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/cheese.jpg`);
-          const cheese = new Blob([cheesedata], {type: 'image/jpg'});
+          const cheeseBase64 =cheesedata.toString('base64');
+          const cheeseUrl = `data:image/jpg;base64,${ cheeseBase64}`;
           const bbqdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/bbq.jpg`);
-          const bbq = new Blob([bbqdata], {type: 'image/jpg'});
+          const bbqBase64 =bbqdata.toString('base64');
+          const bbqUrl = `data:image/jpg;base64,${ bbqBase64}`;
           const mushroomdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/mushroom.jpg`);
-          const mushroom = new Blob([mushroomdata], {type: 'image/jpg'});
+          const mushroomBase64 =mushroomdata.toString('base64');
+          const mushroomUrl = `data:image/jpg;base64,${ mushroomBase64}`;
           const spicydata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/spicy.jpg`);
-          const spicy = new Blob([spicydata], {type: 'image/jpg'});
-          const burgers = [cheese,bbq,mushroom,spicy];
+          const spicyBase64 =spicydata.toString('base64');
+          const spicyUrl = `data:image/jpg;base64,${ spicyBase64}`;
+          const burgers = [cheeseUrl,bbqUrl,mushroomUrl,spicyUrl];
           for (let i=0;i<4;i++){
               await Menu_Item.create({
                   Item_Id: faker.datatype.uuid(),
@@ -387,7 +424,7 @@ export async function addRandomData() {
                   Description: descr[i],
                   Price: faker.random.number({min,max,precision:0.01}),
                   Image: burgers[i],
-                  MenuId: menu.Menu_Id
+                  MenuId: menu.Menu_IdUrl
               });
           }
         }
@@ -399,14 +436,18 @@ export async function addRandomData() {
           const min = 15.50;
           const max= 18.99;
           const californiadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/california.jpg`);
-          const california = new Blob([californiadata], {type: 'image/jpg'});
+          const californiaBase64 =californiadata.toString('base64');
+          const californiaUrl = `data:image/jpg;base64,${ californiaBase64}`;
           const nigiridata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/nigiri.jpg`);
-          const nigiri = new Blob([nigiridata], {type: 'image/jpg'});
+          const nigiriBase64 =nigiridata.toString('base64');
+          const nigiriUrl = `data:image/jpg;base64,${ nigiriBase64}`;
           const tunadata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/tuna.jpg`);
-          const tuna = new Blob([tunadata], {type: 'image/jpg'});
+          const tunaBase64 =tunadata.toString('base64');
+          const tunaUrl = `data:image/jpg;base64,${ tunaBase64}`;
           const dragondata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/dragon.jpg`);
-          const dragon = new Blob([dragondata], {type: 'image/jpg'});
-          const sushi = [california,nigiri,tuna,dragon];
+          const dragonBase64 =dragondata.toString('base64');
+          const dragonUrl = `data:image/jpg;base64,${ dragonBase64}`;
+          const sushi = [californiaUrl,nigiriUrl,tunaUrl,dragonUrl];
           for (let i=0;i<4;i++){
               await Menu_Item.create({
                   Item_Id: faker.datatype.uuid(),
@@ -425,14 +466,18 @@ export async function addRandomData() {
           const min = 15.50;
           const max= 17.99;
           const salmondata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/salmon.jpg`);
-          const salmon = new Blob([salmondata], {type: 'image/jpg'});
+          const salmonBase64 =salmondata.toString('base64');
+          const salmonUrl = `data:image/jpg;base64,${ salmonBase64}`;
           const fishtacodata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/fishtaco.jpg`);
-          const fishtaco = new Blob([fishtacodata], {type: 'image/jpg'});
+          const fishtacoBase64 =fishtacodata.toString('base64');
+          const fishtacoUrl = `data:image/jpg;base64,${ fishtacoBase64}`;
           const mahidata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/mahi.jpg`);
-          const mahi = new Blob([mahidata], {type: 'image/jpg'});
+          const mahiBase64 =mahidata.toString('base64');
+          const mahiUrl = `data:image/jpg;base64,${ mahiBase64}`;
           const shrimpdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/shrimp.jpg`);
-          const shrimp = new Blob([shrimpdata], {type: 'image/jpg'});
-          const fish = [salmon,fishtaco,mahi,shrimp];
+          const shrimpBase64 =shrimpdata.toString('base64');
+          const shrimpUrl = `data:image/jpg;base64,${ shrimpBase64}`;
+          const fish = [salmonUrl,fishtacoUrl,mahiUrl,shrimpUrl];
           for (let i=0;i<4;i++){
               await Menu_Item.create({
                   Item_Id: faker.datatype.uuid(),
@@ -451,14 +496,18 @@ export async function addRandomData() {
           const min = 15.50;
           const max= 17.99;
           const butterdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/butter.jpg`);
-          const butter = new Blob([butterdata], {type: 'image/jpg'});
+          const butterBase64 =butterdata.toString('base64');
+          const butterUrl = `data:image/jpg;base64,${ butterBase64}`;
           const biryanidata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/biryani.jpg`);
-          const biryani = new Blob([biryanidata], {type: 'image/jpg'});
+          const biryaniBase64 =biryanidata.toString('base64');
+          const biryaniUrl = `data:image/jpg;base64,${ biryaniBase64}`;
           const palakdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/palak.jpg`);
-          const palak = new Blob([palakdata], {type: 'image/jpg'});
+          const palakBase64 =palakdata.toString('base64');
+          const palakUrl = `data:image/jpg;base64,${ palakBase64}`;
           const masaladata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/masala.jpg`);
-          const masala = new Blob([masaladata], {type: 'image/jpg'});
-          const indian = [butter,biryani,palak,masala];
+          const masalaBase64 =masaladata.toString('base64');
+          const masalaUrl = `data:image/jpg;base64,${ masalaBase64}`;
+          const indian = [butterUrl,biryaniUrl,palakUrl,masalaUrl];
           for (let i=0;i<4;i++){
               await Menu_Item.create({
                   Item_Id: faker.datatype.uuid(),
@@ -477,14 +526,18 @@ export async function addRandomData() {
           const min = 15.50;
           const max= 18.99;
           const sourdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/sour.jpg`);
-          const sour = new Blob([sourdata], {type: 'image/jpg'});
+          const sourBase64 =sourdata.toString('base64');
+          const sourUrl = `data:image/jpg;base64,${ sourBase64}`;
           const paodata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/pao.jpg`);
-          const pao = new Blob([paodata], {type: 'image/jpg'});
+          const paoBase64 =paodata.toString('base64');
+          const paoUrl = `data:image/jpg;base64,${ paoBase64}`;
           const beefdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/beef.jpg`);
-          const beef = new Blob([beefdata], {type: 'image/jpg'});
+          const beefBase64 =beefdata.toString('base64');
+          const beefUrl = `data:image/jpg;base64,${ beefBase64}`;
           const meindata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/mein.jpg`);
-          const mein = new Blob([meindata], {type: 'image/jpg'});
-          const chinese = [sour,pao,beef,mein];
+          const meinBase64 =meindata.toString('base64');
+          const meinUrl = `data:image/jpg;base64,${ meinBase64}`;
+          const chinese = [sourUrl,paoUrl,beefUrl,meinUrl];
           for (let i=0;i<4;i++){
               await Menu_Item.create({
                   Item_Id: faker.datatype.uuid(),
@@ -503,14 +556,18 @@ export async function addRandomData() {
           const min = 19.50;
           const max= 24.50;
           const ribeyedata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/ribeye.jpg`);
-          const ribeye = new Blob([ribeyedata], {type: 'image/jpg'});
+          const ribeyeBase64 =ribeyedata.toString('base64');
+          const ribeyeUrl = `data:image/jpg;base64,${ ribeyeBase64}`;
           const filetdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/filet.jpg`);
-          const filet = new Blob([filetdata], {type: 'image/jpg'});
+          const filetBase64 =filetdata.toString('base64');
+          const filetUrl = `data:image/jpg;base64,${ filetBase64}`;
           const tbonedata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/tbone.jpg`);
-          const tbone = new Blob([tbonedata], {type: 'image/jpg'});
+          const tboneBase64 =tbonedata.toString('base64');
+          const tboneUrl = `data:image/jpg;base64,${ tboneBase64}`;
           const yorkdata=fs.readFileSync(`${process.env.PHOTO_BASE_PATH}/york.jpg`);
-          const york = new Blob([yorkdata], {type: 'image/jpg'});
-          const steaks = [ribeye,filet,tbone,york];
+          const yorkBase64 =yorkdata.toString('base64');
+          const yorkUrl = `data:image/jpg;base64,${ yorkBase64}`;
+          const steaks = [ribeyeUrl,filetUrl,tboneUrl,yorkUrl];
           for (let i=0;i<4;i++){
               await Menu_Item.create({
                   Item_Id: faker.datatype.uuid(),
@@ -538,7 +595,7 @@ export async function addRandomData() {
       // Create reviews
       const users = await User.findAll();
       const items = await Menu_Item.findAll();
-      const rev = ['1','2','3','4','5'];
+      const rev = [1,2,3,4,5];
       for (let i=0;i<2;i++){
         for (let i = 0; i < 10; i++) {
           const user = faker.random.arrayElement(users);
@@ -547,7 +604,7 @@ export async function addRandomData() {
           const reviewscount = await Review.count({where: {UserId: user.User_Id}});
 
           if (reviewscount ===0 ){
-            if (revv==='1' || revv==='2'){
+            if (revv===1 || revv===2){
               const comments = ['I did not enjoy it at all!','The taste was not for me.','Very bad for how expensive it was.','Was not the worst but it could be a lot better.','Not happy at all with it.','The food was lacking flavor.'];
               await Review.create({
                   Review_Id:faker.datatype.uuid(),
@@ -557,7 +614,7 @@ export async function addRandomData() {
                   MenuItemId: item.Item_Id,
                 });
             }
-            if (revv==='3'){
+            if (revv===3){
                 const comments = ['Pretty good but I was not thrilled.','Would try again,however I was not completely satisfied.','Nice taste but something was throwing me off.','Although food was very nice,we waited a lot for it so it was very cold.','Nice pick from the menu just was not that thrilled.'];
                 await Review.create({
                     Review_Id:faker.datatype.uuid(),
@@ -567,7 +624,7 @@ export async function addRandomData() {
                     MenuItemId: item.Item_Id,
                   });
             }
-            if (revv==='4' || revv==='5'){
+            if (revv===4 || revv===5){
                 const comments = ['Amazing item and the most polite stuff!!','I loved everything, the performance of the plate was a state of the art!','Great personel, incredible flavors. 10/10 recommend!!','The food was good and worth every peny!','Loved this item, I would for sure advise everyone to try it!'];
                 await Review.create({
                     Review_Id:faker.datatype.uuid(),

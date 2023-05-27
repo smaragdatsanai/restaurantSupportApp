@@ -7,7 +7,7 @@
             </div>
 
             <div class="container d-flex align-items-center justify-content-center signup-form">
-                <form action="/doAddMenu/{{restaurantId}}" method="post"  class="needs-validation">
+                <form action="/doAddMenu/{{restaurantId}}" method="post"  class="needs-validation" enctype="multipart/form-data">
                     <div class="col-lg form-floating mb-3">
                 
                         <input type="text" class="form-control" 
@@ -40,6 +40,9 @@
                         <label for="floatingcloses">Active Until</label>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="m-3">
+                         <input type="file" name="image" accept="image/jpg">
                     </div>
                     <button type="submit" class="btn btn-dark btn-lg pb-sm-3 mb-3">Add Menu</button>
                 </form>

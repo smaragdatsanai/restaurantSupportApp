@@ -7,7 +7,7 @@
             </div>
 
             <div class="container d-flex align-items-center justify-content-center signup-form">
-                <form action="/doAddItem/{{menuId}}" method="post" class="needs-validation">
+                <form action="/doAddItem/{{menuId}}" method="post" class="needs-validation" enctype="multipart/form-data">
                     <div class="col-lg form-floating mb-3">
                 
                         <input type="text" class="form-control" 
@@ -28,6 +28,9 @@
                     <div class="description-container">
                         <label for="description" class="description-label">Item description:</label>
                         <textarea value="{{description}}" id="description" name="description" rows="4" cols="50"></textarea>
+                    </div>
+                    <div class="m-3">
+                         <input type="file" name="image" accept="image/jpg">
                     </div>
                     
                     

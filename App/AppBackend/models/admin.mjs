@@ -78,7 +78,51 @@ export async function getAllAdminRestaurants(userId){
   }
 }
 
-export async function addOwnerRestaurant(name,address,opens,closes,type,ownerid){
+export async function getRestaurantsforGraph() {
+  try {
+    const restaurants = await Restaurant.findAll({
+      include: [
+        {
+          model: Menu,
+          include: [
+            {
+              model: Menu_Item,
+              include: {
+                model: Review,
+                attributes: [[sequelize.fn('AVG', sequelize.col('Rating')), 'averageRating']],
+              },
+              attributes: ['Item_Id', 'Name'],
+            },
+          ],
+          attributes: ['Menu_Id', 'Name'],
+        },
+      ],
+      attributes: ['Restaurant_Id', 'Name'],
+      group: ['Restaurant.Restaurant_Id', 'Menus.Menu_Id', 'Menus->Menu_Items.Item_Id','Menus->Menu_Items->Reviews.Review_Id'], // Include the Menu_Items.Item_Id in the group array
+    });
+    const restaurantObjects = restaurants.map(restaurant => ({
+      restaurantId: restaurant.Restaurant_Id,
+      name: restaurant.Name,
+      menus: restaurant.Menus.map(menu => ({
+        menuId: menu.Menu_Id,
+        menuName: menu.Name,
+        menuItems: menu.Menu_Items.map(menuItem => ({
+          itemId: menuItem.Item_Id,
+          itemName: menuItem.Name,
+          averageRating: menuItem.Reviews[0]?.dataValues.averageRating || null,
+        })),
+      })),
+    }));
+
+    return restaurantObjects;
+  } catch (error) {
+    console.error('Error retrieving Restaurants:', error);
+  }
+}
+
+
+
+export async function addOwnerRestaurant(name,address,opens,closes,type,ownerid,image){
   try{
     await Restaurant.create({
       Restaurant_Id: faker.datatype.uuid(),
@@ -88,8 +132,7 @@ export async function addOwnerRestaurant(name,address,opens,closes,type,ownerid)
       Closes_at: closes,
       Restaurant_Type: type,
       OwnerId: ownerid,
-
-      Image:'5b6f626a65637420426c6f625d'
+      Image:image
     });
   }catch(error){
     console.error('Error creating restaurant:',error);
@@ -114,7 +157,7 @@ export async function addOwnerMenu (name,type,opens,closes,restaurantid){
   }
 }
 
-export async function addMenuItem (name,description,price,menuid){
+export async function addMenuItem (name,description,price,menuid,image){
   try{
     await Menu_Item.create({
       Item_Id : faker.datatype.uuid(),
@@ -122,7 +165,7 @@ export async function addMenuItem (name,description,price,menuid){
       Description: description,
       Price: price,
       MenuId: menuid,
-      Image:'5b6f626a65637420426c6f625d'
+      Image:image
     });                     
   }catch(error){
     console.error('Error adding Item:',error);
