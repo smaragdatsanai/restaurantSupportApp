@@ -72,6 +72,9 @@
 }
 
 
+
+
+
 #home{
     background: url("/imgs/bgpicture.jpg") no-repeat center center fixed;
     background-color: #fffcfc;
@@ -82,6 +85,14 @@
     background-size: cover;
 }
 
+#bg{
+  background: url("/imgs/bgpicture.jpg") no-repeat center center fixed;
+  background-color: #fffcfc;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+}
 
 .landing-text{
     display: table-cell;
@@ -121,6 +132,8 @@ footer{
     background-color: rgb(0, 0, 0);
     color:#FFF;
 }
+
+
 
 i {
   color:#000000;
@@ -212,3 +225,20 @@ text.restaurant-name {
       font-weight: 700;
   }
 }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  margin-top: auto;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+

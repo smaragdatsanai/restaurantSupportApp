@@ -1,5 +1,16 @@
+
+
 <div class="padding ">
+   
     <div class="container cont_style vstack gap-3 col-md-7 mx-auto py-5  ">
+         {{#if message}}<div class="row ">
+    <div class="col-6 offset-3">
+        <div class="alert alert-primary" role="alert">
+            {{message}}
+        </div>
+    </div>
+</div>
+{{/if}}
         <div class="row">
             <div class="col-md-6 mx-auto text-center pb-3">
                 <h1>All restaurants</h1>
