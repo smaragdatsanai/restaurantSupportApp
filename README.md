@@ -1,6 +1,6 @@
-This is a restaurant support app.
+#This is a restaurant support app.
 
-Project Discription:
+##Project Discription:
 
 Η παρούσα εφαρμογή αποτελεί μια εφαρμογή υποστήριξης εστιατορίου που έχει
 σχεδιαστεί για να βοηθά εστιατόρια να διαχειρίζονται διάφορες λειτουργίες 
@@ -10,7 +10,7 @@ Project Discription:
 
 
 
-Προεπισκόπηση της σελίδας - Τοπικά:
+#Προεπισκόπηση της σελίδας - Τοπικά:
 Εκτέλεση των εντολών:
 
 npm install
