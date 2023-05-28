@@ -25,66 +25,6 @@ import multer from 'multer';
 
 const upload = multer({ dest: 'public/uploads/' });
 
-// router.get('/upload', (req, res) => {
-//   res.render('image');
-// });
-
-// router.post('/upload', upload.single('image'), (req, res) => {
-//   const imageFilePath = req.file.filename;
-//   res.render('display', { imageFilePath });
-// });
-
-
-router.get('/upload', (req, res) => {
-  res.render('image');
-});
-
-// router.post('/upload', upload.single('image'), (req, res) => {
-//     const imageFile = req.file;
-
-//     if (!imageFile) {
-//       res.status(400).send('No image file provided');
-//       return;
-//     }
-  
-//     const imageBuffer = fs.readFileSync(imageFile.path);
-//     const imageBlob =new Blob([imageBuffer],{type:'image/jpg'})
-//     const imageBufferPromise = imageBlob.arrayBuffer();
-
-//     imageBufferPromise.then((buffer) => {
-//     const imageBlobBuffer = Buffer.from(buffer);
-//     const imageBase64 = imageBlobBuffer.toString('base64');
-//     const imageUrl = `data:image/jpg;base64,${imageBase64}`;
-//     console.log(imageUrl)
-  
-//     res.render('display', { imageUrl });
-//     }).catch((error) => {
-//     console.error('Error occurred while retrieving the image buffer:', error);
-//     });
-
-    
-// });
-
-
-router.post('/upload', upload.single('image'), (req, res) => {
-    const imageFile = req.file;
-
-    if (!imageFile) {
-      res.status(400).send('No image file provided');
-      return;
-    }
-  
-    const imageBuffer = fs.readFileSync(imageFile.path);
-    const imageBase64 = imageBuffer.toString('base64');
-    const imageUrl = `data:image/jpg;base64,${imageBase64}`;
-    console.log(imageUrl)
-  
-    res.render('display', { imageUrl });
-    
-});
-
-
-
 
 
 router.get("/", (req, res) => {
@@ -115,10 +55,6 @@ router.get('/home',
 
 
 
-
-
-
-
 //RESTAURANT
 
 router.get('/restaurants',
@@ -144,23 +80,7 @@ router.get('/restaurants/menu/menuItems/:menuId',
     UserController.checkIfAuthenticated,
     MenuController.showMenuItems
 );
-router.get('/restaurants/menu/menuItems/addRating/:itemName/:itemId',
-    UserController.checkIfAuthenticated,
-    UserController.checkIfUser,
-    (req, res) => {
-        res.render('./ratingForm', { Item_Id: req.params.itemId, Name: req.params.itemName })
-    }
-);
 
-
-router.post("/restaurants/menu/menuItems/addRating/:itemId",
-    UserController.checkIfAuthenticated,
-    UserController.checkIfUser,
-    ReviewController.addRating,
-    (req, res) => {
-        res.render('./restaurants', { message: "Η αξιολόγηση πραγματοποιήθηκε επιτυχώς" });
-    }
-);
 
 router.get('/restaurants/findRestaurant',
     UserController.checkIfAuthenticated,
@@ -208,10 +128,15 @@ router.post("/doRegister",
 router.get('/userProfile',
     UserController.checkIfAuthenticated,
     UserController.userProfileRender,
+    (req, res,next) => {
+        res.locals.message='Η ανάκτηση του προφιλ του χρήστη απέτυχε'
+        next()
+    },
+    RestaurantController.displayOpenRestaurants,
     (req, res) => {
-          res.render("restaurants", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" });
-      }
-  ) 
+        res.redirect('/home');
+    }
+  );
 
 
 
@@ -226,89 +151,18 @@ router.get('/logout',
 
 router.get('/switchaccounts',
     UserController.checkIfAuthenticated,
-    UserController.doLogout,
     (req, res) => {
-        res.redirect('./login');
+        if (req.session.userType=="User")
+            UserController.doLogout,
+            res.redirect('./login')
+        else
+            UserController.doLogout,
+            res.redirect('./adminLogin');
+        
     }
 );
 
 //ADMIN
-
-
-router.post('/place-restaurant',
-    UserController.checkIfAuthenticated,
-    upload.single('image'),
-    AdminController.addRestaurant,
-    (req, res) => {
-        res.render('./adminHome', { message: "Η προσθήκη εστιατορίου πραγματοποιήθηκε επιτυχώς" });
-    }
-);
-
-router.get('/addRestaurant',
-    UserController.checkIfAuthenticated,
-    (req,res)=>{
-        res.render('./add-restaurant');
-    }
-);
-
-router.get('/addMenu/:restaurantId',
-    UserController.checkIfAuthenticated,
-    (req,res)=>{
-        res.render('./add-menu',{restaurantId:req.params.restaurantId});
-    }
-);
-
-router.post('/doAddMenu/:restaurantId',
-    UserController.checkIfAuthenticated,
-    upload.single('image'),
-    AdminController.addMenu,
-    (req, res) => {
-        res.render('./adminHome', { message: "Η προσθήκη Μενού πραγματοποιήθηκε επιτυχώς" });
-    }
-);
-
-router.get('/addItem/:menuId',
-    UserController.checkIfAuthenticated,
-    (req,res)=>{
-        res.render('./add-item',{menuId:req.params.menuId});
-    }
-);
-
-
-router.post('/doAddItem/:menuId',
-    UserController.checkIfAuthenticated,
-    upload.single('image'),
-    AdminController.addItem,
-    (req, res) => {
-        res.render('./adminHome', { message: "Η Προσθήκη προιόντος πραγματοποιήθηκε επιτυχώς" });
-    }
-);
-
-
-router.get('/restaurants/menu/menuItems/deleteItem/:itemId',
-    UserController.checkIfAuthenticated,
-    AdminController.deleteItem,
-    (req,res)=>{
-        res.render('./adminHome', { message: "Η Διαγραφή προιόντος πραγματοποιήθηκε επιτυχώς" });
-    }
-);
-
-router.get('/restaurants/menu/menuItems/deleteRestaurant/:restaurantId',
-    UserController.checkIfAuthenticated,
-    AdminController.deleteRestaurant,
-    (req,res)=>{
-        res.render('./adminHome', { message: "Η Διαγραφή εστιατορίου πραγματοποιήθηκε επιτυχώς" });
-    }
-);
-
-router.get('/restaurants/menu/menuItems/deleteMenu/:menuId',
-    UserController.checkIfAuthenticated,
-    AdminController.deleteMenu,
-    (req,res)=>{
-        res.render('./adminHome', { message: "Η Διαγραφή του Μενού πραγματοποιήθηκε επιτυχώς" });
-    }
-);
-
 
 router.get('/adminLogin',
     (req, res) => {
@@ -335,38 +189,211 @@ router.post("/doAdminRegister",
     Validator.validateNewUser,
     AdminController.doRegister,
     AdminController.doLogin,
+    (req, res,next) => {
+        res.locals.message="Η εγγραφή του χρήστη έγινε με επιτυχία"
+        next()
+    },
+    AdminController.adminHomePageRender,
     (req, res) => {
-        res.locals.message="Η εγγραφή του χρήστη έγινε με επιτυχία",
-        res.redirect("/Home")
+        res.redirect('/home');
     }
 );
 
 router.get('/adminProfile',
 UserController.checkIfAuthenticated,
 AdminController.adminProfileRender,
-(req, res) => {
+(req, res,next) => {
     res.locals.message="Η ανάκτηση του προφιλ του χρήστη απέτυχε" ,
-    res.redirect("/Home")
-  }
+    next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
+    }
 );
 
 
 router.get('/adminHome',
     UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
     AdminController.adminHomePageRender,
     (req, res) => {
-        res.render("adminHome", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" });
+        res.locals.message="Η ανάκτηση του προφιλ του χρήστη απέτυχε"
+        res.redirect('/home');
     }
 );
 
+
+
+
 //CRUD
+
+
+router.post('/place-restaurant',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    upload.single('image'),
+    AdminController.addRestaurant,
+    (req, res,next) => {
+        res.locals.message="Η προσθήκη εστιατορίου πραγματοποιήθηκε επιτυχώς"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
+
+router.get('/addRestaurant',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    (req,res,next)=>{
+        res.render('./add-restaurant');
+    }
+);
+
+router.get('/addMenu/:restaurantId',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    (req,res)=>{
+        res.render('./add-menu',{restaurantId:req.params.restaurantId});
+    }
+);
+
+router.post('/doAddMenu/:restaurantId',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    upload.single('image'),
+    AdminController.addMenu,
+    (req, res,next) => {
+        res.locals.message="Η προσθήκη Μενού πραγματοποιήθηκε επιτυχώς"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
+
+router.get('/addItem/:menuId',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    (req,res)=>{
+        res.render('./add-item',{menuId:req.params.menuId});
+    }
+);
+
+
+router.post('/doAddItem/:menuId',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    upload.single('image'),
+    AdminController.addItem,
+    (req, res,next) => {
+        res.locals.message="Η Προσθήκη προιόντος πραγματοποιήθηκε επιτυχώςς"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
+
+
+router.get('/restaurants/menu/menuItems/deleteItem/:itemId',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    AdminController.deleteItem,
+    (req,res,next)=>{
+        res.locals.message="Η Διαγραφή προιόντος πραγματοποιήθηκε επιτυχώς"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
+
+router.get('/restaurants/menu/menuItems/deleteRestaurant/:restaurantId',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    AdminController.deleteRestaurant,
+    (req,res,next)=>{
+        res.locals.message="Η Διαγραφή εστιατορίου πραγματοποιήθηκε επιτυχώς"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
+
+router.get('/restaurants/menu/menuItems/deleteMenu/:menuId',
+    UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
+    AdminController.deleteMenu,
+    (req,res,next)=>{
+    
+        res.locals.message="Η Διαγραφή του Μενού πραγματοποιήθηκε επιτυχώς"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
+
+router.get('/deleteReview/:reviewId',
+    UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
+    crudController.deleteReview,
+    (req,res,next)=>{
+        res.locals.message="Η Διαγραφή της κριτικής πραγματοποιήθηκε επιτυχώς"
+        next()
+    },
+    RestaurantController.displayOpenRestaurants,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
+
+
+
+router.get('/restaurants/menu/menuItems/addRating/:itemName/:itemId',
+    UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
+    (req, res) => {
+        res.render('./ratingForm', { Item_Id: req.params.itemId, Name: req.params.itemName })
+    }
+);
+
+
+router.post("/restaurants/menu/menuItems/addRating/:itemId",
+    UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
+    ReviewController.addRating,
+    
+    (req, res,next) => {
+        res.locals.message="Η αξιολόγηση πραγματοποιήθηκε επιτυχώς"
+        next()
+    },
+    RestaurantController.displayOpenRestaurants,
+    (req, res) => {
+        res.redirect('/home');
+    }
+);
 
 router.get('/editRating/:reviewId/:itemId',
     UserController.checkIfAuthenticated,
     UserController.checkIfUser,
     crudController.updateReviewForm,
-    (req,res)=>{
-        res.render("restaurants", { message: "" });
+    (req,res,next)=>{
+        res.locals.message="Η αίτηση για φόρμα υποφολής κριτικής απέτυχε"
+        next()
+    },
+    RestaurantController.displayOpenRestaurants,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
 
@@ -374,54 +401,96 @@ router.post('/updateReview/:reviewId',
     UserController.checkIfAuthenticated,
     UserController.checkIfUser,
     crudController.updatereview,
-    (req,res)=>{
-        res.render("restaurants", { message: "Η ενημέρωση της κριτικής σας έγινε με επιτυχία" });
+    (req,res,next)=>{
+        res.locals.message="Η ενημέρωση της κριτικής σας έγινε με επιτυχία"
+        next()
+    },
+    RestaurantController.displayOpenRestaurants,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
 
 router.get('/editMenu/:menuId',
     UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
     crudController.updateMenuForm,
-    (req,res)=>{
-        res.render("adminHome", { message: "" });
+    (req,res,next)=>{
+        res.locals.message="Η αίτηση για φόρμα υποβολής ανανέωσης Μενού απέτυχε"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
 router.post('/doMenuEdit/:menuId',
     UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
     crudController.updateMenu,
-    (req,res)=>{
-        res.render("adminHome", { message: "Η ενημέρωση του Μενού σας έγινε με επιτυχία"});
+    (req,res,next)=>{
+        res.locals.message="Η ενημέρωση του Μενού σας έγινε με επιτυχία"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
 
 
 router.get('/editItem/:itemId',
     UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
     crudController.updateMenuItemForm,
-    (req,res)=>{
-        res.render("adminHome", { message: "" });
+    (req,res,next)=>{
+        res.locals.message="Η αίτηση για φόρμα υποβολής ανανέωσης Μενού Item απέτυχε"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
 router.post('/doItemEdit/:itemId',
     UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
     crudController.updateItem,
-    (req,res)=>{
-        res.render("adminHome", { message: "Η ενημέρωση του Menu Item σας έγινε με επιτυχία"});
+    (req,res,next)=>{
+        res.locals.message="Η ενημέρωση του Menu Item σας  έγινε με επιτυχία"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
 
 router.get('/editRestaurant/:restaurantId',
     UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
     crudController.updateRestaurantForm,
-    (req,res)=>{
-        res.render("adminHome", { message: "" });
+    (req,res,next)=>{
+        res.locals.message="Η αίτηση για φόρμα υποβολής ανανέωσης Εστιατορίου απέτυχε"
+        
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
 router.post('/doRestaurantEdit/:restaurantId',
     UserController.checkIfAuthenticated,
+    AdminController.checkIfAdmin,
     crudController.updateRestaurant,
-    (req,res)=>{
-        res.render("adminHome", { message: "Η ενημέρωση του Εστιατορίου σας έγινε με επιτυχία"});
+    (req,res,next)=>{
+        res.locals.message="Η ενημέρωση του Εστιατορίου σας έγινε με επιτυχία"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
 
@@ -435,10 +504,17 @@ router.get('/changePassword',
 router.post('/doPasswordChange',
     UserController.checkIfAuthenticated,
     crudController.changepassword,
-    (req,res)=>{
-        res.render("adminHome", { message: "Η ενημέρωση του κωδικού πρόσβασης έγινε με επιτυχία" });
+    (req,res,nex)=>{
+        res.locals.message="Η ενημέρωση του κωδικού πρόσβασης έγινε με επιτυχία"
+        next()
+    },
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.redirect('/home');
     }
 )
+
+
 
 export default router;
 

@@ -34,14 +34,25 @@
     width:100%;
 }
 
-/* 
+.menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.menu-item img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+}
+
+
 #bg{
   background: url("/imgs/bgpicture.jpg") no-repeat center center fixed;
   background-color: #fffcfc;
   height: 100%;
   width: 100%;
   background-size: cover;
-} */
+}
 
 
 .submit-button-container {

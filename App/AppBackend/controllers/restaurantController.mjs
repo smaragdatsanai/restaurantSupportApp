@@ -16,8 +16,9 @@ async function displayAllRestaurants(req, res, next) {
 async function displayOpenRestaurants(req, res, next) {
   try {
     console.log("displayOpenRestaurants");
+    const message = res.locals.message;
     const restaurants = await Restaurant.getOpenRestaurants();
-    res.render("../views/restaurants", { Restaurant: restaurants, Button:'active'});
+    res.render("../views/restaurants", { Restaurant: restaurants, Button:'active', message});
     console.log("entered displayOpenRestaurants");
   } catch (error) {
     next(error)

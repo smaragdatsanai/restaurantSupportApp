@@ -151,10 +151,12 @@ const updatereview = async (req,res,next)=>{
         next(error)
     }
 }
+
+
 const deleteReview= async (req,res,next)=>{
     try{
     console.log("DELETING Review")
-    const reviewid =req.params.Review_Id
+    const reviewid =req.params.reviewId
     const review = await Crud.deleteReview(reviewid)
     console.log(review);
     next()

@@ -64,10 +64,12 @@ const adminProfileRender = async (req, res, next) => {
 }
 const adminHomePageRender = async (req, res, next) => {
     try {
-      const graphData = [];
-      const restaurants = await Owner.getRestaurantsforGraph();
-    //   console.log(restaurants);
-      restaurants.forEach((restaurant) => {
+        const message = res.locals.message;
+        console.log(message)
+        const graphData = [];
+        const restaurants = await Owner.getRestaurantsforGraph();
+        //   console.log(restaurants);
+        restaurants.forEach((restaurant) => {
         const menuData = [];
         restaurant.menus.forEach((menu) => {
           const menuItemData = [];
@@ -87,10 +89,12 @@ const adminHomePageRender = async (req, res, next) => {
           menus: menuData,
         });
       });
-      
       const graphDataString = JSON.stringify(graphData);
-      console.log(graphData)
-      res.render('./adminHome', { graphDataString });
+      const userId=req.session.userId
+      const adminRestaurants = await Owner.getAllAdminRestaurants(userId);
+      const employeeNames = ['John Smith', 'Emily Johnson', 'David Davis', 'Sarah Anderson', 'Michael Brown', 'Jennifer Wilson', 'Christopher Taylor'];
+      res.render('./adminHome', { graphDataString, message, restaurants: adminRestaurants, randomEmployeeNames: employeeNames });
+      
     } catch (error) {
       next(error);
     }
@@ -217,5 +221,13 @@ const deleteRestaurant = async (req, res, next) => {
     }
 }
 
+function checkIfAdmin(req, res, next) {
+    if (req.session.userType=='Admin') { 
+        next() //επόμενο middleware
+    }
+    else
+        res.redirect("/") //αλλιώς ανακατεύθυνση στην αρχική σελίδα
+}
 
-export { doRegister, doLogin, adminProfileRender, addRestaurant, addMenu, addItem, deleteItem, deleteRestaurant, deleteMenu, adminHomePageRender}
+
+export { checkIfAdmin,doRegister, doLogin, adminProfileRender, addRestaurant, addMenu, addItem, deleteItem, deleteRestaurant, deleteMenu, adminHomePageRender}

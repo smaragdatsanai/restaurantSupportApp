@@ -61,46 +61,49 @@
             </div>
         </div>
         {{else}}
+
         <div class="row mt-5">
-            <div class="vstack gap-3 col-md-7 mx-auto">
-                <div class="row">
-                    <div class="col-md-5 mx-auto text-center pb-1">
-                        <h1>My Restaurants</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5 mx-auto text-center pb-1">
-                        <a href="/addRestaurant" class="btn btn-outline-secondary mb-5">Add Restaurant</a>
-                    </div>
-                </div>
+            <div class="vstack gap-3 col-md-9 mx-auto">
                 {{#each restaurant}}
                 <div class="row justify-content-center">
                     <div class="col">
                         <div class="card mb-3">
                             <div class="row g-0">
-                                <div class="col-md-4">
+                                <div class="col-md-5">
                                     <img src="{{this.Image}}" class="img-fluid" alt="...">
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7">
                                     <div class="card-body">
                                         <h4 class="card-title">Restaurant: {{this.Name}}</h4>
+                                        <p class="card-text">{{this.Address}}</p>
+                                        <p class="card-text">Opens: {{this.Opens_on}}</p>
+                                        <p class="card-text">Closes: {{this.Closes_at}}</p>
                                         <a href="/addMenu/{{this.Restaurant_Id}}"
                                             class="btn btn-outline-secondary mb-3">Add Menu</a>
-
                                         {{#each this.Menus}}
                                         <div class="menu-item">
-                                            <h5 class="card-text">Menu: {{this.Name}}</h5>
-                                            <a href="/addItem/{{this.Menu_Id}}"
-                                                class="btn btn-outline-secondary mb-2">Add Menu Item</a>
-                                            <a href="/editMenu/{{this.Menu_Id}}"
-                                                class="btn btn-outline-secondary mb-2">Edit Menu</a>
-                                            <a href="/restaurants/menu/menuItems/{{this.Menu_Id}}"
-                                                class="btn btn-outline-secondary mb-2">Display All Menu Items</a>
-                                            <a href="/restaurants/menu/menuItems/deleteMenu/{{this.Menu_Id}}"
-                                                class="btn btn-outline-secondary mb-2">Delete Menu</a>
+                                            <div class="row g-0">
+                                                <div class="col-md-3">
+                                                    <img src="{{this.Image}}" class="img-fluid" alt="...">
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <h5 class="card-text">Menu: {{this.Name}}</h5>
+                                                    <p class="card-text">Menu Type: {{this.Type}}</p>
+                                                    <p class="card-text">Active from: {{this.Active_from}}</p>
+                                                    <p class="card-text">Active until: {{this.Active_until}}</p>
+                                                    <a href="/addItem/{{this.Menu_Id}}"
+                                                        class="btn btn-outline-secondary mb-2">Add Menu Item</a>
+                                                    <a href="/editMenu/{{this.Menu_Id}}"
+                                                        class="btn btn-outline-secondary mb-2">Edit Menu</a>
+                                                    <a href="/restaurants/menu/menuItems/{{this.Menu_Id}}"
+                                                        class="btn btn-outline-secondary mb-2">Display All Menu
+                                                        Items</a>
+                                                    <a href="/restaurants/menu/menuItems/deleteMenu/{{this.Menu_Id}}"
+                                                        class="btn btn-outline-secondary mb-2">Delete Menu</a>
+                                                </div>
+                                            </div>
                                         </div>
                                         {{/each}}
-
                                     </div>
                                 </div>
                             </div>
@@ -114,9 +117,83 @@
                 {{/each}}
             </div>
         </div>
-
         {{/if}}
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+{{!-- <div class="row">
+    <div class="col-md-5 mx-auto text-center pb-1">
+        <h1>My Restaurants</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5 mx-auto text-center pb-1">
+        <a href="/addRestaurant" class="btn btn-outline-secondary mb-5">Add Restaurant</a>
+    </div>
+</div>
+{{#each restaurant}}
+<div class="row justify-content-center">
+    <div class="col">
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{this.Image}}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.Name}}</h5>
+                        <p class="card-text">{{this.Address}}</p>
+                        <p class="card-text">Opens: {{this.Opens_on}}</p>
+                        <p class="card-text">Closes: {{this.Closes_at}}</p>
+                        <a href="/editrestaurant/{{this.Restaurant_Id}}" class="btn btn-outline-secondary mb-3">Edit
+                            Restaurant</a>
+                        <a href="/restaurants/menu/menuItems/deleteRestaurant/{{this.Restaurant_Id}}"
+                            class="btn btn-outline-secondary mb-3">Delete Restaurant</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#each this.Menu}}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card mb-3 w-75 mx-auto">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{this.Image}}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.Name}}</h5>
+                        <p class="card-text">Menu Type: {{this.Type}}</p>
+                        <p class="card-text">Active from: {{this.Active_from}}</p>
+                        <p class="card-text">Active until: {{this.Active_until}}</p>
+                        <a href="/addItem/{{this.Menu_Id}}" class="btn btn-outline-secondary mb-2">Add
+                            Menu Item</a>
+                        <a href="/editMenu/{{this.Menu_Id}}" class="btn btn-outline-secondary mb-2">Edit
+                            Menu</a>
+                        <a href="/restaurants/menu/menuItems/{{this.Menu_Id}}"
+                            class="btn btn-outline-secondary mb-2">Display All Menu Items</a>
+                        <a href="/restaurants/menu/menuItems/deleteMenu/{{this.Menu_Id}}"
+                            class="btn btn-outline-secondary mb-2">Delete Menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
 </div>
 </div>
+{{/each}} --}}

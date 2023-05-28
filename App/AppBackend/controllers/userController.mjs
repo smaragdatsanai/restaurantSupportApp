@@ -46,6 +46,7 @@ const doLogout = (req, res, next) => {
     req.session.destroy() //καταστρέφουμε τη συνεδρία στο session store
     next()
 }
+
 const userProfileRender= async (req, res, next)=>{
     try {
         const userId=req.session.userId

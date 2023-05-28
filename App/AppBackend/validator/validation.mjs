@@ -38,7 +38,7 @@ const validateNewUser = [
             next()
         }
         else {
-            res.render("./registrationform", {
+            res.render("./registrationForm", {
                 message: errors.mapped()
             })
         }

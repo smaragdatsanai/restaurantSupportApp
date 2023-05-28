@@ -1,28 +1,106 @@
 <div class="padding">
     <div class="container cont_style vstack gap-3 col-md-7 mx-auto py-5">
-        {{#if message}}<div class="row m-5">
+        {{#if message}}
+        <div class="row m-5">
             <div class="col-6 offset-3">
                 <div class="alert alert-primary" role="alert">
                     {{message}}
                 </div>
             </div>
+        </div>
         {{/if}}
         <div class="row">
             <div class="col-md-6 mx-auto text-center pb-3">
-                <h1></h1>
+                <h1>Welcome to the Admin Panel</h1>
             </div>
         </div>
         <div class="d-flex justify-content-center">
-
             <div class="container-md m-5 p-5 align-items-center justify-content-center rounded-3"
                 style="background-color: #c7e3c2; max-width: 600px; box-shadow: 4px 3px 7px 2px #00000040;">
-
                 <div style="position: relative; z-index: 1;" class="m-5" id="graph-container"
                     data-graph-data="{{graphDataString}}"></div>
-
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam varius ligula id risus consectetur,
+                    nec congue magna ultrices. Sed feugiat lobortis nibh, at semper lacus feugiat vel. Etiam elementum
+                    nisl purus, eu rutrum risus elementum non. Nunc luctus nisl quis ipsum tristique, non suscipit odio
+                    fermentum. Donec lobortis, odio vitae placerat vulputate, dui nisl suscipit metus, vel fringilla
+                    sapien urna sed libero. Mauris semper mi sed ex luctus dignissim.</p>
+                <p>Vestibulum at velit et nunc iaculis egestas ut vitae mauris. Fusce ac scelerisque justo. Quisque
+                    sagittis, ipsum sed fringilla elementum, felis ligula consequat metus, auctor feugiat libero risus
+                    vel odio. Sed bibendum libero nec vulputate efficitur. Sed condimentum purus id odio vehicula
+                    aliquam. Suspendisse tincidunt orci vel efficitur dignissim. Aliquam varius justo ut ante iaculis,
+                    in eleifend nisi fringilla. Fusce rhoncus, sem et laoreet convallis, dui nisi vulputate nulla, in
+                    fringilla nulla odio et eros.</p>
+            </div>
+        </div>
+    {{#if restaurants}}
+        
+      <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h3>Your Restaurant Photos</h3>
+                <div class="row">
+                    {{#each restaurants}}
+                    <div class="col-md-4">
+                        <img src="{{this.Image}}" class="img-fluid" alt="Restaurant Photo 1">
+                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
+        
+    {{/if}}
+{{#if restaurants}}
+    {{#each restaurants}}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {{randomEmployeeNames}}
+            <h3>Employee Schedule for {{this.Name}}</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Employee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monday</td>
+                        <td>{{}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td>{{}}</td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td>{{}}</td>
+                    </tr>
+                    <tr>
+                        <td>Thursday</td>
+                        <td>{{}}</td>
+                    </tr>
+                    <tr>
+                        <td>Friday</td>
+                        <td>{{}}</td>
+                    </tr>
+                    <tr>
+                        <td>Saturday</td>
+                        <td>{{}}</td>
+                    </tr>
+                    <tr>
+                        <td>Sunday</td>
+                        <td>{{}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{/each}}
+{{/if}}
+
     </div>
 </div>
 
