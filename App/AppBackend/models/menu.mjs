@@ -31,22 +31,46 @@ export async function showRestaurantMenu(resId){
 export async function showActiveMenu(resId) {
   try {
     const currentTime = new Date();
-    const currentTimeString = currentTime.toISOString().substr(11, 8);
+    const options = { timeZone: 'Europe/Athens', hour12: false };
+    const currentTimeString = currentTime.toLocaleString('en-US', options).substr(11, 8);
 
     const menu = await Menu.findAll({
       where: {
-        RestaurantId: resId,
-        Active_from: {
-          [Op.lte]: currentTimeString,
-        },
-        Active_until: {
-          [Op.gte]: currentTimeString,
-        },
+        RestaurantId:resId,
+        [Op.or]: [
+          {
+            Active_from: {
+              [Op.lte]: currentTimeString,
+            },
+            Active_until: {
+              [Op.gte]: currentTimeString,
+            },
+          },
+          {
+            Active_from: {
+              [Op.gte]: sequelize.col('Active_until'),
+            },
+            Active_until: {
+              [Op.gte]: currentTimeString,
+            },
+          },
+          {
+            Active_from: {
+              [Op.gte]: sequelize.col('Active_until'),
+            },
+            Active_until: {
+              [Op.lte]: currentTimeString,
+            },
+          },
+        ],
       },
     });
-   return menu.map((item) => item.toJSON());
+
+    console.log(currentTimeString);
+
+    return menu.map((item) => item.toJSON());
   } catch (error) {
-    console.error('Error retrieving Restaurants:', error);
+    console.error('Error retrieving Menus:', error);
   }
 }
 

@@ -47,19 +47,41 @@ export async function getRestaurantById(resId){
 export async function getOpenRestaurants() {
   try {
     const currentTime = new Date();
-    const currentTimeString = currentTime.toISOString().substr(11, 8); // Extract time portion (HH:mm:ss)
+    const options = { timeZone: 'Europe/Athens', hour12: false };
+    const currentTimeString = currentTime.toLocaleString('en-US', options).substr(11, 8);
 
     const rest = await Restaurant.findAll({
       where: {
-        Opens_on: {
-          [Op.lte]: currentTimeString,
-        },
-        Closes_at: {
-          [Op.gte]: currentTimeString,
-        },
+        [Op.or]: [
+          {
+            Opens_on: {
+              [Op.lte]: currentTimeString,
+            },
+            Closes_at: {
+              [Op.gte]: currentTimeString,
+            },
+          },
+          {
+            Opens_on: {
+              [Op.gte]: sequelize.col('Closes_at'),
+            },
+            Closes_at: {
+              [Op.gte]: currentTimeString,
+            },
+          },
+          {
+            Opens_on: {
+              [Op.gte]: sequelize.col('Closes_at'),
+            },
+            Closes_at: {
+              [Op.lte]: currentTimeString,
+            },
+          },
+        ],
       },
     });
-    console.log(rest,currentTimeString)
+
+    console.log(currentTimeString);
 
     return rest.map((item) => item.toJSON());
   } catch (error) {

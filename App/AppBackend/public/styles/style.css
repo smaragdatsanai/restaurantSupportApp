@@ -34,6 +34,15 @@
     width:100%;
 }
 
+/* 
+#bg{
+  background: url("/imgs/bgpicture.jpg") no-repeat center center fixed;
+  background-color: #fffcfc;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+} */
+
 
 .submit-button-container {
   margin-top: 10px; 
@@ -85,14 +94,7 @@
     background-size: cover;
 }
 
-#bg{
-  background: url("/imgs/bgpicture.jpg") no-repeat center center fixed;
-  background-color: #fffcfc;
-  height: 100%;
-  position: relative;
-  width: 100%;
-  background-size: cover;
-}
+
 
 .landing-text{
     display: table-cell;

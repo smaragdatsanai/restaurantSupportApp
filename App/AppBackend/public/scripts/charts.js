@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("id", "chart")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", `0 0 ${width} ${height}`);
+        .attr("viewBox", `-50 0 ${width +100} ${height + 100}`);
 
 
     const flattenedData = [];
@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .style("text-anchor", "end")
         .attr("dx", "-0.8em")
         .style("fill", "black")
+        .style("font-size", "12px")
         .attr("dy", "0.15em");
 
     // Add labels to the y-axis
@@ -83,9 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add x-axis label
     svg.append("text")
-        .attr("transform", `translate(${width / 2}, ${height + 30})`)
+        .attr("transform", `translate(${width / 2}, ${height + 70})`)
         .style("text-anchor", "middle")
         .style("fill", "black")
+        .style("font-size", "20px")
         .text("Restaurant");
 
     // Add y-axis label
@@ -96,20 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .style("text-anchor", "middle")
         .style("fill", "black")
         .text("Rating");
-
-    // Add restaurant names below the bars
-    svg.selectAll(".restaurant-name")
-        .data(topFive)
-        .enter()
-        .append("text")
-        .attr("class", "restaurant-name")
-        .attr("x", d => xScale(d.restaurantName) + xScale.bandwidth() / 2)
-        .attr("y", height + 20) // Adjust the y-coordinate to control the vertical position
-        .attr("transform", "translate(0, 10)")
-        .style("text-anchor", "middle")
-        .style("fill", "black")
-        .text(d => d.restaurantName);
-
 
     // Add rating values on top of the bars
     svg.selectAll(".rating-value")

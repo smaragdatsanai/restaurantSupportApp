@@ -31,6 +31,7 @@ const doRegister = async (req, res, next) => {
     try {
         const user = await User.addUser(username,password,email)
         if (user) {
+            res.locals.message="Η εγγραφή του χρήστη έγινε με επιτυχία"
             next()
         }
         else {

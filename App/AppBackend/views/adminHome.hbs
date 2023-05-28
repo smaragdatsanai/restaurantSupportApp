@@ -1,23 +1,31 @@
-<div id="home">
-     {{#if message}}<div class="row ">
-    <div class="col-6 offset-3">
-        <div class="alert alert-primary" role="alert">
-            {{message}}
+<div class="padding">
+    <div class="container cont_style vstack gap-3 col-md-7 mx-auto py-5">
+        {{#if message}}<div class="row m-5">
+            <div class="col-6 offset-3">
+                <div class="alert alert-primary" role="alert">
+                    {{message}}
+                </div>
+            </div>
+        {{/if}}
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center pb-3">
+                <h1></h1>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+
+            <div class="container-md m-5 p-5 align-items-center justify-content-center rounded-3"
+                style="background-color: #c7e3c2; max-width: 600px; box-shadow: 4px 3px 7px 2px #00000040;">
+
+                <div style="position: relative; z-index: 1;" class="m-5" id="graph-container"
+                    data-graph-data="{{graphDataString}}"></div>
+
+                </div>
+            </div>
         </div>
     </div>
-</div>
-{{/if}}
-    <div class="d-flex justify-content-center">
-        <div class="container-md m-5 p-5 align-items-center justify-content-center rounded-3"
-            style="background-color: #c7e3c2; max-width: 600px; box-shadow: 4px 3px 7px 2px #00000040;">
-           
-            <div style="position: relative; z-index: 1;" class="m-5" id="graph-container"
-                data-graph-data="{{graphDataString}}"></div>
-                
-        </div>
-        </div>
-</div>
 </div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="/scripts/charts.js"></script>
+<script src="/scripts/pieCharts.js"></script>

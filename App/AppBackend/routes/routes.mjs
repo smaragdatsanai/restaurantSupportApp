@@ -103,7 +103,8 @@ router.get('/Profile',
             res.redirect("/adminProfile")
         }
     );
-    router.get('/home',
+
+router.get('/home',
     (req, res) => {
         if(req.session.userType=="User")
             res.redirect('./restaurants');
@@ -157,7 +158,7 @@ router.post("/restaurants/menu/menuItems/addRating/:itemId",
     UserController.checkIfUser,
     ReviewController.addRating,
     (req, res) => {
-        res.render('./home', { message: "Η αξιολόγηση πραγματοποιήθηκε επιτυχώς" });
+        res.render('./restaurants', { message: "Η αξιολόγηση πραγματοποιήθηκε επιτυχώς" });
     }
 );
 
@@ -189,16 +190,17 @@ router.post("/doLogin",
     Validator.validateLogin,
     UserController.doLogin,
     (req, res) => {
-        res.render("restaurants",{username: req.body.username})
+        res.redirect('/home')
     }
 );
+
 
 router.post("/doRegister",
     Validator.validateNewUser,
     UserController.doRegister,
     UserController.doLogin,
     (req, res) => {
-        res.render("restaurants", { message: "Η εγγραφή του χρήστη έγινε με επιτυχία" })
+        res.redirect('/home')
     }
 );
 
@@ -325,7 +327,7 @@ router.post("/doAdminLogin",
     Validator.validateLogin,
     AdminController.doLogin,
     (req, res) => {
-        res.render("adminHome", { username: req.body.username })
+        res.redirect("/Home")
     }
 );
 
@@ -334,7 +336,8 @@ router.post("/doAdminRegister",
     AdminController.doRegister,
     AdminController.doLogin,
     (req, res) => {
-        res.render("adminHome", { message: "Η εγγραφή του χρήστη έγινε με επιτυχία" })
+        res.locals.message="Η εγγραφή του χρήστη έγινε με επιτυχία",
+        res.redirect("/Home")
     }
 );
 
@@ -342,7 +345,8 @@ router.get('/adminProfile',
 UserController.checkIfAuthenticated,
 AdminController.adminProfileRender,
 (req, res) => {
-      res.render("adminHome", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" });
+    res.locals.message="Η ανάκτηση του προφιλ του χρήστη απέτυχε" ,
+    res.redirect("/Home")
   }
 );
 
