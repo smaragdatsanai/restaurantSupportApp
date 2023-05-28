@@ -140,7 +140,7 @@ export async function addOwnerRestaurant(name,address,opens,closes,type,ownerid,
 }
 
 
-export async function addOwnerMenu (name,type,opens,closes,restaurantid){
+export async function addOwnerMenu (name,type,opens,closes,restaurantid,image){
   try{
     await Menu.create ({
       Menu_Id: faker.datatype.uuid(),
@@ -149,9 +149,10 @@ export async function addOwnerMenu (name,type,opens,closes,restaurantid){
       Active_from: opens,
       Active_until: closes,
       RestaurantId: restaurantid,
-      Image:'5b6f626a65637420426c6f625d'
+      Image: image
 
     });
+    
   }catch(error){
     console.error('Error creating menu:',error);
   }

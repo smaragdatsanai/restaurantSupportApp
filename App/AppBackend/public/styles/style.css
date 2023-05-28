@@ -49,8 +49,8 @@
 }
 
 .image-container {
-  width: 400px; /* Set the desired width */
-  height: 300px; /* Set the desired height */
+  width: 400px;
+  height: 300px;
 }
 .image-container img {
   max-width: 100%;
@@ -74,7 +74,7 @@
 
 #home{
     background: url("/imgs/bgpicture.jpg") no-repeat center center fixed;
-    background-color: #fffcfc; /* fallback background color */
+    background-color: #fffcfc;
     display: table;
     height: 100%;
     position: relative;
@@ -176,6 +176,26 @@ a.fa {
   box-sizing: border-box;
 }
 
+text.restaurant-name {
+  text-anchor: middle;
+  transform: translate(0, 10);
+  display: block;
+  white-space: nowrap;
+}
+
+
+
+.btn:hover {
+  color: #c7e3c2;
+  border-color: #c7e3c2;
+}
+
+.restaurantsCont{
+  background-color: #c7e3c2;
+  max-width:600px;
+  box-shadow: 4px 3px 7px 2px #00000040;
+} 
+
 @media(max-width:768px){
     .landing-text h1 {
         font-size:300%
@@ -191,12 +211,4 @@ a.fa {
       font-size: 200%;
       font-weight: 700;
   }
-}
-
-
-text.restaurant-name {
-  text-anchor: middle;
-  transform: translate(0, 10);
-  display: block;
-  white-space: nowrap;
 }

@@ -128,6 +128,17 @@ const addRestaurant = async (req, res, next) => {
 }
 const addMenu = async (req, res, next) => {
     try {
+        const imageFile = req.file;
+        console.log(req.body);
+        console.log(req.file);
+        if (!imageFile) {
+            res.status(400).send('No image file provided');
+            return;
+        }
+        const imageBuffer = fs.readFileSync(imageFile.path);
+        const imageBase64 = imageBuffer.toString('base64');
+        const imageUrl = `data:image/jpg;base64,${imageBase64}`;
+        const image = imageUrl;
         const name = req.body.name;
         const type = req.body.type;
         const opens = req.body.opens;
@@ -135,8 +146,7 @@ const addMenu = async (req, res, next) => {
         const restaurantid = req.params.restaurantId; //type params ara theloume to id panw
         console.log(req.body)
         console.log(name, type, opens, closes, restaurantid)
-        const menu = await Owner.addOwnerMenu(name, type, opens, closes, restaurantid)
-        console.log(menu);
+        await Owner.addOwnerMenu(name, type, opens, closes, restaurantid,image)
         next();
     } catch (error) {
         next(error)

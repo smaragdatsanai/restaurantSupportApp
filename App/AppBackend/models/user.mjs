@@ -1,5 +1,5 @@
 import {User} from "./database.mjs"
-import bcrypt from "bcrypt";
+import bcrypt from "bcrypt"
 import faker from 'faker' 
 import { sequelize } from "./dbConfig.mjs";
 import { DataTypes } from "sequelize";

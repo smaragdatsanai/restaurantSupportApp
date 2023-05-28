@@ -1,8 +1,41 @@
-{{!-- <h1>{{restaurantName}}</h1> --}}
-{{#each menus}}
-<h2>Menu Type: <a href="/restaurants/menu/menuItems/{{Menu_Id}}">{{Type}}</a></h2>
-{{/each}}
+<div class="padding">
+  <div class="container cont_style vstack gap-3 col-md-7 mx-auto py-5">
+    <div class="row">
+      <div class="col-md-6 mx-auto text-center pb-3">
+        <h1>Browse Our Menus</h1>
+      </div>
+    </div>
 
-
-
- <a href="/restaurants/Allmenus/{{Restaurant_Id}}" class="btn btn-outline-dark">Show All Menus</a>
+    {{#each menus}}
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card mb-3 w-75 mx-auto">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{this.Image}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{Name}}</h5>
+                <p class="card-text">Menu Type: {{Type}}</p>
+                <p class="card-text">Active from: {{Active_from}}</p>
+                <p class="card-text">Active until: {{Active_until}}</p>
+                <a href="/restaurants/menu/menuItems/{{Menu_Id}}" class="btn btn-outline-secondary">Show Restaurant Items</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+    {{#if Button}}
+    <div class="d-flex flex-column align-items-center mt-4">
+      <a href="/restaurants/Allmenus/{{Restaurant_Id}}" class="btn btn-outline-dark">Show All Menus</a>
+    </div>
+    {{else}}
+    <div class="d-flex flex-column align-items-center">
+      <a href="/restaurants/menu/{{Restaurant_Id}}" class="btn btn-outline-dark">Show Active Menus</a>
+    </div>
+    {{/if}}
+  </div>
+</div>

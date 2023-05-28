@@ -17,7 +17,9 @@ const MenuController = await import('../controllers/menuController.mjs')
 const RestaurantController = await import('../controllers/restaurantController.mjs')
 const ReviewController = await import('../controllers/reviewController.mjs')
 const AdminController = await import('../controllers/adminController.mjs')
-import { Blob } from 'buffer';
+const crudController = await import('../controllers/CRUDController.mjs')
+
+
 import fs from 'fs';
 import multer from 'multer';
 
@@ -156,11 +158,6 @@ router.get('/restaurants/findRestaurant',
     RestaurantController.searchRestaurant
 );
 
-// //MENU
-// router.get('/menu',
-//     UserController.checkIfAuthenticated,
-//     MenuController.displayAvailableMenus
-// );
 
 //USER 
 
@@ -348,12 +345,93 @@ AdminController.adminProfileRender,
 
 
 router.get('/adminHome',
-// UserController.checkIfAuthenticated,
-AdminController.adminHomePageRender,
-(req, res) => {
-      res.render("home", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" });
-  }
+    // UserController.checkIfAuthenticated,
+    AdminController.adminHomePageRender,
+    (req, res) => {
+        res.render("home", { message: "Η ανάκτηση του προφιλ του χρήστη απέτυχε" });
+    }
 );
+
+//CRUD
+
+router.get('/editRating/:reviewId/:itemId',
+    UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
+    crudController.updateReviewForm,
+    (req,res)=>{
+        res.render("home", { message: "" });
+    }
+)
+
+router.post('/updateReview/:reviewId',
+    UserController.checkIfAuthenticated,
+    UserController.checkIfUser,
+    crudController.updatereview,
+    (req,res)=>{
+        res.render("home", { message: "Η ενημέρωση της κριτικής σας έγινε με επιτυχία" });
+    }
+)
+
+router.get('/editMenu/:menuId',
+    UserController.checkIfAuthenticated,
+    crudController.updateMenuForm,
+    (req,res)=>{
+        res.render("home", { message: "" });
+    }
+)
+router.post('/doMenuEdit/:menuId',
+    UserController.checkIfAuthenticated,
+    crudController.updateMenu,
+    (req,res)=>{
+        res.render("home", { message: "Η ενημέρωση του Μενού σας έγινε με επιτυχία"});
+    }
+)
+
+
+router.get('/editItem/:itemId',
+    UserController.checkIfAuthenticated,
+    crudController.updateMenuItemForm,
+    (req,res)=>{
+        res.render("home", { message: "" });
+    }
+)
+router.post('/doItemEdit/:itemId',
+    UserController.checkIfAuthenticated,
+    crudController.updateItem,
+    (req,res)=>{
+        res.render("home", { message: "Η ενημέρωση του Menu Item σας έγινε με επιτυχία"});
+    }
+)
+
+router.get('/editRestaurant/:restaurantId',
+    UserController.checkIfAuthenticated,
+    crudController.updateRestaurantForm,
+    (req,res)=>{
+        res.render("home", { message: "" });
+    }
+)
+router.post('/doRestaurantEdit/:restaurantId',
+    UserController.checkIfAuthenticated,
+    crudController.updateRestaurant,
+    (req,res)=>{
+        res.render("home", { message: "Η ενημέρωση του Εστιατορίου σας έγινε με επιτυχία"});
+    }
+)
+
+
+router.get('/changePassword',
+    UserController.checkIfAuthenticated,
+    (req,res)=>{
+        res.render("change-password");
+    }
+)
+router.post('/doPasswordChange',
+    UserController.checkIfAuthenticated,
+    crudController.changepassword,
+    (req,res)=>{
+        res.render("home", { message: "Η ενημέρωση του κωδικού πρόσβασης έγινε με επιτυχία" });
+    }
+)
 
 export default router;
 

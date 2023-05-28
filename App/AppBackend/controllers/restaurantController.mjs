@@ -1,4 +1,4 @@
-import * as Restaurant from '../models/restaurant.mjs' // version 3 with ORM sequelize, postgress
+import * as Restaurant from '../models/restaurant.mjs' 
 
 
 async function displayAllRestaurants(req, res, next) {
@@ -6,7 +6,7 @@ async function displayAllRestaurants(req, res, next) {
     console.log("displayAlleRestaurants");
     const restaurants = await Restaurant.getAllRestaurants();
     console.log(restaurants.length);
-    res.render("../views/restaurants", { Restaurant: restaurants });
+    res.render("../views/restaurants", { Restaurant: restaurants, Button:'' });
     console.log("entered displayAllRestaurants");
   } catch (error) {
     next(error)
@@ -17,8 +17,7 @@ async function displayOpenRestaurants(req, res, next) {
   try {
     console.log("displayOpenRestaurants");
     const restaurants = await Restaurant.getOpenRestaurants();
-    console.log(restaurants);
-    res.render("../views/restaurants", { Restaurant: restaurants });
+    res.render("../views/restaurants", { Restaurant: restaurants, Button:'active'});
     console.log("entered displayOpenRestaurants");
   } catch (error) {
     next(error)

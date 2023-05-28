@@ -21,8 +21,8 @@ async function displayAvailableMenus(req, res, next) {
   try {
     console.log("displayAvailableMenus");
     const menu = await Menu.getAllMenus();
-    res.render("../views/menu-list", { menus: menu });
     console.log("entered displayAvailableMenus");
+    res.render("../views/menu-list", { menus: menu, Button:''});
   } catch (error) {
     next(error)
   }
@@ -30,11 +30,10 @@ async function displayAvailableMenus(req, res, next) {
 
 async function showRestaurantActiveMenu(req, res, next) {
   try {
-    // const restaurant= await Restaurant.getRestaurantById(req.params.restaurantId)
     console.log("entered");
     const menus = await Menu.showActiveMenu(req.params.restaurantId)
     console.log("exited");
-    res.render('menu-list', { menus: menus, Restaurant_Id: req.params.restaurantId });
+    res.render('menu-list', { menus: menus, Restaurant_Id: req.params.restaurantId,Button:'Active' });
   } catch (error) {
     next(error);
   }
@@ -42,11 +41,10 @@ async function showRestaurantActiveMenu(req, res, next) {
 
 async function showRestaurantMenu(req, res, next) {
   try {
-    // const restaurant= await Restaurant.getRestaurantById(req.params.restaurantId)
     console.log("entered");
     const menus = await Menu.showRestaurantMenu(req.params.restaurantId)
     console.log("exited");
-    res.render('menu-list', { menus: menus, Restaurant_Id: req.params.restaurantId });
+    res.render('menu-list', { menus: menus, Restaurant_Id: req.params.restaurantId, Button:'' });
   } catch (error) {
     next(error);
   }
